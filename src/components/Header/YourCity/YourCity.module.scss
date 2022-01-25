@@ -1,0 +1,12 @@
+@use "../../forward" as *;
+
+.wrapper {
+  font-size: $size-text--base;
+  display: flex;
+  gap: $gutter-small;
+  font-family: ptsans-bold, sans-serif;
+}
+
+.link {
+  color: black;
+}
