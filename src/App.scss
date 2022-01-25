@@ -1,0 +1,39 @@
+@use "./scss/fonts.scss";
+@use "./scss/vars" as *;
+@import "~normalize.css/normalize.css";
+
+// TODO: придумать прокрутку для карточек организаторов
+// TODO: провести рефакторинг
+:root {
+  font-size: $font-size--root;
+  font-family: ptsans-regular, sans-serif;
+}
+
+::selection {
+  color: white;
+  background-color: $color--base;
+}
+
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 8px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $color--base;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}

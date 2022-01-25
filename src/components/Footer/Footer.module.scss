@@ -1,0 +1,79 @@
+@use "../forward" as *;
+
+.wrapper {
+  background-color: #e5f9eb;
+
+  box-sizing: border-box;
+  padding: 50px;
+
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.social {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 50px;
+
+  &Title {
+    font-size: 3.5rem;
+  }
+
+  &Text {
+    font-size: $size-text--base;
+    color: #a1a1a1;
+    max-width: 318px;
+    margin-top: 15px;
+  }
+}
+
+.iconsRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon {
+  $size: 48px;
+  $icons: ("facebook", "twitter", "linkedin", "youtube", "phone");
+
+  background-position: center;
+  background-repeat: no-repeat;
+
+  @each $icon in $icons {
+    &_#{$icon} {
+      background-image: url(../../assets/img/#{$icon}.svg);
+    }
+  }
+
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(black, 0.08);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+}
+
+.navSection {
+  display: flex;
+  flex-direction: column;
+  gap: $gutter-small;
+}
+
+.nav {
+  &Title {
+    font-family: ptsans-bold;
+    font-size: 2.6rem;
+    margin-bottom: 20px;
+  }
+
+  &Item {
+    font-size: 1.8rem;
+  }
+}

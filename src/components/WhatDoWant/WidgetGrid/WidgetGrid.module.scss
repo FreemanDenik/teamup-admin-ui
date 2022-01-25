@@ -1,0 +1,12 @@
+@use "../../forward" as *;
+
+.widgetGrid {
+  display: flex;
+  column-gap: 30px;
+  row-gap: 18px;
+  flex-wrap: wrap;
+
+  &__widget {
+    @include fill-widget;
+  }
+}
