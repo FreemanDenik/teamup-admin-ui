@@ -14,13 +14,13 @@
   color: $color;
 }
 
-@mixin fill-widget {
+@mixin fill-widget($round: 1px) {
   @include text($size-text--base, $color: white);
   cursor: pointer;
   background-color: $color--base;
   border: none;
   padding: 14px 30px;
-  border-radius: 3px;
+  border-radius: $round;
 
   transition-property: background-color transform box-shadow;
   transition-duration: $transition-duration--short;
