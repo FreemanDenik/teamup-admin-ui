@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { SignUpFields } from "../../types";
 import Input from "../Input";
+import Interests from "../SignUp/Interests";
 import { Link, useNavigate } from "react-router-dom";
 import s from "./SignUp.module.scss";
 import classNames from "classnames";
@@ -15,6 +16,26 @@ const SignUp = () => {
   } = useForm<SignUpFields>({});
 
   const navigate = useNavigate();
+  const [isDeleteConfirmation, setIsDeleteConfirmation] =
+    useState<boolean>(false);
+
+  const onClose = () => {
+    setIsDeleteConfirmation(false);
+  };
+
+  const confirm = isDeleteConfirmation ? <Interests onClose={onClose} /> : null;
+
+  const controlButtons = (
+    <div className="control-buttons">
+      <input
+        className="add-interests"
+        onClick={() => setIsDeleteConfirmation(true)}
+        type="button"
+      />
+
+      {confirm}
+    </div>
+  );
 
   const onSubmit: SubmitHandler<SignUpFields> = ({
     username,
@@ -167,13 +188,7 @@ const SignUp = () => {
           <div className={s.block_interest}>
             <p className={s.your_interests}>Интересы</p>
 
-            <ul className={s.interests}>
-              <li>
-                <button className={s.interest} type="button">
-                  Игра
-                </button>
-              </li>
-            </ul>
+            {controlButtons}
           </div>
 
           <button className={s.signup_submit} type="submit" disabled={!isValid}>

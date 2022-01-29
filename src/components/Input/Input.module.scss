@@ -1,17 +1,31 @@
 @use "../forward" as *;
 
 .input {
-  padding: 0px;
-  font-family: ptsans-bold, sans-serif;
   height: 48px;
   width: 328px;
-  box-sizing: border-box;
-  background-color: #ededed;
+  background-color: $background-color-input;
   border: none;
-  font-size: 16px;
   cursor: pointer;
+  font-size: $size-text--base;
+  font-family: ptsans-bold, sans-serif;
   padding: 16px 16px;
-  color: #000000;
+  box-sizing: border-box;
+
+  color: $active-color;
+  &,
+  &::placeholder {
+    transition-property: color;
+    transition-duration: 0.15s;
+  }
+
+  &::placeholder {
+    color: lighten($active-color, 20%);
+  }
+
+  &:focus::placeholder {
+    color: black;
+  }
+
   &:focus {
     border: 1px solid $color--base;
     outline: none !important;
@@ -19,33 +33,61 @@
 }
 .input_short {
   width: 156px;
-  padding: 0px;
-  font-family: ptsans-bold, sans-serif;
   height: 48px;
+  font-family: ptsans-bold, sans-serif;
   box-sizing: border-box;
-  background-color: #ededed;
+  background-color: $background-color-input;
   border: none;
-  font-size: 16px;
+  font-size: $size-text--base;
   cursor: pointer;
   padding: 16px 16px;
-  color: #000000;
+
+  color: $active-color;
+
+  &,
+  &::placeholder {
+    transition-property: color;
+    transition-duration: 0.15s;
+  }
+
+  &::placeholder {
+    color: lighten($active-color, 20%);
+  }
+
+  &:focus::placeholder {
+    color: black;
+  }
   &:focus {
     border: 1px solid $color--base;
     outline: none !important;
   }
 }
 .input_small {
-  padding: 0px;
   font-family: ptsans-bold, sans-serif;
   height: 48px;
   width: 280px;
   box-sizing: border-box;
-  background-color: #ededed;
+  background-color: $background-color-input;
   border: none;
-  font-size: 16px;
+  font-size: $size-text--base;
   cursor: pointer;
   padding: 16px 16px;
-  color: #000000;
+
+  color: $active-color;
+
+  &,
+  &::placeholder {
+    transition-property: color;
+    transition-duration: 0.15s;
+  }
+
+  &::placeholder {
+    color: lighten($active-color, 20%);
+  }
+
+  &:focus::placeholder {
+    color: black;
+  }
   &:focus {
     border: 1px solid $color--base;
     outline: none !important;
@@ -58,13 +100,30 @@
   margin-bottom: 20px;
 }
 .formField__input_area {
-  font-family: ptsans-bold, sans-serif;
-  font-size: 16px;
-  margin-top: 10px;
   width: 530px;
   height: 119px;
-  border: 1px solid #ededed;
+  margin-top: 10px;
+  font-family: ptsans-regular, sans-serif;
+  font-size: $size-text--base;
+  border: 1px solid $background-color-input;
   resize: none;
+
+  color: $active-color;
+
+  &,
+  &::placeholder {
+    transition-property: color;
+    transition-duration: 0.15s;
+  }
+
+  &::placeholder {
+    color: lighten($active-color, 40%);
+  }
+
+  &:focus::placeholder {
+    color: $active-color;
+  }
+
   &:focus {
     border: 1px solid $color--base;
     outline: none !important;
