@@ -58,3 +58,26 @@
     @content;
   }
 }
+
+@mixin icon-button(
+  $iconName,
+  $background-color: white,
+  $ext: "svg",
+  $shadow: false,
+  $size: $circle-icon--size,
+  $border: none
+) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  box-shadow: if($shadow, 0 8px 16px rgba(black, 0.08), null);
+  background-color: $background-color;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../../assets/img/#{$iconName}.#{$ext});
+  border: $border;
+}
+
+@mixin icon-button-fill($iconName) {
+  @include icon-button($iconName, $color--base);
+}

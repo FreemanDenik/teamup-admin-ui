@@ -35,23 +35,13 @@
 }
 
 .icon {
-  $size: 48px;
   $icons: ("facebook", "twitter", "linkedin", "youtube", "phone");
-
-  background-position: center;
-  background-repeat: no-repeat;
 
   @each $icon in $icons {
     &_#{$icon} {
-      background-image: url(../../assets/img/#{$icon}.svg);
+      @include icon-button($icon, $shadow: true);
     }
   }
-
-  width: $size;
-  height: $size;
-  border-radius: 50%;
-  background-color: white;
-  box-shadow: 0 8px 16px rgba(black, 0.08);
 }
 
 .nav {
