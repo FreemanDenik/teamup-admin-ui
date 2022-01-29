@@ -88,29 +88,14 @@
 }
 
 .signin_submit {
-  background-color: $color--base;
+  @include fill-widget();
   width: 280px;
   height: 48px;
-  border-radius: 1px;
-  border: 1px solid $color--base;
   color: $header--bgcol;
   font-size: $size-text--base;
   font-family: ptsans-bold, sans-serif;
   box-sizing: border-box;
   margin-bottom: 35px;
-  cursor: pointer;
-  outline: none;
-  transition-property: background-color transform box-shadow;
-  transition-duration: $transition-duration--short;
-
-  &:hover {
-    background-color: darken($color: $color--base, $amount: 10%);
-  }
-
-  &:active {
-    transform: scale(0.9);
-    box-shadow: 0 0 10px rgba(#000000, 0.4);
-  }
 }
 
 .close_signin {
