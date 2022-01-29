@@ -83,17 +83,6 @@
 }
 
 .close_signup {
-  // Заменил это
-  // background-image: url(../../assets/img/close.svg);
-  // background-repeat: no-repeat;
-  // width: $circle-icon--size;
-  // height: $circle-icon--size;
-  // border-radius: 50%;
-  // background-color: $color--base;
-  // background-position: center;
-  // border: none;
-
-  // На это
   @include icon-button-fill(close);
   margin-left: 60px;
   cursor: pointer;
@@ -119,19 +108,8 @@
 }
 
 .google_button {
-  /*
-    Заменил это:
-      background-image: url(../../assets/img/google.svg);
-      background-repeat: no-repeat;
-      background-size: contain;
-      width: 48px;
-      height: 48px;
-      background-color: transparent;
-      border: none;
-  */
-
   margin-top: 30px;
-  // На это
+
   @include icon-button-fill(google);
   cursor: pointer;
 }

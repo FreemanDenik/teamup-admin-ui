@@ -114,14 +114,6 @@
 }
 
 .close_signin {
-  // background-image: url(../../assets/img/close.svg);
-  // background-repeat: no-repeat;
-  // width: $circle-icon--size;
-  // height: $circle-icon--size;
-  // border-radius: 50%;
-  // background-color: $color--base;
-  // border: none;
-  // background-position: center;
   @include icon-button-fill(close);
   cursor: pointer;
 }
@@ -151,14 +143,6 @@
 }
 
 .google_button {
-  // background-image: url(../../assets/img/google.svg);
-  // background-repeat: no-repeat;
-  // background-size: contain;
-  // width: 48px;
-  // height: 48px;
-  // background-color: transparent;
-  // border: none;
-  // cursor: pointer;
   margin-top: 30px;
   @include icon-button-fill(google);
 }
