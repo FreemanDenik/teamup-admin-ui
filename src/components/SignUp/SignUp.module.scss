@@ -1,7 +1,7 @@
 @use "../forward" as *;
 .sign_wall {
   position: relative;
-  background-color: #d9efd7;
+  background-color: $sign-wall;
   min-height: 100vh;
   padding-top: 80px;
   padding-bottom: 60px;
@@ -14,38 +14,35 @@
   width: 895px;
   height: 100%;
   margin: 0 auto;
-  background-color: white;
+  background-color: $header--bgcol;
   border-radius: 6px;
-
-  padding-top: 60px;
-  padding-bottom: 50px;
-  padding-left: 80px;
-  padding-right: 32px;
+  padding: 60px 32px 50px 80px;
 }
 
 .form {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  color: black;
+  color: $active-color;
   font-family: ptsans-bold, sans-serif;
 }
-
+.add-interests {
+}
 .form__title {
   margin: 0;
-  font-size: 34px;
+  font-size: $size-title;
   font-family: ptsans-bold, sans-serif;
 }
 
 .form_link {
-  font-size: 17px;
+  font-size: $size-form-link;
   font-family: ptsans-bold, sans-serif;
 }
 
 .link {
-  font-size: 16px;
+  font-size: $size-text--base;
   font-family: ptsans-bold, sans-serif;
-  color: #4dc43f;
+  color: $color--base;
   margin-left: 20px;
   text-decoration: none;
 }
@@ -57,9 +54,9 @@
 }
 
 .about_yourself {
-  color: black;
+  color: $active-color;
   font-family: ptsans-bold, sans-serif;
-  font-size: 16px;
+  font-size: $size-text--base;
   margin: 0;
 }
 
@@ -68,30 +65,10 @@
   margin-bottom: 18px;
 }
 .your_interests {
-  color: black;
+  color: $active-color;
   font-family: ptsans-bold, sans-serif;
-  font-size: 16px;
+  font-size: $size-text--base;
   margin: 0;
-}
-
-.interests {
-  margin-top: 10px;
-}
-
-.interest {
-  border: 1px solid #4dc43f;
-  padding: 3px 23px;
-  cursor: pointer;
-  color: #4dc43f;
-  font-family: ptsans-bold, sans-serif;
-  font-size: 12px;
-  background-color: white;
-
-  &:hover {
-    transition: 0.5s;
-    color: black;
-    background-color: #4dc43f;
-  }
 }
 
 .signup_photo {
@@ -106,9 +83,9 @@
 .close_signup {
   background-image: url(../../assets/img/close.svg);
   background-repeat: no-repeat;
-  width: 48px;
+  width: $size-close-btn;
+  height: $size-close-btn;
   border-radius: 50%;
-  height: 48px;
   background-color: $color--base;
   border: none;
   background-position: center;
@@ -153,8 +130,8 @@
   height: 48px;
   border-radius: 1px;
   border: 1px solid $color--base;
-  color: #ffffff;
-  font-size: 16px;
+  color: $header--bgcol;
+  font-size: $size-text--base;
   font-family: ptsans-bold, sans-serif;
   box-sizing: border-box;
   margin-bottom: 35px;

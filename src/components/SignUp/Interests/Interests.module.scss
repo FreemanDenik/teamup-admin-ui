@@ -1,0 +1,65 @@
+@use "../../forward" as *;
+
+.input_interest {
+  width: 90%;
+  font-size: 1.6rem;
+  font-family: ptsans-bold, sans-serif;
+  padding: 6px;
+  border: 1px solid #999;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  &:focus {
+    border: 1px solid $color--base;
+    outline: none !important;
+  }
+}
+
+.block_interest {
+  padding: 12px 16px;
+  background-color: white;
+  border-radius: 4px;
+  filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.15));
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 100%;
+}
+
+.interests {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.interest {
+  border: 1px solid $color--base;
+  padding: 3px 23px;
+  cursor: pointer;
+  color: $color--base;
+  font-family: ptsans-bold, sans-serif;
+  font-size: 12px;
+  background-color: $header--bgcol;
+
+  &:hover {
+    transition: 0.5s;
+    color: $active-color;
+    background-color: $color--base;
+  }
+}
+.close_interest {
+  background-image: url(../../../assets/img/close.svg);
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  background-color: $color--base;
+  border: none;
+  background-position: center;
+  cursor: pointer;
+}
