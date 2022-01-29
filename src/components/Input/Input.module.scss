@@ -11,25 +11,26 @@
   padding: 16px 16px;
   box-sizing: border-box;
 
-  color: $active-color;
-  &,
-  &::placeholder {
-    transition-property: color;
-    transition-duration: 0.15s;
-  }
+  @include input;
+  // color: $active-color;
+  // &,
+  // &::placeholder {
+  //   transition-property: color;
+  //   transition-duration: 0.15s;
+  // }
 
-  &::placeholder {
-    color: lighten($active-color, 20%);
-  }
+  // &::placeholder {
+  //   color: lighten($active-color, 20%);
+  // }
 
-  &:focus::placeholder {
-    color: black;
-  }
+  // &:focus::placeholder {
+  //   color: black;
+  // }
 
-  &:focus {
-    border: 1px solid $color--base;
-    outline: none !important;
-  }
+  // &:focus {
+  //   border: 1px solid $color--base;
+  //   outline: none;
+  // }
 }
 .input_short {
   width: 156px;

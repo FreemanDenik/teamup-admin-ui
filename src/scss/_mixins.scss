@@ -33,3 +33,28 @@
     transform: scale(0.98);
   }
 }
+
+@mixin input($color: $active-color) {
+  color: $color;
+
+  &,
+  &::placeholder {
+    transition-property: color;
+    transition-duration: 0.15s;
+  }
+
+  &::placeholder {
+    color: lighten($color, 20%);
+  }
+
+  &:focus::placeholder {
+    color: black;
+  }
+
+  &:focus {
+    border: 1px solid $color--base;
+    outline: none;
+
+    @content;
+  }
+}

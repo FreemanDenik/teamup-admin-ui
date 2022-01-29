@@ -16,13 +16,17 @@ $icon-size: 24px;
   width: 100%;
   box-sizing: border-box;
 
+  &_focus {
+    border: 2px solid $color--base;
+  }
+
   &__field {
-    color: #3e3e3e;
     background-color: transparent;
     border: none;
     outline: none;
     font-size: $size-text--base;
     width: 100%;
+    color: #3e3e3e;
   }
 
   &__icon {
