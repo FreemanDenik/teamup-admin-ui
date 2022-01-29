@@ -29,6 +29,10 @@
     background-color: darken($color--base, 10%);
   }
 
+  &:disabled {
+    background-color: $color-text--light;
+  }
+
   &:active {
     transform: scale(0.98);
   }

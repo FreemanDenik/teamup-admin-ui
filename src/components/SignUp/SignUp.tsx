@@ -5,7 +5,6 @@ import Input from "../Input";
 import Interests from "../SignUp/Interests";
 import { Link, useNavigate } from "react-router-dom";
 import s from "./SignUp.module.scss";
-import classNames from "classnames";
 
 const SignUp = () => {
   const {

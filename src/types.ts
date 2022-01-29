@@ -5,14 +5,6 @@ export interface LoginUserModel {
   password: string;
 }
 
-export interface UpdateUserModel {
-  email?: string;
-  token?: string;
-  username?: string;
-  bio?: string;
-  image?: string;
-}
-
 export interface SignUpFields {
   email: string;
   password: string;

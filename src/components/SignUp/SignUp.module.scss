@@ -116,6 +116,7 @@
 
 .signup_submit {
   @include fill-widget();
+
   width: 328px;
   height: 48px;
   color: $header--bgcol;
