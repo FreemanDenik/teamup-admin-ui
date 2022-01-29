@@ -2,7 +2,7 @@ import React, { FC } from "react";
 
 import s from "./HowWorks.module.scss";
 
-const HowWorks = () => {
+const HowWorks: FC = () => {
   return (
     <section className={`${s.howWorks}`}>
       <h1 className={`${s.howWorks__title}`}>Как работает TeamUp</h1>

@@ -1,11 +1,9 @@
 import React, { FC } from "react";
-import classNames from "classnames";
+import cls from "classnames";
 
 import s from "./Stats.module.scss";
 
-interface StatsProps {}
-
-const Stats: FC<StatsProps> = ({}) => {
+const Stats: FC = () => {
   return (
     <div className={s.stats}>
       {[

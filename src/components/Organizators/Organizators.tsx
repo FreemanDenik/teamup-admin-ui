@@ -1,11 +1,9 @@
 import React, { FC, useState, useEffect, useRef } from "react";
-import classNames from "classnames";
+import cls from "classnames";
 import Card from "./Card";
 import s from "./Organizators.module.scss";
 
-interface OrganizatorsProps {}
-
-const Organizators: FC<OrganizatorsProps> = ({}) => {
+const Organizators: FC = () => {
   const [offset, setOffset] = useState<number>(0);
 
   return (

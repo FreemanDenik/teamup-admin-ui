@@ -1,12 +1,10 @@
 import React, { FC } from "react";
-import classNames from "classnames";
+import cls from "classnames";
 import { v4 } from "uuid";
 
 import s from "./Card.module.scss";
 
-interface CardProps {}
-
-const Card: FC<CardProps> = ({}) => {
+const Card: FC = () => {
   return (
     <div className={s.wrapper}>
       <div className={s.avatar} />

@@ -1,5 +1,5 @@
-import classNames from "classnames";
-import { ReactElement, useCallback, useEffect, useMemo, useState } from "react";
+import cls from "classnames";
+import { ReactElement, useCallback, useEffect, useState } from "react";
 import s from "./Slider.module.scss";
 interface SliderProps<T> {
   data: T[];
@@ -80,7 +80,7 @@ function Slider<T>({
           {data.map((el, index) => {
             return (
               <div
-                className={classNames(s.slide, {
+                className={cls(s.slide, {
                   [s.slide_active]: currentIndex === index,
                 })}
                 style={{

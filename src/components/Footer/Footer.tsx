@@ -3,9 +3,7 @@ import cls from "classnames";
 
 import s from "./Footer.module.scss";
 
-interface FooterProps {}
-
-const Footer: FC<FooterProps> = ({}) => {
+const Footer: FC = () => {
   return (
     <footer className={s.wrapper}>
       <div className={s.social}>

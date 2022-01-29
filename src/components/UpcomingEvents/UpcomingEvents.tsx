@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from "react";
-import classNames from "classnames";
+import cls from "classnames";
 import { v4 } from "uuid";
 
 import s from "./UpcomingEvents.module.scss";
