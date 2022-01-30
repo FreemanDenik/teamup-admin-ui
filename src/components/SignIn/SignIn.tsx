@@ -33,8 +33,6 @@ const SignIn = () => {
 
           <Input
             label="email"
-            type="text"
-            placeholder="Email"
             register={register}
             config={{
               required: "required field",
@@ -44,8 +42,6 @@ const SignIn = () => {
 
           <Input
             label="password"
-            type="text"
-            placeholder="Password"
             register={register}
             config={{
               required: "required field",

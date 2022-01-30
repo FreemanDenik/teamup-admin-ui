@@ -1,55 +1,35 @@
-import React, { FC } from "react";
+import React, { FC, useMemo } from "react";
 import { InputProps, SignUpFields } from "../../types";
 import s from "./Input.module.scss";
-type Fields = SignUpFields;
 
-function Input<T extends Fields = SignUpFields>({
+function capitalize(value: string): string {
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+function Input<T extends SignUpFields>({
   label,
   register,
   config,
-  type,
   area = false,
-  placeholder,
 }: InputProps<T>) {
-  let inputField;
-  if (type === "short") {
-    inputField = (
-      <input
-        className={s.input_short}
-        type={type}
-        placeholder={placeholder}
-        {...register(label, config)}
-      />
-    );
-  } else if (type === "textarea") {
-    inputField = (
-      <textarea
-        placeholder={placeholder}
-        className={s.formField__input_area}
-        {...register(label, config)}
-      />
-    );
-  } else if (type === "text") {
-    inputField = (
-      <input
-        className={s.input_small}
-        type={type}
-        placeholder={placeholder}
-        {...register(label, config)}
-      />
-    );
-  } else {
-    inputField = (
-      <input
-        className={s.input}
-        type={type}
-        placeholder={placeholder}
-        {...register(label, config)}
-      />
-    );
-  }
+  const placeholder = useMemo(() => capitalize(label), [label]);
 
-  return <label className={s.label}>{inputField}</label>;
+  return (
+    <label className={s.label}>
+      {area ? (
+        <textarea
+          placeholder={placeholder}
+          {...register(label, config)}
+        ></textarea>
+      ) : (
+        <input
+          type="text"
+          placeholder={placeholder}
+          {...register(label, config)}
+        />
+      )}
+    </label>
+  );
 }
 
 export default Input;

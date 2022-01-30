@@ -21,7 +21,5 @@ export interface InputProps<T> {
   label: Path<T>;
   register: UseFormRegister<T>;
   config: RegisterOptions;
-  type?: string;
   area?: boolean;
-  placeholder: string;
 }

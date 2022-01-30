@@ -62,17 +62,14 @@ const SignUp = () => {
 
           <div className={s.fio}>
             <Input
-              type="short"
-              placeholder="Фамилия"
               label="lastname"
               register={register}
               config={{
                 required: "required field",
               }}
             />
+
             <Input
-              type="short"
-              placeholder="Имя"
               label="firstname"
               register={register}
               config={{
@@ -82,9 +79,7 @@ const SignUp = () => {
           </div>
 
           <Input
-            placeholder="Email Address"
             label="email"
-            type="email"
             register={register}
             config={{
               required: "required field",
@@ -107,8 +102,6 @@ const SignUp = () => {
 
           <Input
             label="username"
-            type="name"
-            placeholder="Username"
             register={register}
             config={{
               required: "required field",
@@ -131,9 +124,7 @@ const SignUp = () => {
 
           {/* Пароль */}
           <Input
-            placeholder="Пароль"
             label="password"
-            type="password"
             register={register}
             config={{
               required: "required field",
@@ -151,9 +142,7 @@ const SignUp = () => {
 
           <div className={s.fio}>
             <Input
-              placeholder="Город"
               label="city"
-              type="short"
               register={register}
               config={{
                 required: "required field",
@@ -161,9 +150,7 @@ const SignUp = () => {
             />
 
             <Input
-              placeholder="Возраст"
               label="age"
-              type="short"
               register={register}
               config={{
                 required: "required field",
@@ -174,9 +161,7 @@ const SignUp = () => {
           <p className={s.about_yourself}> О себе</p>
 
           <Input
-            placeholder="Например: Увлекаюсь настольными играми и люблю активный отдых на природе"
             label="aboutUser"
-            type="textarea"
             register={register}
             config={{
               required: "required field",
