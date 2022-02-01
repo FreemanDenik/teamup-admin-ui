@@ -1,8 +1,7 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { SignInPage, SignUpPage } from "./pages/SignPage";
 import Home from "./pages/Home";
-import SignUp from "./components/SignUp";
-import SignIn from "./components/SignIn";
 import "./App.scss";
 
 const App = () => {
@@ -10,8 +9,8 @@ const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="sign-up" element={<SignUp />} />
-        <Route path="sign-in" element={<SignIn />} />
+        <Route path="sign-up" element={<SignUpPage />} />
+        <Route path="sign-in" element={<SignInPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>

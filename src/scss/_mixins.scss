@@ -78,10 +78,24 @@
   background-color: $background-color;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url(../../assets/img/#{$iconName}.#{$ext});
+  background-image: url(../assets/img/#{$iconName}.#{$ext});
   border: $border;
 }
 
 @mixin icon-button-fill($iconName) {
   @include icon-button($iconName, $color--base);
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin bg-image($width, $height, $iconName) {
+  background-image: url(../assets/img/#{$iconName}.svg);
+  background-size: cover;
+
+  width: $width;
+  height: $height;
 }

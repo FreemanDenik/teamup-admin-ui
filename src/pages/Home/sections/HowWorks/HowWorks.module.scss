@@ -42,7 +42,7 @@ $row-gap: 70px;
 
       @each $icon-name in $icon-names {
         &_#{$icon-name} {
-          background-image: url(../../assets/img/#{$icon-name}.svg);
+          background-image: url(../../../../assets/img/#{$icon-name}.svg);
         }
       }
     }

@@ -1,4 +1,4 @@
-@use "../../../scss/vars" as *;
+@use "../../forward" as *;
 
 .slider {
   display: flex;
@@ -15,8 +15,6 @@
 }
 
 .slide {
-  background-color: crimson;
-
   transition-duration: $transition-duration--long;
   transition-property: transform box-shadow;
   position: relative;

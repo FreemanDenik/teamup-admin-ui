@@ -8,13 +8,9 @@
   align-items: center;
   flex-direction: column;
 
-  background-image: url(../../assets/img/start-screen.jpg);
+  background-image: url(../../../../assets/img/start-screen.jpg);
   background-size: cover;
   background-position: right;
-  // background-attachment: fixed;
-
-  // TODO: 2px
-  // filter: blur(2px);
   box-shadow: 0 3px 6px rgba(black, 0.16);
 
   &__title {

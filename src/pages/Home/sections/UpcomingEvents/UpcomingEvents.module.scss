@@ -1,8 +1,7 @@
 @use "../forward" as *;
-// TODO: поменять pt sans на noto sans
 
 .eventCard {
-  background-image: url(../../assets/img/near-event.png);
+  background-image: url(../../../../assets/img/near-event.png);
   background-position: center;
   background-size: cover;
   width: 100%;

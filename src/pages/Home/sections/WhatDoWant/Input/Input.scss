@@ -10,7 +10,6 @@ $icon-size: 24px;
   max-width: 272px;
   min-height: 48px;
   background-color: white;
-  margin-top: 20px;
   padding: 0 12px;
   border: 2px solid #404040;
   width: 100%;
@@ -39,7 +38,7 @@ $icon-size: 24px;
 
     @each $icon in $icon-names {
       &--#{$icon} {
-        background-image: url(../../../assets/img/#{$icon}.svg);
+        background-image: url(../../../../../assets/img/#{$icon}.svg);
       }
     }
   }
