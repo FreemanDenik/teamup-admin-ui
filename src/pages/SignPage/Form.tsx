@@ -1,7 +1,8 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC, HTMLProps, ReactNode } from "react";
 
 import classNames from "classnames";
 import s from "./Form.module.scss";
+import { Link, useNavigate } from "react-router-dom";
 
 type FormImageGuard = "fontg" | "new";
 
@@ -12,9 +13,10 @@ interface FormProps {
   submitText: string;
   imageName: FormImageGuard;
   extraHeight?: boolean;
+  redirectTo: "/sign-in" | "/sign-up";
 }
 
-const Form: FC<FormProps> = ({
+const Form: FC<FormProps & HTMLProps<HTMLFormElement>> = ({
   dontHasAccount,
   eyeCatching,
   title,
@@ -22,7 +24,9 @@ const Form: FC<FormProps> = ({
   imageName,
   children,
   extraHeight = false,
+  redirectTo,
 }) => {
+  const navigate = useNavigate();
   return (
     <div className={s.wrapper}>
       <div className={`${s.inner} ${extraHeight ? s.inner_height : ""}`}>
@@ -36,10 +40,10 @@ const Form: FC<FormProps> = ({
             <div className={s.dontHasAccount}>
               {/* Нет аккаунта? */}
               {dontHasAccount}
-              <span className={s.dontHasAccount_eyeCatching}>
+              <Link to={redirectTo} className={s.dontHasAccount_eyeCatching}>
                 {/* Создай новый */}
                 {eyeCatching}
-              </span>
+              </Link>
             </div>
           </header>
           <main className={`${s.main}`}>
@@ -67,7 +71,7 @@ const Form: FC<FormProps> = ({
 
         <div className={`${s.image} ${s[`image_${imageName}`]}`} />
 
-        <button className={s.close}></button>
+        <button className={s.close} onClick={() => navigate("/")}></button>
       </div>
     </div>
   );

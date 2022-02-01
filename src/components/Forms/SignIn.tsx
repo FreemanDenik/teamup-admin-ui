@@ -14,6 +14,7 @@ const SignIn: FC<SignInProps> = ({}) => {
       eyeCatching="Создай новый!"
       submitText="Авторизоваться"
       imageName="fontg"
+      redirectTo="/sign-up"
     >
       <input type="text" className={s.input} />
       <input type="text" className={s.input} />

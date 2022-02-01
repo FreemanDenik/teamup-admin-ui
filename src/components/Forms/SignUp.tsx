@@ -13,6 +13,7 @@ const SignUp: FC<SignUpProps> = ({}) => {
       eyeCatching="Авторизуйся"
       imageName="new"
       submitText="Sign Up"
+      redirectTo="/sign-in"
     >
       <div className={s.rowHalf}>
         <input type="text" className={s.input} />
