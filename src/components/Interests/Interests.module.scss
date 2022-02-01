@@ -1,0 +1,80 @@
+@use "../forward" as *;
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  gap: 20px;
+}
+
+.add,
+.delete {
+  outline: none;
+  border: 1px solid $color--base;
+  display: block;
+  padding: 0;
+  margin: 0;
+  border-radius: 50%;
+}
+
+.delete {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  transform: translate(50%, -50%);
+
+  $size: $size-text--base * 0.9;
+  width: $size;
+  height: $size;
+}
+
+.interest {
+  font-size: $size-text--base;
+  box-shadow: 0 2px 5px rgba(black, 0.5);
+  padding: 10px 20px;
+  cursor: pointer;
+  user-select: none;
+  color: $color--base;
+  font-family: ptsans-bold;
+
+  transition-property: color background-color;
+  transition-duration: $transition-duration--short;
+
+  &:hover {
+    color: white;
+    background-color: $color--base;
+
+    .delete {
+      display: block;
+    }
+  }
+
+  position: relative;
+
+  &_slim {
+    padding: 6px 12px;
+  }
+}
+
+.add {
+  $size: $size-text--base * 1.8;
+  width: $size;
+  height: $size;
+  margin: auto auto auto 0;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: absolute;
+  top: 0;
+  right: -90%;
+  max-width: 250px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  border: 1px solid $color--base;
+}

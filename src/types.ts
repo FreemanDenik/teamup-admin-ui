@@ -5,14 +5,6 @@ export interface LoginUserModel {
   password: string;
 }
 
-export interface UpdateUserModel {
-  email?: string;
-  token?: string;
-  username?: string;
-  bio?: string;
-  image?: string;
-}
-
 export interface SignUpFields {
   email: string;
   password: string;
@@ -29,7 +21,5 @@ export interface InputProps<T> {
   label: Path<T>;
   register: UseFormRegister<T>;
   config: RegisterOptions;
-  type?: string;
   area?: boolean;
-  placeholder: string;
 }

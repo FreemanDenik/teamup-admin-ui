@@ -1,15 +1,13 @@
-import React, { FC, useEffect } from "react";
-import classNames from "classnames";
-import s from "./Home.module.scss";
-import Header from "../../components/Header";
-import LayoutContainer from "../../components/LayoutContainer";
-import StartScreen from "../../components/StartScreen";
-import UpcomingEvents from "../../components/UpcomingEvents";
-import Stats from "../../components/Stats";
-import HowWorks from "../../components/HowWorks";
-import WhatDoWant from "../../components/WhatDoWant";
-import Organizators from "../../components/Organizators";
-import Footer from "../../components/Footer";
+import React, { FC } from "react";
+import LayoutContainer from "./sections/LayoutContainer";
+import Header from "./sections/Header";
+import StartScreen from "./sections/StartScreen";
+import WhatDoWant from "./sections/WhatDoWant";
+import HowWorks from "./sections/HowWorks";
+import UpcomingEvents from "./sections/UpcomingEvents";
+import Stats from "./sections/Stats";
+import Organizators from "./sections/Organizators";
+import Footer from "./sections/Footer";
 
 interface HomeProps {}
 
