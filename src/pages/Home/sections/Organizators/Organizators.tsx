@@ -1,13 +1,66 @@
-import React, { FC, useState, useEffect, useRef } from "react";
-import cls from "classnames";
+import React, { FC, useEffect, useRef, useState } from "react";
+import Loop from "../../../../components/Loop/Loop";
+import { CardProps, OrganizatorsProps } from "../../../../types";
 import Card from "./Card";
 import s from "./Organizators.module.scss";
 
-const Organizators: FC = () => {
-  const [offset, setOffset] = useState<number>(0);
+const Organizators: FC<OrganizatorsProps> = ({}) => {
+  const [runLoop, setRunLoop] = useState<boolean>(false);
+  const [data, setData] = useState<Partial<CardProps>[]>([
+    {
+      name: "Danil",
+      surname: "Ternovoi",
+      age: 24,
+    },
+
+    {
+      name: "Anton",
+      surname: "Ternovoi",
+      age: 24,
+    },
+
+    {
+      name: "Olga",
+      surname: "Belova",
+      age: 24,
+    },
+
+    {
+      name: "Lena",
+      surname: "Zotova",
+      age: 24,
+    },
+
+    {
+      name: "Sergey",
+      surname: "Zotov",
+      age: 24,
+    },
+  ]);
+
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (wrapperRef.current) {
+      const {
+        current: { clientHeight, offsetTop },
+      } = wrapperRef;
+
+      const check = () => {
+        const isTreshold = window.scrollY >= offsetTop - clientHeight * 0.9;
+
+        if (isTreshold) return setRunLoop((prev) => (prev ? prev : true));
+        return setRunLoop(false);
+      };
+
+      window.addEventListener("scroll", check);
+      window.addEventListener("load", check);
+      return () => window.removeEventListener("scroll", check);
+    }
+  }, [wrapperRef]);
 
   return (
-    <div>
+    <section ref={wrapperRef}>
       <header className={s.header}>
         <h1 className={s.title}>Популярные организаторы</h1>
         <p className={s.subTitle}>
@@ -16,19 +69,17 @@ const Organizators: FC = () => {
         </p>
       </header>
 
-      <div className={s.profiles}>
-        <div className={s.carousel}>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-        </div>
-      </div>
+      <Loop<Partial<CardProps>>
+        data={data}
+        renderItem={(el) => <Card {...el} />}
+        width={325}
+        height={435}
+        gap={6}
+        run={runLoop}
+      />
 
       <button className={s.more}>Больше организаторов</button>
-    </div>
+    </section>
   );
 };
 

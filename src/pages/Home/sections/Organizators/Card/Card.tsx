@@ -1,17 +1,28 @@
 import React, { FC } from "react";
-import cls from "classnames";
 import { v4 } from "uuid";
-
+import { CardProps } from "../../../../../types";
 import s from "./Card.module.scss";
+import mockone from "../../../../../assets/img/mock-org1.png";
+import mocktwo from "../../../../../assets/img/mock-org2.png";
 
-const Card: FC = () => {
+const Card: FC<Partial<CardProps>> = ({
+  name = "name",
+  surname = "surname",
+  desc = "desc",
+  age = 23,
+}) => {
   return (
     <div className={s.wrapper}>
-      <div className={s.avatar} />
+      <div
+        className={s.avatar}
+        style={{ backgroundImage: `url(${mockone})` }}
+      />
       <div className={s.info}>
-        <div className={s.name}>Name Surname</div>
-        <div className={s.years}>18 years</div>
-        <div className={s.desc}>Description</div>
+        <div className={s.name}>
+          {name} {surname}
+        </div>
+        <div className={s.years}>{age} years</div>
+        <div className={s.desc}>{desc}</div>
       </div>
       <footer className={s.footer}>
         <div className={s.followers}>
@@ -25,6 +36,7 @@ const Card: FC = () => {
                   style={{
                     left: `${(33 * index) / 2}px`,
                     zIndex: `${length - index}`,
+                    backgroundImage: `url(${mocktwo})`,
                   }}
                 ></div>
               );

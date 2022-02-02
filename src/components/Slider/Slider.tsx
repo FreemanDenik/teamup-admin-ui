@@ -1,13 +1,7 @@
 import cls from "classnames";
 import { ReactElement, useCallback, useEffect, useState } from "react";
+import { SliderProps } from "../../types";
 import s from "./Slider.module.scss";
-interface SliderProps<T> {
-  data: T[];
-  renderItem(dataElement: T): ReactElement;
-  width: number;
-  height: number;
-  gap: number;
-}
 
 function Slider<T>({
   data,
@@ -15,8 +9,18 @@ function Slider<T>({
   width,
   height,
   gap,
+  startFrom = "start",
 }: SliderProps<T>): ReactElement {
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [currentIndex, setCurrentIndex] = useState<number>(() => {
+    switch (startFrom) {
+      case "start":
+        return 0;
+      case "middle":
+        return Math.floor(data.length / 2);
+      case "end":
+        return data.length - 1;
+    }
+  });
 
   const prev = () => {
     setCurrentIndex((prev) => {

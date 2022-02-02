@@ -1,8 +1,8 @@
 @use "../../forward" as *;
 
 .wrapper {
-  min-height: 435px;
-  min-width: 325px;
+  width: 100%;
+  height: 100%;
   background-color: $organizator-card--bgcol;
   padding: 13px;
   box-sizing: border-box;
@@ -17,22 +17,15 @@
   height: $organizator-card--avatar-size;
   min-height: $organizator-card--avatar-size;
   border-radius: 50%;
-  background-color: grey;
   margin: 0 auto;
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 
   display: flex;
   justify-content: center;
   align-items: center;
-
-  &::after {
-    content: "avatar";
-    display: block;
-
-    font-family: ptsans-bold;
-    color: white;
-    font-size: 4rem;
-    font-variant: small-caps;
-  }
 }
 
 .name {
@@ -76,10 +69,9 @@
   width: $size;
   height: $size;
   border-radius: 50%;
-
-  background-color: grey;
-  box-shadow: inset 0 0 0 2px white;
-
   position: absolute;
   top: 0;
+
+  background-position: center;
+  background-size: cover;
 }

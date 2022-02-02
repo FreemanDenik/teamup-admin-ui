@@ -1,4 +1,4 @@
-@use "../../forward" as *;
+@use "../forward" as *;
 
 .slider {
   display: flex;
@@ -21,10 +21,7 @@
 }
 
 .slide_active {
-  box-shadow: 0 0 10px black;
-  transform: scale(1.2);
-  margin: 0 50px;
-  z-index: 2;
+  box-shadow: 0 -10px 0 $color--base;
 }
 
 .slide:first-of-type.slide--active {
