@@ -16,6 +16,7 @@ function Loop<T>({
   width,
   height,
   gap,
+  run = false,
 }: LoopProps<T>): ReactElement {
   const loopRef = useRef<number>(0);
   const boxBounding = useMemo(() => width + gap, [width, gap]);
@@ -55,12 +56,12 @@ function Loop<T>({
     });
   }, [loopRef]);
 
-  // TODO: STOP ANIMATION
-  // useEffect(() => {
-  //   loop();
-
-  //   return () => cancelAnimationFrame(loopRef.current);
-  // }, [loopRef]);
+  useEffect(() => {
+    if (run) {
+      loop();
+      return () => cancelAnimationFrame(loopRef.current);
+    }
+  }, [loopRef, run]);
 
   return (
     <div className={s.profiles}>

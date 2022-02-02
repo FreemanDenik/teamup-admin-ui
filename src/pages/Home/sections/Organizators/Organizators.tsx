@@ -1,10 +1,11 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import Loop from "../../../../components/Loop/Loop";
 import { CardProps, OrganizatorsProps } from "../../../../types";
 import Card from "./Card";
 import s from "./Organizators.module.scss";
 
 const Organizators: FC<OrganizatorsProps> = ({}) => {
+  const [runLoop, setRunLoop] = useState<boolean>(false);
   const [data, setData] = useState<Partial<CardProps>[]>([
     {
       name: "Danil",
@@ -37,8 +38,29 @@ const Organizators: FC<OrganizatorsProps> = ({}) => {
     },
   ]);
 
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (wrapperRef.current) {
+      const {
+        current: { clientHeight, offsetTop },
+      } = wrapperRef;
+
+      const check = () => {
+        const isTreshold = window.scrollY >= offsetTop - clientHeight * 0.9;
+
+        if (isTreshold) return setRunLoop((prev) => (prev ? prev : true));
+        return setRunLoop(false);
+      };
+
+      window.addEventListener("scroll", check);
+      window.addEventListener("load", check);
+      return () => window.removeEventListener("scroll", check);
+    }
+  }, [wrapperRef]);
+
   return (
-    <div>
+    <section ref={wrapperRef}>
       <header className={s.header}>
         <h1 className={s.title}>Популярные организаторы</h1>
         <p className={s.subTitle}>
@@ -53,10 +75,11 @@ const Organizators: FC<OrganizatorsProps> = ({}) => {
         width={325}
         height={435}
         gap={6}
+        run={runLoop}
       />
 
       <button className={s.more}>Больше организаторов</button>
-    </div>
+    </section>
   );
 };
 

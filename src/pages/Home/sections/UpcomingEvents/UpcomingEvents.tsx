@@ -11,6 +11,7 @@ interface Human {
 }
 
 const UpcomingEvents = () => {
+  // TODO: убрать моковые данные
   const [humans, setHumans] = useState<Human[]>([
     {
       name: "danil",

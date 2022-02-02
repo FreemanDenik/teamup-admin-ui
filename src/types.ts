@@ -47,6 +47,7 @@ export interface LoopProps<T = any> extends BoxGeometry {
   data: T[];
   renderItem(el: T, index?: number, arr?: T[]): ReactElement;
   gap: number;
+  run?: boolean;
 }
 
 export type SliderStartGuard = "start" | "middle" | "end";
