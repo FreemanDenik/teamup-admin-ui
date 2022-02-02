@@ -3,7 +3,7 @@ import cls from "classnames";
 import { v4 } from "uuid";
 
 import s from "./UpcomingEvents.module.scss";
-import Slider from "./Slider";
+import Slider from "../../../../components/Slider";
 
 interface Human {
   name: string;
@@ -46,6 +46,7 @@ const UpcomingEvents = () => {
         width={516}
         height={268}
         data={humans}
+        startFrom="middle"
         renderItem={(human) => {
           return (
             <div className={s.eventCard} key={v4()}>

@@ -1,17 +1,25 @@
 import React, { FC } from "react";
-import cls from "classnames";
+import classNames from "classnames";
 import { v4 } from "uuid";
 
 import s from "./Card.module.scss";
+import { CardProps } from "../../../../../types";
 
-const Card: FC = () => {
+const Card: FC<Partial<CardProps>> = ({
+  name = "name",
+  surname = "surname",
+  desc = "desc",
+  age = 23,
+}) => {
   return (
     <div className={s.wrapper}>
       <div className={s.avatar} />
       <div className={s.info}>
-        <div className={s.name}>Name Surname</div>
-        <div className={s.years}>18 years</div>
-        <div className={s.desc}>Description</div>
+        <div className={s.name}>
+          {name} {surname}
+        </div>
+        <div className={s.years}>{age} years</div>
+        <div className={s.desc}>{desc}</div>
       </div>
       <footer className={s.footer}>
         <div className={s.followers}>

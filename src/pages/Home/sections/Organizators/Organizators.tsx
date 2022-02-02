@@ -1,10 +1,41 @@
-import React, { FC, useState, useEffect, useRef } from "react";
-import cls from "classnames";
+import React, { FC, useState } from "react";
+import Loop from "../../../../components/Loop/Loop";
+import { CardProps, OrganizatorsProps } from "../../../../types";
 import Card from "./Card";
 import s from "./Organizators.module.scss";
 
-const Organizators: FC = () => {
-  const [offset, setOffset] = useState<number>(0);
+const Organizators: FC<OrganizatorsProps> = ({}) => {
+  const [data, setData] = useState<Partial<CardProps>[]>([
+    {
+      name: "Danil",
+      surname: "Ternovoi",
+      age: 24,
+    },
+
+    {
+      name: "Anton",
+      surname: "Ternovoi",
+      age: 24,
+    },
+
+    {
+      name: "Olga",
+      surname: "Belova",
+      age: 24,
+    },
+
+    {
+      name: "Lena",
+      surname: "Zotova",
+      age: 24,
+    },
+
+    {
+      name: "Sergey",
+      surname: "Zotov",
+      age: 24,
+    },
+  ]);
 
   return (
     <div>
@@ -16,16 +47,13 @@ const Organizators: FC = () => {
         </p>
       </header>
 
-      <div className={s.profiles}>
-        <div className={s.carousel}>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-        </div>
-      </div>
+      <Loop<Partial<CardProps>>
+        data={data}
+        renderItem={(el) => <Card {...el} />}
+        width={325}
+        height={435}
+        gap={6}
+      />
 
       <button className={s.more}>Больше организаторов</button>
     </div>
