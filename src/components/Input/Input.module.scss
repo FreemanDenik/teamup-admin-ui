@@ -10,27 +10,6 @@
   font-family: ptsans-bold, sans-serif;
   padding: 16px 16px;
   box-sizing: border-box;
-
-  @include input;
-  // color: $active-color;
-  // &,
-  // &::placeholder {
-  //   transition-property: color;
-  //   transition-duration: 0.15s;
-  // }
-
-  // &::placeholder {
-  //   color: lighten($active-color, 20%);
-  // }
-
-  // &:focus::placeholder {
-  //   color: black;
-  // }
-
-  // &:focus {
-  //   border: 1px solid $color--base;
-  //   outline: none;
-  // }
 }
 .input_short {
   width: 156px;

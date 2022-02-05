@@ -5,7 +5,7 @@ import s from "./Stats.module.scss";
 
 const Stats: FC = () => {
   return (
-    <div className={s.stats}>
+    <section className={s.stats}>
       {[
         {
           title: "Всего мероприятий",
@@ -21,7 +21,7 @@ const Stats: FC = () => {
           <div className={s.statsCard__count}>{count}</div>
         </div>
       ))}
-    </div>
+    </section>
   );
 };
 

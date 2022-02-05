@@ -2,9 +2,6 @@
 @use "./scss/vars" as *;
 @import "~normalize.css/normalize.css";
 
-// TODO: придумать прокрутку для карточек организаторов
-// TODO: провести рефакторинг
-
 :root {
   font-size: $font-size--root;
   font-family: ptsans-regular, sans-serif;
@@ -39,11 +36,30 @@ li {
   margin: 0;
 }
 
+#root {
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
 .bg {
   background-color: rgba(navy, 0.1);
-  box-shadow: inset 0 0 0 2px black;
+  box-shadow: inset 0 0 0 1px lightcoral;
 }
+
+.bg-box {
+  @extend .bg;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
 a {
   text-decoration: none;
-  color: black;
+}
+
+.block {
+  width: 40px;
+  height: 40px;
+  background-color: navy;
 }

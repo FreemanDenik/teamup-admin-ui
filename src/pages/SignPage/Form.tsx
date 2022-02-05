@@ -3,6 +3,7 @@ import React, { FC, HTMLProps, ReactNode } from "react";
 import classNames from "classnames";
 import s from "./Form.module.scss";
 import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 type FormImageGuard = "fontg" | "new";
 
@@ -28,9 +29,21 @@ const Form: FC<FormProps & HTMLProps<HTMLFormElement>> = ({
 }) => {
   const navigate = useNavigate();
   return (
-    <div className={s.wrapper}>
+    <motion.div
+      className={s.wrapper}
+      initial={{ opacity: 0, translateX: "-10%" }}
+      animate={{ opacity: 1, translateX: 0 }}
+      exit={{ opacity: 0, translateX: "10%" }}
+      transition={{ duration: 0.5 }}
+    >
       <div className={`${s.inner} ${extraHeight ? s.inner_height : ""}`}>
-        <div className={`${s.form}`}>
+        <motion.div
+          className={`${s.form}`}
+          initial={{ opacity: 0, translateX: "-10%" }}
+          animate={{ opacity: 1, translateX: 0 }}
+          exit={{ opacity: 0, translateX: "10%" }}
+          transition={{ duration: 0.5 }}
+        >
           {/* HEADER */}
           <header className={`${s.header}`}>
             <div className={s.title}>
@@ -47,14 +60,6 @@ const Form: FC<FormProps & HTMLProps<HTMLFormElement>> = ({
             </div>
           </header>
           <main className={`${s.main}`}>
-            {/* <input type="text" className={s.input} />
-            <input type="text" className={s.input} />
-
-            <label className={`${s.rememberMe}`}>
-              <input type="checkbox" className={s.check} />
-              <div className={s.pseudo} />
-              <span>Оставаться в сети</span>
-            </label> */}
             {children}
 
             <button className={s.auth}>
@@ -67,13 +72,13 @@ const Form: FC<FormProps & HTMLProps<HTMLFormElement>> = ({
             <div className={s.googleAccess}>Или зайти с помощью</div>
             <div className={s.googleButton}></div>
           </footer>
-        </div>
+        </motion.div>
 
         <div className={`${s.image} ${s[`image_${imageName}`]}`} />
 
         <button className={s.close} onClick={() => navigate("/")}></button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
