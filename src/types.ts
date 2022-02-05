@@ -1,6 +1,101 @@
 import { ReactElement } from "react";
 import { Path, RegisterOptions, UseFormRegister } from "react-hook-form";
 
+interface Dto {
+  // Первичный ключ
+  id: number;
+}
+
+export interface InterestDto extends Dto {
+  // Название
+  title: string;
+
+  // Краткое описание
+  shortDescription: string;
+}
+
+export interface UserDto extends Dto {
+  // Username
+  name: string;
+
+  // Имя
+  firstName: string;
+
+  // Фамилия
+  lastName: string;
+
+  // Отчество
+  middleName: string;
+
+  // Почта
+  email: string;
+
+  // Город проживания
+  city: string;
+
+  // Доп.Инфо
+  aboutUser: string;
+
+  // Интересы, заполняется не всегда
+  userInterests: InterestDto[];
+}
+
+export interface EventTypeDto extends Dto {
+  // Название
+  type: string;
+}
+
+export interface EventReviewDto extends Dto {
+  // Кто оставил отзыв
+  reviewer: UserDto;
+
+  // сообщение
+  message: string;
+
+  // Для какого мероприятия
+  eventId: number;
+
+  // Время
+  time: Date;
+
+  // оценка
+  EventGrade: number;
+}
+
+export interface EventDto extends Dto {
+  // Название
+  eventName: string;
+
+  // Краткое описание
+  descriptionEvent: string;
+
+  // Место провидения
+  placeEvent: string;
+
+  // Время проведения
+  timeEvent: Date;
+
+  // Приватность
+  eventPrivacy: boolean;
+
+  // Кол-во участников
+  participantsCount: number;
+
+  // Тип мероприятия
+  EventType: EventTypeDto;
+
+  // Id автора
+  AuthorId: number;
+
+  // Интересы
+  eventInterests: InterestDto[];
+
+  // Status	StatusDto	Статус мероприятия
+
+  // Минимальный возраст
+  MinYear: number;
+}
+
 export interface LoginUserModel {
   email: string;
   password: string;
@@ -43,7 +138,7 @@ export interface LoopItemProps extends BoxGeometry {
   left: number;
 }
 
-export interface LoopProps<T = any> extends BoxGeometry {
+export interface LoopProps<T> extends BoxGeometry {
   data: T[];
   renderItem(el: T, index?: number, arr?: T[]): ReactElement;
   gap: number;

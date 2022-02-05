@@ -1,18 +1,29 @@
-import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import React, { FC } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { SignInPage, SignUpPage } from "./pages/SignPage";
 import Home from "./pages/Home";
+import { AnimatePresence, motion as m } from "framer-motion";
 import "./App.scss";
 
+const routesMap = {
+  "/": Home,
+  "sign-up": SignUpPage,
+  "sign-in": SignInPage,
+};
+
 const App = () => {
+  const location = useLocation();
+
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="sign-up" element={<SignUpPage />} />
-        <Route path="sign-in" element={<SignInPage />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
+      <AnimatePresence exitBeforeEnter>
+        <Routes {...{ location, key: location.pathname }}>
+          {Object.entries(routesMap).map(([path, Comp]) => {
+            return <Route path={path} element={<Comp />} key={path} />;
+          })}
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </AnimatePresence>
     </>
   );
 };

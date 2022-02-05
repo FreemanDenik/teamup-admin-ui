@@ -6,7 +6,7 @@ import s from "./WhatDoWant.module.scss";
 
 const WhatDoWant = () => {
   return (
-    <div className={s.whatDoWant}>
+    <section className={s.whatDoWant}>
       <div className={`${s.whatDoWant__search} ${s.whatDoWantSearch}`}>
         <Title />
 
@@ -33,7 +33,7 @@ const WhatDoWant = () => {
           ]}
         />
       </div>
-    </div>
+    </section>
   );
 };
 

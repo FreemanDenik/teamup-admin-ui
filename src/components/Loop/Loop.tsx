@@ -52,7 +52,7 @@ function Loop<T>({
           lastLeavedIndexRef.current = 0;
         }
       }
-      return { ...prev, offset: prev.offset + 1 };
+      return { ...prev, offset: prev.offset + 0.5 };
     });
   }, [loopRef]);
 

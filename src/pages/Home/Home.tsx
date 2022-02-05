@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
+import { motion } from "framer-motion";
 import LayoutContainer from "./sections/LayoutContainer";
 import Header from "./sections/Header";
 import StartScreen from "./sections/StartScreen";
@@ -11,9 +12,21 @@ import Footer from "./sections/Footer";
 
 interface HomeProps {}
 
+let wasViewed = false;
+
 const Home: FC<HomeProps> = ({}) => {
+  useEffect(() => {
+    wasViewed = !wasViewed;
+    console.log(wasViewed);
+  }, [wasViewed]);
+
   return (
-    <main>
+    <motion.main
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0.5 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.2 }}
+    >
       <Header />
       <LayoutContainer>
         <StartScreen />
@@ -26,7 +39,7 @@ const Home: FC<HomeProps> = ({}) => {
         <Organizators />
         <Footer />
       </LayoutContainer>
-    </main>
+    </motion.main>
   );
 };
 

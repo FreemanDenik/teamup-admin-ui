@@ -1,9 +1,10 @@
 import React from "react";
+import { motion } from "framer-motion";
 import s from "./StartScreen.module.scss";
 
 const StartScreen = () => {
   return (
-    <div className={s.offer}>
+    <section className={s.offer}>
       <div className={s.inner}>
         <h1 className={s.title}>About Us</h1>
         <p className={s.desc}>
@@ -11,7 +12,7 @@ const StartScreen = () => {
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
       </div>
-    </div>
+    </section>
   );
 };
 
