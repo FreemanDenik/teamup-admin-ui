@@ -10,7 +10,7 @@
 .add,
 .delete {
   outline: none;
-  border: 1px solid $color--base;
+  border: none;
   display: block;
   padding: 0;
   margin: 0;
@@ -28,6 +28,11 @@
   $size: $size-text--base * 0.9;
   width: $size;
   height: $size;
+
+  background-image: url("../../assets/img/closeSmall.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: transparent;
 }
 
 .interest {
@@ -63,6 +68,10 @@
   width: $size;
   height: $size;
   margin: auto auto auto 0;
+  background-image: url("../../assets/img/addInterest.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: transparent;
 }
 
 .modal {

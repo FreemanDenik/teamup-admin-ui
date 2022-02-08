@@ -99,6 +99,7 @@ export interface EventDto extends Dto {
 export interface LoginUserModel {
   email: string;
   password: string;
+  rememberMe?: boolean;
 }
 
 export interface SignUpFields {
@@ -106,7 +107,7 @@ export interface SignUpFields {
   password: string;
   username: string;
   firstname: string;
-  youAgree?: boolean;
+
   lastname: string;
   aboutUser: string;
   city: string;

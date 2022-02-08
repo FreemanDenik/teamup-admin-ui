@@ -16,7 +16,7 @@ const Interests: FC<InterestsProps> = ({}) => {
             <button className={s.delete}></button>
           </div>
         ))}
-      <button className={s.add}>a</button>
+      <button className={s.add}></button>
 
       <div className={s.modal}>
         <Input icon="search" />
@@ -26,7 +26,6 @@ const Interests: FC<InterestsProps> = ({}) => {
             .map(() => (
               <div className={`${s.interest} ${s.interest_slim}`} key={v4()}>
                 Игры
-                <button className={s.delete}></button>
               </div>
             ))}
         </div>
