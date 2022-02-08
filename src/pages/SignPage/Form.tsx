@@ -26,10 +26,12 @@ const Form: FC<FormProps & HTMLProps<HTMLFormElement>> = ({
   children,
   extraHeight = false,
   redirectTo,
+  onSubmit,
 }) => {
   const navigate = useNavigate();
   return (
-    <motion.div
+    <motion.form
+      onSubmit={onSubmit}
       className={s.wrapper}
       initial={{ opacity: 0, translateX: "-10%" }}
       animate={{ opacity: 1, translateX: 0 }}
@@ -78,7 +80,7 @@ const Form: FC<FormProps & HTMLProps<HTMLFormElement>> = ({
 
         <button className={s.close} onClick={() => navigate("/")}></button>
       </div>
-    </motion.div>
+    </motion.form>
   );
 };
 

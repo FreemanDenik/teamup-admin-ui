@@ -1,35 +1,11 @@
-import React, { FC, useMemo } from "react";
-import { InputProps, SignUpFields } from "../../types";
-import s from "./Input.module.scss";
+import React, { FC, HTMLProps, useMemo } from "react";
 
-function capitalize(value: string): string {
-  return value.charAt(0).toUpperCase() + value.slice(1);
-}
+import s from "../../pages/SignPage/Form.module.scss";
 
-function Input<T extends SignUpFields>({
-  label,
-  register,
-  config,
-  area = false,
-}: InputProps<T>) {
-  const placeholder = useMemo(() => capitalize(label), [label]);
+interface InputProps extends HTMLProps<HTMLInputElement> {}
 
-  return (
-    <label className={s.label}>
-      {area ? (
-        <textarea
-          placeholder={placeholder}
-          {...register(label, config)}
-        ></textarea>
-      ) : (
-        <input
-          type="text"
-          placeholder={placeholder}
-          {...register(label, config)}
-        />
-      )}
-    </label>
-  );
+function Input(props: InputProps) {
+  return <input className={s.input} {...props} />;
 }
 
 export default Input;
