@@ -9,10 +9,11 @@ const routesMap = {
   "/": Home,
   "sign-up": SignUpPage,
   "sign-in": SignInPage,
-};
+  };
 
 const App = () => {
   const location = useLocation();
+
 
   return (
     <>
