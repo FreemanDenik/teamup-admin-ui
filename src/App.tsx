@@ -14,7 +14,6 @@ const routesMap = {
 const App = () => {
   const location = useLocation();
 
-
   return (
     <>
       <AnimatePresence exitBeforeEnter>
