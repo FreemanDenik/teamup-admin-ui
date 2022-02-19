@@ -1,12 +1,14 @@
 import React, { FC, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import Form from "../../pages/SignPage/Form";
-import s from "../../pages/SignPage/Form.module.scss";
-import Interests from "../Interests";
 import { SignUpFields } from "../../types";
+
+import Form from "../../pages/SignPage/Form";
+import Interests from "../Interests";
 import Input from "../Input";
+
 import { ValidateUserName } from "../../services/ValidateUserName";
 
+import s from "../../pages/SignPage/Form.module.scss";
 
 const SignUp: FC = () => {
   const { control, handleSubmit, reset, setError, clearErrors } = useForm<SignUpFields>({
@@ -21,14 +23,10 @@ const SignUp: FC = () => {
       aboutUser: ""
     }
   });
-
   const [serverValidate, setServerValidate] = useState(false);
-
-
   const register: SubmitHandler<SignUpFields> = async (data) => {
     console.log(data);
   };
-
   return (
     <Form
       onSubmit = {handleSubmit(register)}
@@ -80,7 +78,6 @@ const SignUp: FC = () => {
           }}
         />
       </div>
-
       <Controller
         control = {control}
         name = "email"
@@ -90,7 +87,6 @@ const SignUp: FC = () => {
             value: /\w+@\w+\.\w+/gi,
             message: "Your email should be valid"
           }
-
         }}
         render = {({ field: { ref, ...field }, fieldState: { error } }) => {
           return (
@@ -101,7 +97,6 @@ const SignUp: FC = () => {
           );
         }}
       />
-
       <Controller
         control = {control}
         name = "password"
@@ -121,7 +116,6 @@ const SignUp: FC = () => {
           );
         }}
       />
-
       <Controller
         control = {control}
         name = "username"
@@ -132,11 +126,11 @@ const SignUp: FC = () => {
               value: /[а-яa-z]/gi,
               message: "Invalid username"
             },
-            onChange:()=> clearErrors("username"),
+            onChange: () => clearErrors("username"),
             onBlur: (e: React.FocusEvent<HTMLInputElement>) => {
-              if (ValidateUserName(e.target.value)){
+              if (ValidateUserName(e.target.value)) {
                 setServerValidate(true);
-              } else{
+              } else {
                 setServerValidate(false);
                 setError("username", {
                   message: "Данное имя уже занято"
@@ -156,7 +150,6 @@ const SignUp: FC = () => {
           );
         }}
       />
-
       <div className = {s.rowHalf}>
         <Controller
           control = {control}
@@ -173,7 +166,6 @@ const SignUp: FC = () => {
             );
           }}
         />
-
         <Controller
           control = {control}
           name = "age"
@@ -190,7 +182,6 @@ const SignUp: FC = () => {
           }}
         />
       </div>
-
       <Controller
         control = {control}
         name = "aboutUser"
@@ -210,7 +201,6 @@ const SignUp: FC = () => {
           );
         }}
       />
-
       <Interests />
     </Form>
   );
