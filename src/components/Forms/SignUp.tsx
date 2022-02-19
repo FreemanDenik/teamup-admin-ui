@@ -1,12 +1,13 @@
-import React, { FC } from "react";
+import React, { FC, FocusEvent } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import Form from "../../pages/SignPage/Form";
 import s from "../../pages/SignPage/Form.module.scss";
 import Interests from "../Interests";
 import { SignUpFields } from "../../types";
 import Input from "../Input";
+import {ValidateUserName} from '../../services/ValidateUserName'
 
-const SignUp = () => {
+const SignUp: FC = () => {
   const { control, handleSubmit, reset } = useForm<SignUpFields>({
     defaultValues: {
       email: "",
@@ -23,7 +24,14 @@ const SignUp = () => {
   const register: SubmitHandler<SignUpFields> = async (data) => {
     console.log(data);
   };
+const handleInputOnBlur = (e: FocusEvent<HTMLInputElement>)=>{
+   if ( e.target.name === "username") {
+    ValidateUserName(e.target.value)
+  } else {
+    console.log("Валидация email");
+  }
 
+}
   return (
     <Form
       onSubmit={handleSubmit(register)}
@@ -89,7 +97,7 @@ const SignUp = () => {
         render={({ field: { ref, ...field }, fieldState: { error } }) => {
           return (
             <>
-              <Input {...field} placeholder="Почта" />
+              <Input {...field} placeholder="Почта" onBlur={handleInputOnBlur} />
               {error && error.message}
             </>
           );
@@ -129,7 +137,8 @@ const SignUp = () => {
         render={({ field: { ref, ...field }, fieldState: { error } }) => {
           return (
             <>
-              <Input {...field} placeholder="Username" />
+
+              <Input {...field} placeholder="Username" onBlur={handleInputOnBlur} />
               {error && error.message}
             </>
           );
