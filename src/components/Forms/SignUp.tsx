@@ -1,14 +1,15 @@
-import React, { FC, FocusEvent } from "react";
+import React, { FC, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import Form from "../../pages/SignPage/Form";
 import s from "../../pages/SignPage/Form.module.scss";
 import Interests from "../Interests";
 import { SignUpFields } from "../../types";
 import Input from "../Input";
-import {ValidateUserName} from '../../services/ValidateUserName'
+import { ValidateUserName } from "../../services/ValidateUserName";
+
 
 const SignUp: FC = () => {
-  const { control, handleSubmit, reset } = useForm<SignUpFields>({
+  const { control, handleSubmit, reset, setError, clearErrors } = useForm<SignUpFields>({
     defaultValues: {
       email: "",
       password: "",
@@ -17,46 +18,42 @@ const SignUp: FC = () => {
       age: "",
       city: "",
       username: "",
-      aboutUser: "",
-    },
+      aboutUser: ""
+    }
   });
+
+  const [serverValidate, setServerValidate] = useState(false);
+
 
   const register: SubmitHandler<SignUpFields> = async (data) => {
     console.log(data);
   };
-const handleInputOnBlur = (e: FocusEvent<HTMLInputElement>)=>{
-   if ( e.target.name === "username") {
-    ValidateUserName(e.target.value)
-  } else {
-    console.log("Валидация email");
-  }
 
-}
   return (
     <Form
-      onSubmit={handleSubmit(register)}
-      title="Создание пользователя"
-      dontHasAccount="Уже есть пользователь ?"
-      eyeCatching="Авторизуйся"
-      imageName="new"
-      submitText="Sign Up"
-      redirectTo="/sign-in"
+      onSubmit = {handleSubmit(register)}
+      title = "Создание пользователя"
+      dontHasAccount = "Уже есть пользователь ?"
+      eyeCatching = "Авторизуйся"
+      imageName = "new"
+      submitText = "Sign Up"
+      redirectTo = "/sign-in"
     >
-      <div className={s.rowHalf}>
+      <div className = {s.rowHalf}>
         <Controller
-          control={control}
-          name="lastname"
-          rules={{
+          control = {control}
+          name = "lastname"
+          rules = {{
             required: true,
             pattern: {
               value: /[а-яa-z]/gi,
-              message: "Invalid lastname",
-            },
+              message: "Invalid lastname"
+            }
           }}
-          render={({ field: { ref, ...field }, fieldState: { error } }) => {
+          render = {({ field: { ref, ...field }, fieldState: { error } }) => {
             return (
               <div>
-                <Input {...field} placeholder="Фамилия" />
+                <Input {...field} placeholder = "Фамилия" />
                 {error && error.message}
               </div>
             );
@@ -64,19 +61,19 @@ const handleInputOnBlur = (e: FocusEvent<HTMLInputElement>)=>{
         />
 
         <Controller
-          control={control}
-          name="firstname"
-          rules={{
+          control = {control}
+          name = "firstname"
+          rules = {{
             required: true,
             pattern: {
               value: /[а-яa-z]/gi,
-              message: "Invalid firstname",
-            },
+              message: "Invalid firstname"
+            }
           }}
-          render={({ field: { ref, ...field }, fieldState: { error } }) => {
+          render = {({ field: { ref, ...field }, fieldState: { error } }) => {
             return (
               <div>
-                <Input {...field} placeholder="Имя" />
+                <Input {...field} placeholder = "Имя" />
                 {error && error.message}
               </div>
             );
@@ -85,19 +82,20 @@ const handleInputOnBlur = (e: FocusEvent<HTMLInputElement>)=>{
       </div>
 
       <Controller
-        control={control}
-        name="email"
-        rules={{
+        control = {control}
+        name = "email"
+        rules = {{
           required: true,
           pattern: {
             value: /\w+@\w+\.\w+/gi,
-            message: "Your email should be valid",
-          },
+            message: "Your email should be valid"
+          }
+
         }}
-        render={({ field: { ref, ...field }, fieldState: { error } }) => {
+        render = {({ field: { ref, ...field }, fieldState: { error } }) => {
           return (
             <>
-              <Input {...field} placeholder="Почта" onBlur={handleInputOnBlur} />
+              <Input {...field} placeholder = "Почта" />
               {error && error.message}
             </>
           );
@@ -105,19 +103,19 @@ const handleInputOnBlur = (e: FocusEvent<HTMLInputElement>)=>{
       />
 
       <Controller
-        control={control}
-        name="password"
-        rules={{
+        control = {control}
+        name = "password"
+        rules = {{
           required: true,
           pattern: {
             value: /(\w|\d){3, 20}/,
-            message: "Invalid password",
-          },
+            message: "Invalid password"
+          }
         }}
-        render={({ field: { ref, ...field }, fieldState: { error } }) => {
+        render = {({ field: { ref, ...field }, fieldState: { error } }) => {
           return (
             <>
-              <Input {...field} placeholder="Пароль" />
+              <Input {...field} placeholder = "Пароль" />
               {error && error.message}
             </>
           );
@@ -125,37 +123,51 @@ const handleInputOnBlur = (e: FocusEvent<HTMLInputElement>)=>{
       />
 
       <Controller
-        control={control}
-        name="username"
-        rules={{
-          required: true,
-          pattern: {
-            value: /[а-яa-z]/gi,
-            message: "Invalid username",
-          },
-        }}
-        render={({ field: { ref, ...field }, fieldState: { error } }) => {
+        control = {control}
+        name = "username"
+        rules = {
+          {
+            required: true,
+            pattern: {
+              value: /[а-яa-z]/gi,
+              message: "Invalid username"
+            },
+            onChange:()=> clearErrors("username"),
+            onBlur: (e: React.FocusEvent<HTMLInputElement>) => {
+              if (ValidateUserName(e.target.value)){
+                setServerValidate(true);
+              } else{
+                setServerValidate(false);
+                setError("username", {
+                  message: "Данное имя уже занято"
+                });
+              }
+
+
+            }
+          }
+        }
+        render = {({ field: { ref, ...field }, fieldState: { error } }) => {
           return (
             <>
-
-              <Input {...field} placeholder="Username" onBlur={handleInputOnBlur} />
+              <Input {...field} placeholder = "Username" serverValidate = {serverValidate} />
               {error && error.message}
             </>
           );
         }}
       />
 
-      <div className={s.rowHalf}>
+      <div className = {s.rowHalf}>
         <Controller
-          control={control}
-          name="city"
-          rules={{
-            required: true,
+          control = {control}
+          name = "city"
+          rules = {{
+            required: true
           }}
-          render={({ field: { ref, ...field }, fieldState: { error } }) => {
+          render = {({ field: { ref, ...field }, fieldState: { error } }) => {
             return (
               <>
-                <Input {...field} placeholder="Город" />
+                <Input {...field} placeholder = "Город" />
                 {error && error.message}
               </>
             );
@@ -163,15 +175,15 @@ const handleInputOnBlur = (e: FocusEvent<HTMLInputElement>)=>{
         />
 
         <Controller
-          control={control}
-          name="age"
-          rules={{
-            required: true,
+          control = {control}
+          name = "age"
+          rules = {{
+            required: true
           }}
-          render={({ field: { ref, ...field }, fieldState: { error } }) => {
+          render = {({ field: { ref, ...field }, fieldState: { error } }) => {
             return (
               <>
-                <Input {...field} placeholder="Возраст" />
+                <Input {...field} placeholder = "Возраст" />
                 {error && error.message}
               </>
             );
@@ -180,17 +192,17 @@ const handleInputOnBlur = (e: FocusEvent<HTMLInputElement>)=>{
       </div>
 
       <Controller
-        control={control}
-        name="aboutUser"
-        rules={{
-          required: true,
+        control = {control}
+        name = "aboutUser"
+        rules = {{
+          required: true
         }}
-        render={({ field: { ref, ...field }, fieldState: { error } }) => {
+        render = {({ field: { ref, ...field }, fieldState: { error } }) => {
           return (
             <>
-              <label className={s.areaLabel}>
-                <span className={s.dontHasAccount}>О себе</span>
-                <textarea className={s.area}></textarea>
+              <label className = {s.areaLabel}>
+                <span className = {s.dontHasAccount}>О себе</span>
+                <textarea className = {s.area}></textarea>
               </label>
 
               {error && error.message}

@@ -2,10 +2,14 @@
 
 export const ValidateUserName = (userName: string)=>{
 
-  if(userName) {
+  if(userName === "User") {
     console.log("Name", userName);
+    return true
+  } else {
+
+    return false
   }
-  console.log("Имя не задано");
+
   return true
 }
 
