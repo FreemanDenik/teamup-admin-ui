@@ -69,7 +69,6 @@
     color: $color--base;
   }
 }
-
 .input {
   @include input;
 
@@ -85,6 +84,7 @@
   border: 1px solid transparent;
   outline: none;
 }
+
 
 .rememberMe {
   font-size: $size-text--base;
