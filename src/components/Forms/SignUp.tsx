@@ -1,13 +1,14 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import Form from "../../pages/SignPage/Form";
 import s from "../../pages/SignPage/Form.module.scss";
 import Interests from "../Interests";
 import { SignUpFields } from "../../types";
 import Input from "../Input";
+import { ValidateEmail } from "../../services/ValidateEmail";
 
 const SignUp = () => {
-  const { control, handleSubmit, reset } = useForm<SignUpFields>({
+  const { control, handleSubmit, reset, clearErrors, setError } = useForm<SignUpFields>({
     defaultValues: {
       email: "",
       password: "",
@@ -19,6 +20,7 @@ const SignUp = () => {
       aboutUser: "",
     },
   });
+  const [serverEmailValidate, setServerEmailValidate] = useState(false);
 
   const register: SubmitHandler<SignUpFields> = async (data) => {
     console.log(data);
@@ -85,11 +87,23 @@ const SignUp = () => {
             value: /\w+@\w+\.\w+/gi,
             message: "Your email should be valid",
           },
-        }}
+          onChange: () => clearErrors("email"),
+          onBlur: (e: React.FocusEvent<HTMLInputElement>) => {
+            console.log(e.target.value);
+            if (ValidateEmail(e.target.value)) {
+              console.log("validate true");
+              setServerEmailValidate(true);
+            } else {
+              setServerEmailValidate(false);
+              setError("email", {
+                message: "Данный email уже занят"
+              });
+            }
+        }}}
         render={({ field: { ref, ...field }, fieldState: { error } }) => {
           return (
             <>
-              <Input {...field} placeholder="Почта" />
+              <Input {...field} placeholder="Почта" serverValidate = {serverEmailValidate}/>
               {error && error.message}
             </>
           );
