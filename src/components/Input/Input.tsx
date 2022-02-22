@@ -1,11 +1,15 @@
-import React, { FC, HTMLProps, useMemo } from "react";
-
+import React, { HTMLProps } from "react";
+import classNames from "classnames";
 import s from "../../pages/SignPage/Form.module.scss";
+import localStyle from "./Input.module.scss";
 
-interface InputProps extends HTMLProps<HTMLInputElement> {}
-
-function Input(props: InputProps) {
-  return <input className={s.input} {...props} />;
+interface InputProps extends HTMLProps<HTMLInputElement> {
+  serverValidate?:boolean
 }
-
+const Input = (props: InputProps)=> {
+  // флаг валидации поля сервером (не обязательно)
+   const {serverValidate, ...restProps} = props
+   let inputClass = classNames(s.input,{[localStyle.serverValidate]:serverValidate})
+  return <input className={inputClass} {...restProps}/>;
+}
 export default Input;
