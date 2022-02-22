@@ -7,7 +7,8 @@ import s from "../../pages/SignPage/Form.module.scss";
 import localStyle from "./Input.module.scss";
 
 interface InputProps extends HTMLProps<HTMLInputElement> {
-  serverValidate?: boolean
+  serverValidate?: boolean,
+  value: string
 }
 
 const Input = (props: InputProps)=> {
