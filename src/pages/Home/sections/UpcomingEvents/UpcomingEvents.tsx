@@ -1,68 +1,46 @@
-import React, { ReactElement, useEffect, useState } from "react";
-import cls from "classnames";
+import React, { useEffect, useState } from "react";
 import { v4 } from "uuid";
 
 import s from "./UpcomingEvents.module.scss";
 import Slider from "../../../../components/Slider";
+import { EventDto } from "../../../../types";
+import { GetEventsInCity } from "../../../../components/services/GetEventsInCity";
 
-interface Human {
-  name: string;
-  age: number;
-}
+interface UpcomingEventsProps {}
 
 const UpcomingEvents = () => {
-  // TODO: убрать моковые данные
-  const [humans, setHumans] = useState<Human[]>([
-    {
-      name: "danil",
-      age: 24,
-    },
-    {
-      name: "lena",
-      age: 22,
-    },
-    {
-      name: "sergo",
-      age: 21,
-    },
-    {
-      name: "danil 2",
-      age: 24,
-    },
-    {
-      name: "lena 2",
-      age: 22,
-    },
-    {
-      name: "sergo 2",
-      age: 21,
-    },
-  ]);
+
+  const [events, setEvents] = useState<EventDto[]>([]);
+
+  useEffect(()=>{
+    setEvents(GetEventsInCity())
+  },[])
 
   return (
     <section className={s.upcomingEvents}>
       <h1 className={s.title}>Ближайшие мероприятия возле вас</h1>
-      <Slider<Human>
+      <Slider<EventDto>
         gap={9}
         width={516}
         height={268}
-        data={humans}
+        data={events}
         startFrom="middle"
-        renderItem={(human) => {
+        renderItem={(event) => {
           return (
             <div className={s.eventCard} key={v4()}>
               <div className={s.eventCard__tags}>
-                <div className={s.eventCard__tag}>Игры</div>
-                <div className={s.eventCard__tag}>На дому</div>
+                {event.eventInterests.map((item)=>(
+                  <div key={item.id} className={s.eventCard__tag}>{item.title}</div>
+                  )
+                )}
               </div>
-
               <div className={s.eventCard__info}>
-                <div className={s.eventCard__name}>Название мероприятия</div>
-                <div className={s.eventCard__desc}>Описание мероприятия</div>
+                <div className={s.eventCard__name}>{event.eventName}</div>
+                <div className={s.eventCard__desc}>{event.descriptionEvent}</div>
                 <div className={s.eventCard__dateTime}>
-                  25 января, с 11:00 до 15:00
+                  {event.timeEvent}
                 </div>
-                <div className={s.eventCard__address}>город Москва</div>
+                <div className={s.eventCard__address}>город {event.city}</div>
               </div>
             </div>
           );

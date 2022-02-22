@@ -5,6 +5,8 @@ import "./Input.scss";
 interface InputProps {
   icon: "place" | "search";
   placeholder?: string;
+  onChangeFunc?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  id?: string;
   value?: string;
   onChange?: (inputValue: string) => void;
 }
@@ -12,8 +14,10 @@ interface InputProps {
 const Input: FC<InputProps> = (
   {
     placeholder = "enter something",
+    id,
     icon,
     value,
+    onChangeFunc,
     onChange
   }) => {
   const [focused, setFocused] = useState<boolean>(false);
@@ -39,14 +43,15 @@ const Input: FC<InputProps> = (
         onClick = {() => inputRef.current?.focus()}
       />
       <input
-        type = "text"
-        className = "input__field"
-        placeholder = {placeholder}
-        onFocus = {() => setFocused(true)}
-        onBlur = {() => setFocused(false)}
-        ref = {inputRef}
-        value = {inputValue}
-        onChange = {(event) => handleOnChangeInput(event)}
+        type="text"
+        id={id}
+        value={value}
+        className="input__field"
+        placeholder={placeholder}
+        onChange={onChangeFunc}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        ref={inputRef}
       />
     </div>
   );
