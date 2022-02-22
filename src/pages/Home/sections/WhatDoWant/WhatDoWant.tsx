@@ -3,6 +3,7 @@ import Input from "./Input/Input";
 import Title from "./Title";
 import WidgetGrid from "./WidgetGrid";
 import s from "./WhatDoWant.module.scss";
+import {Place} from "./Place/Place";
 
 const WhatDoWant = () => {
   return (
@@ -12,7 +13,7 @@ const WhatDoWant = () => {
 
         <div className={s.whatDoWantSearch__top}>
           <Input placeholder={'Поищите "Игры"'} icon="search" />
-          <Input placeholder="Местоположение" icon="place" />
+          <Place />
         </div>
 
         <button className={s.whatDoWantSearch__btn}>Поиск</button>
