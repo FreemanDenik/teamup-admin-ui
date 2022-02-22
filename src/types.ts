@@ -37,12 +37,11 @@ export interface UserDto extends Dto {
   aboutUser: string;
 
   // Интересы, заполняется не всегда
-  userInterests: InterestDto[];
+  userInterests?: InterestDto[];
 }
 
 export interface EventTypeDto extends Dto {
   // Название
-  id:number;
   type: string;
 }
 
@@ -57,14 +56,13 @@ export interface EventReviewDto extends Dto {
   eventId: number;
 
   // Время
-  time: Date;
+  time: string;
 
   // оценка
   EventGrade: number;
 }
 
 export interface EventDto extends Dto {
-  id: number;
   // Название
   eventName: string;
   // Краткое описание
@@ -74,21 +72,21 @@ export interface EventDto extends Dto {
   // Город
   city: string;
   // Время проведения
-  timeEvent: Date;
+  timeEvent: string;
   // Приватность
   eventPrivacy: boolean;
   // Кол-во участников
   participantsCount: number;
   // Тип мероприятия
-  EventType: EventTypeDto;
+  eventType: EventTypeDto;
   // Id автора
-  AuthorId: number;
+  authorId: number;
   // Интересы
   eventInterests: InterestDto[];
   // Status	StatusDto	Статус мероприятия. Строка-временный тип данных
-  status:string;
+  status: string;
   // Минимальный возраст
-  MinYear: number;
+  minYear: number;
 }
 
 export interface LoginUserModel {
@@ -123,7 +121,8 @@ export interface CardProps {
   age: number;
 }
 
-export interface OrganizatorsProps {}
+export interface OrganizatorsProps {
+}
 
 export interface BoxGeometry {
   width: number;
@@ -136,7 +135,9 @@ export interface LoopItemProps extends BoxGeometry {
 
 export interface LoopProps<T> extends BoxGeometry {
   data: T[];
+
   renderItem(el: T, index?: number, arr?: T[]): ReactElement;
+
   gap: number;
   run?: boolean;
 }
@@ -145,7 +146,9 @@ export type SliderStartGuard = "start" | "middle" | "end";
 
 export interface SliderProps<T> {
   data: T[];
+
   renderItem(dataElement: T): ReactElement;
+
   width: number;
   height: number;
   gap: number;
