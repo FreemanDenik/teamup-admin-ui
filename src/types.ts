@@ -42,6 +42,7 @@ export interface UserDto extends Dto {
 
 export interface EventTypeDto extends Dto {
   // Название
+  id:number;
   type: string;
 }
 
@@ -63,35 +64,29 @@ export interface EventReviewDto extends Dto {
 }
 
 export interface EventDto extends Dto {
+  id: number;
   // Название
   eventName: string;
-
   // Краткое описание
   descriptionEvent: string;
-
   // Место провидения
   placeEvent: string;
-
+  // Город
+  city: string;
   // Время проведения
   timeEvent: Date;
-
   // Приватность
   eventPrivacy: boolean;
-
   // Кол-во участников
   participantsCount: number;
-
   // Тип мероприятия
   EventType: EventTypeDto;
-
   // Id автора
   AuthorId: number;
-
   // Интересы
   eventInterests: InterestDto[];
-
-  // Status	StatusDto	Статус мероприятия
-
+  // Status	StatusDto	Статус мероприятия. Строка-временный тип данных
+  status:string;
   // Минимальный возраст
   MinYear: number;
 }
