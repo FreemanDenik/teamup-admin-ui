@@ -5,6 +5,7 @@ import { SignUpFields } from "../../types";
 import Form from "../../pages/SignPage/Form";
 import Interests from "../Interests";
 import Input from "../Input";
+import { ValidateEmail } from "../../services/ValidateEmail";
 
 import { ValidateUserName } from "../../services/ValidateUserName";
 
@@ -24,6 +25,8 @@ const SignUp: FC = () => {
     }
   });
   const [serverValidate, setServerValidate] = useState(false);
+  const [serverEmailValidate, setServerEmailValidate] = useState(false);
+
   const register: SubmitHandler<SignUpFields> = async (data) => {
     console.log(data);
   };
@@ -85,13 +88,25 @@ const SignUp: FC = () => {
           required: true,
           pattern: {
             value: /\w+@\w+\.\w+/gi,
-            message: "Your email should be valid"
-          }
-        }}
-        render = {({ field: { ref, ...field }, fieldState: { error } }) => {
+            message: "Your email should be valid",
+          },
+          onChange: () => clearErrors("email"),
+          onBlur: (e: React.FocusEvent<HTMLInputElement>) => {
+            console.log(e.target.value);
+            if (ValidateEmail(e.target.value)) {
+              console.log("validate true");
+              setServerEmailValidate(true);
+            } else {
+              setServerEmailValidate(false);
+              setError("email", {
+                message: "Данный email уже занят"
+              });
+            }
+        }}}
+        render={({ field: { ref, ...field }, fieldState: { error } }) => {
           return (
             <>
-              <Input {...field} placeholder = "Почта" />
+              <Input {...field} placeholder="Почта" serverValidate = {serverEmailValidate}/>
               {error && error.message}
             </>
           );
