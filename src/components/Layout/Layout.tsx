@@ -12,11 +12,12 @@ const Layout = () => (
     animate={{ opacity: 1 }}
     transition={{ duration: 0.2 }}
   >
-  <LayoutContainer>
+
     <Header />
+    <LayoutContainer>
        <Outlet />
     <Footer/>
-   </LayoutContainer>
+      </LayoutContainer>
   </motion.main>
 
 );

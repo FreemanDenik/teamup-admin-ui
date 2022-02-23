@@ -15,7 +15,7 @@ const Header = () => {
           <Nav />
           <ButtonPanel />
         </div>
-      </LayoutContainer>
+        </LayoutContainer>
     </header>
   );
 };

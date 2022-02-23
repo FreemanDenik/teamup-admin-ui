@@ -2,9 +2,11 @@ import React, { FC } from "react";
 import cls from "classnames";
 
 import s from "./Footer.module.scss";
+import LayoutContainer from "../LayoutContainer";
 
 const Footer: FC = () => {
   return (
+
     <footer className={s.wrapper}>
       <div className={s.social}>
         <header className={s.socialHeader}>
@@ -48,6 +50,7 @@ const Footer: FC = () => {
         </div>
       </nav>
     </footer>
+
   );
 };
 
