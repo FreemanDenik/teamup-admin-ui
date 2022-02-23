@@ -8,7 +8,7 @@ const SignUpPage: FC<SignUpPageProps> = ({}) => {
   return (
     <SignPage>
       <SignUp />
-    </SignPage>
+     </SignPage>
   );
 };
 
