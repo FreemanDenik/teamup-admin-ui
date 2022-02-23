@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import cls from "classnames";
 
 import s from "./LayoutContainer.module.scss";
 
