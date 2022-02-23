@@ -1,9 +1,5 @@
-
-
 export const ValidateUserName = (userName: string)=>{
-
   if(userName === "User") {
-    console.log("Name", userName);
     return true
   } else {
 
