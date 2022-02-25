@@ -1,12 +1,11 @@
-import React, { ChangeEvent, FC, useRef, useState } from "react";
+import React, { ChangeEvent, FC, useEffect, useRef, useState } from "react";
 import cls from "classnames";
 import "./Input.scss";
 
 interface InputProps {
+  id?: string;
   icon: "place" | "search";
   placeholder?: string;
-  onChangeFunc?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  id?: string;
   value?: string;
   onChange?: (inputValue: string) => void;
 }
@@ -17,19 +16,22 @@ const Input: FC<InputProps> = (
     id,
     icon,
     value,
-    onChangeFunc,
     onChange
   }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState(value || '');
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(()=>{
+    if(value) setInputValue(value)
+  },[value])
+
 
   const handleOnChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
     if (onChange) {
       onChange(event.target.value);
-    }
+     }
   };
 
   return (
@@ -45,10 +47,10 @@ const Input: FC<InputProps> = (
       <input
         type="text"
         id={id}
-        value={value}
+        value={inputValue}
         className="input__field"
         placeholder={placeholder}
-        onChange={onChangeFunc}
+        onChange={(event)=>handleOnChangeInput(event)}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         ref={inputRef}

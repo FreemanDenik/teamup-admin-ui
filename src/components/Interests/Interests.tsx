@@ -21,18 +21,18 @@ const Interests: FC<InterestsProps> = ({}) => {
 
   const handleClickChooseInterest = (item: InterestDto) => {
     setUserInterest([...userInterest, item]);
-    setShowModal(false)
-    setSearchValue('')
+    setShowModal(false);
+    setSearchValue("");
   };
   const handleChangeSearchValue = (userSearchQuery: string) => {
     setSearchValue(userSearchQuery.toLowerCase());
   };
-  const deleteUserInterestItem =(id:number)=>{
-    setUserInterest(userInterest.filter((item)=>item.id !== id))
-  }
-  const handleClickAddInterest =()=>{
-setShowModal(true)
-  }
+  const deleteUserInterestItem = (id: number) => {
+    setUserInterest(userInterest.filter((item) => item.id !== id));
+  };
+  const handleClickAddInterest = () => {
+    setShowModal(true);
+  };
 
   return (
     <div className = {s.container}>
@@ -40,10 +40,14 @@ setShowModal(true)
         .map((item) => (
           <div className = {s.interest} key = {v4()}>
             {item.title}
-            <button className = {s.delete} onClick={()=>deleteUserInterestItem(item.id)}></button>
+            <button className = {s.delete}
+                    onClick = {() => deleteUserInterestItem(item.id)} />
           </div>
         ))}
-      <button className = {s.add} onClick={handleClickAddInterest}></button>
+      <button
+        className = {s.add}
+        onClick = {handleClickAddInterest}
+      />
 
       {showModal && <div className = {s.modal}>
         <Input
@@ -53,7 +57,10 @@ setShowModal(true)
         />
         <div className = {s.container}>
           {interestsList
-            .filter((item) => !userInterest.includes(item) && item.title.toLowerCase().indexOf(searchValue) !== -1)
+            .filter((item) => !userInterest
+              .includes(item) && item.title
+              .toLowerCase()
+              .indexOf(searchValue) !== -1)
             .map((item) => (
               <div className = {`${s.interest} ${s.interest_slim}`} key = {v4()}
                    onClick = {() => handleClickChooseInterest(item)}>
