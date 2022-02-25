@@ -94,7 +94,6 @@ const SignUp: FC = () => {
           onBlur: (e: React.FocusEvent<HTMLInputElement>) => {
             console.log(e.target.value);
             if (ValidateEmail(e.target.value)) {
-              console.log("validate true");
               setServerEmailValidate(true);
             } else {
               setServerEmailValidate(false);

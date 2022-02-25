@@ -2,8 +2,8 @@ import React, { FC } from "react";
 import ButtonPanel from "./ButtonPanel";
 import Nav from "./Nav";
 import YourCity from "./YourCity";
-import headerStyle from "./Header.module.scss";
 import LayoutContainer from "../LayoutContainer";
+import headerStyle from "./Header.module.scss";
 
 const Header = () => {
   return (
@@ -15,7 +15,7 @@ const Header = () => {
           <Nav />
           <ButtonPanel />
         </div>
-      </LayoutContainer>
+        </LayoutContainer>
     </header>
   );
 };

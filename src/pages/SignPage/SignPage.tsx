@@ -1,6 +1,4 @@
 import React, { FC } from "react";
-
-import classNames from "classnames";
 import s from "./SignPage.module.scss";
 
 interface SignPageProps {}

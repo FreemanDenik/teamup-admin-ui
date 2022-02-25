@@ -32,7 +32,7 @@
 }
 
 .eventCard__tag {
-  font-size: $size-text--base;
+
   background-color: white;
   padding: 3px 15px;
   box-sizing: border-box;
@@ -80,7 +80,7 @@
 
 .title {
   display: block;
-  font-size: 4.1rem;
+  font-size: $size-text--title;
   font-family: ptsans-bold;
   text-align: center;
 }
@@ -88,7 +88,6 @@
 .upcomingEvents__otherEvents {
   display: block;
   @include fill-widget;
-
   font-family: ptsans-bold;
   font-size: $size-text--base;
   margin: 0 auto;
