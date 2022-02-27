@@ -1,4 +1,4 @@
-import { EventDto } from "../../types";
+import { EventDto } from "../types";
 
 
 interface InterestsProps {

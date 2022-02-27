@@ -4,7 +4,7 @@ import { v4 } from "uuid";
 import s from "./UpcomingEvents.module.scss";
 import Slider from "../../../../components/Slider";
 import { EventDto } from "../../../../types";
-import { GetEventsInCity } from "../../../../components/services/GetEventsInCity";
+import { GetEventsInCity } from "../../../../services/GetEventsInCity";
 
 interface UpcomingEventsProps {}
 
