@@ -1,0 +1,58 @@
+@use "../../scss" as *;
+
+
+* {
+  box-sizing: border-box;
+}
+
+.eventsList {
+  padding-top: 62px;
+  font-family: ptsans-bold, sans-serif;
+
+  &__container {
+    display: grid;
+  }
+
+  &__title {
+    justify-self: center;
+  }
+
+  &__filter {
+    max-width: 867px;
+    display: grid;
+    grid-gap: 18px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+.searchForm {
+  display: grid;
+  position: relative;
+  grid-template-columns: 1fr 127px;
+  grid-template-rows: 64px;
+  box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+
+  &__input {
+    color: #4dc43f;
+    justify-self: stretch;
+    font: inherit;
+    font-size: $size-text--base;
+    outline: none;
+    border: 1px solid #4dc43f;
+    padding-left: 77px;
+
+  }
+
+  &__button {
+    border: none;
+    background: url("../../assets/img/loupe.svg") no-repeat center #4dc43f;
+
+  }
+}
+.filter__btn{
+  @include fill-widget;
+  max-width: 144px;
+}
+
+

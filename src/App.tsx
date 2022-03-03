@@ -6,6 +6,7 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 // import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { SignInPage, SignUpPage} from "./pages/SignPage";
+import EventsList from "./pages/EventsList";
 
 // import Home from "./pages/Home";
 // import "./App.scss";
@@ -24,6 +25,7 @@ const App = () => {
       <Routes>
         <Route path = "/" element = {<Layout />}>
           <Route index element = {<Home />} />
+          <Route path="events" element={<EventsList/>}/>
         </Route>
         <Route path = "/sign-up" element = {<SignUpPage/>} />
         <Route path = "/sign-in" element = {<SignInPage/>} />

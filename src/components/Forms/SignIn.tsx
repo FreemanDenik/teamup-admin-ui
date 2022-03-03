@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import s from "../../pages/SignPage/Form.module.scss";
 import Form from "../../pages/SignPage/Form";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
