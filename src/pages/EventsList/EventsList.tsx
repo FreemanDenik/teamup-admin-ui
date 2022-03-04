@@ -16,17 +16,17 @@ const EventsList = (props: EventsListProps) => {
       "Завтра",
       "На текущей неделе"
     ]);
-const [listInterest, setListInterest] = useState<Array<string>>([
-  'Футбол',
-  "Музыка",
-  "Кино",
-  "Живопись"
-])
+  const [listInterest, setListInterest] = useState<Array<string>>([
+    "Футбол",
+    "Музыка",
+    "Кино",
+    "Живопись"
+  ]);
   const [actualFilter, setActualFilter] = useState<Array<string>>([
-    'Актуальные 1',
+    "Актуальные 1",
     "Актуальные 2",
     "Актуальные 3"
-  ])
+  ]);
 // получаем список городов для фильтра
   useEffect(() => {
     GetCitiList().then((res) => {
@@ -58,8 +58,8 @@ const [listInterest, setListInterest] = useState<Array<string>>([
             filterPlaceholder = {`По времени`}
             filterFields = {timeFilter} />
           <FilterButton
-            filterPlaceholder={`По интересам`}
-            filterFields={listInterest}/>
+            filterPlaceholder = {`По интересам`}
+            filterFields = {listInterest} />
 
           <button className = {`${s.filter__btn} ${s.btnUnset}`}>Сбросить</button>
         </div>
@@ -67,15 +67,15 @@ const [listInterest, setListInterest] = useState<Array<string>>([
         <div className = {`${s.eventsList__actualFilter}`}>
           <p className = {`${s.actualFilter__title}`}>Всего мероприятий: 548</p>
           <FilterButton
-            filterPlaceholder={`По актуальности`}
-            filterFields={actualFilter}
-          green/>
+            filterPlaceholder = {`По актуальности`}
+            filterFields = {actualFilter}
+            green />
 
         </div>
-        <div className = {`${s.eventsList__card}`}>
+        <div className = {`${s.eventList__container}`}>
           <CardEvent />
         </div>
-        <button className = {`${s.eventsList__button}`}>Больше мероприятий</button>
+        <button className = {`${s.eventList__button}`}>Больше мероприятий</button>
       </div>
     </div>
 

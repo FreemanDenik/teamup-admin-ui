@@ -4,17 +4,21 @@
 * {
   box-sizing: border-box;
 }
-
+body{
+  background-color: #FBFBFB;
+}
 .eventsList {
   padding-top: 62px;
   font-family: ptsans-bold, sans-serif;
 
   &__container {
     display: grid;
-  }
+    }
 
   &__title {
     justify-self: center;
+    font-size: $size-text--title;
+    margin-bottom: 73px;
   }
 
   &__filter {
@@ -46,10 +50,15 @@
     color: #4dc43f;
     justify-self: stretch;
     font: inherit;
-    font-size: $size-text--base;
+    font-size: $size-text--base*1.4;
     outline: none;
     border: 1px solid #4dc43f;
     padding-left: 77px;
+
+  }
+
+  &__input::placeholder{
+    font-size: $size-text--base * 1.3;
 
   }
 
@@ -68,4 +77,13 @@
   font-weight: bold;
 }
 
+.eventList__container{
+  margin-bottom: 54px;
+}
 
+.eventList__button{
+  @include fill-widget;
+ width: 457px;
+ height: 92px;
+  margin: auto;
+}
