@@ -3,6 +3,8 @@
 
 .filter{
   position: relative;
+
+
   &__btn{
     max-width: 223px;
     height: 48px;
@@ -13,6 +15,7 @@
     padding-left: 16px;
     color: #4dc43f;
     background: url("../../assets/img/arrowDown.svg") no-repeat center right;
+    cursor: pointer;
   }
   &__btn::placeholder{
     color: #4dc43f;
@@ -30,6 +33,8 @@
   max-height: 120px;
   overflow: hidden auto;
   line-height: 30px;
+
+
   &__item{
     color: #4dc43f;
   }

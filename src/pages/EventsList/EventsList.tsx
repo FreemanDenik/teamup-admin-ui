@@ -10,12 +10,23 @@ interface EventsListProps {
 
 const EventsList = (props: EventsListProps) => {
   const [listCity, setListCity] = useState<Array<string>>([]);
-
+  const [timeFilter, setTimeFilter] = useState<Array<string>>(
+    [
+      "Сегодня",
+      "Завтра",
+      "На текущей неделе"
+    ]);
+const [listInterest, setListInterest] = useState<Array<string>>([
+  'Футбол',
+  "Музыка",
+  "Кино",
+  "Живопись"
+])
 // получаем список городов для фильтра
   useEffect(() => {
     GetCitiList().then((res) => {
       const resArr = res.map((item: { city: string }) => item.city);
-      const uniqArr: Array<string> = Array.from(new Set(resArr))
+      const uniqArr: Array<string> = Array.from(new Set(resArr));
       setListCity([...listCity, ...uniqArr]);
     });
   }, []);
@@ -41,12 +52,12 @@ const EventsList = (props: EventsListProps) => {
             filterFields = {listCity}
           />
 
-          {/*<FilterButton*/}
-          {/*  filterPlaceholder={`По времени`}*/}
-          {/*  filterName={`time`}/>*/}
-          {/*<FilterButton*/}
-          {/*  filterPlaceholder={`По интересам`}*/}
-          {/*  filterName={`interest`}/>*/}
+          <FilterButton
+            filterPlaceholder = {`По времени`}
+            filterFields = {timeFilter} />
+          <FilterButton
+            filterPlaceholder={`По интересам`}
+            filterFields={listInterest}/>
 
           <button className = {`${s.filter__btn} ${s.btnUnset}`}>Сбросить</button>
         </div>
