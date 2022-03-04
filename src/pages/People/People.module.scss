@@ -1,0 +1,89 @@
+@use "../../scss" as *;
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.header {
+  @include text($size-text--title);
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  width: 100%;
+  text-align: center;
+}
+
+.inputWrapper {
+  display: flex;
+  width: 100%;
+  min-height: 48px;
+  margin-bottom: 12px;
+}
+
+.input {
+  @include input($color--base);
+
+  width: 100%;
+  min-height: 48px;
+  background-color: transparent;
+  padding: 0 12px;
+  box-sizing: border-box;
+  border: 2px solid $color--base;
+  gap: $gutter-small;
+  font-size: $size-text--base;
+  color: #3e3e3e;
+}
+
+.searchButton {
+  width: 100px;
+  border: none;
+  background-color: $color--base;
+  cursor: pointer;
+}
+
+.searchIcon {
+  width: 32px;
+  height: 32px;
+}
+
+.searchIcon * {
+  fill: white;
+  stroke: transparent;
+  width: 37px;
+  height: 37px;
+}
+
+.filter, .reset {
+  border: none;
+  background-color: transparent;
+  min-width: 180px;
+  height: 48px;
+  border: 1px solid $color--base;
+  font-size: 1rem;
+}
+
+.filter {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  margin-right: 12px;
+  color: $color--base;
+  padding: 0px 9px;
+}
+
+.reset {
+  min-width: 150px;
+  color: white;
+  background-color: $color--base;
+}
+
+.downArrow {
+  width: 10px;
+}
+
+.downArrow * {
+  fill: $color--base;
+}
