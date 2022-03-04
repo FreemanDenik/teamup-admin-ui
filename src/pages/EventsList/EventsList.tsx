@@ -22,6 +22,11 @@ const [listInterest, setListInterest] = useState<Array<string>>([
   "Кино",
   "Живопись"
 ])
+  const [actualFilter, setActualFilter] = useState<Array<string>>([
+    'Актуальные 1',
+    "Актуальные 2",
+    "Актуальные 3"
+  ])
 // получаем список городов для фильтра
   useEffect(() => {
     GetCitiList().then((res) => {
@@ -42,16 +47,13 @@ const [listInterest, setListInterest] = useState<Array<string>>([
           <input className = {`${s.searchForm__input}`}
                  type = "text"
                  placeholder = "Я хочу найти мероприятие" />
-
           <button className = {`${s.searchForm__button}`} />
-
         </form>
         <div className = {`${s.eventsList__filter}`}>
           <FilterButton
             filterPlaceholder = {`По городам`}
             filterFields = {listCity}
           />
-
           <FilterButton
             filterPlaceholder = {`По времени`}
             filterFields = {timeFilter} />
@@ -64,7 +66,11 @@ const [listInterest, setListInterest] = useState<Array<string>>([
 
         <div className = {`${s.eventsList__actualFilter}`}>
           <p className = {`${s.actualFilter__title}`}>Всего мероприятий: 548</p>
-          <div className = {`${s.actualFilter__selectBox}`}>По актуальности</div>
+          <FilterButton
+            filterPlaceholder={`По актуальности`}
+            filterFields={actualFilter}
+          green/>
+
         </div>
         <div className = {`${s.eventsList__card}`}>
           <CardEvent />
