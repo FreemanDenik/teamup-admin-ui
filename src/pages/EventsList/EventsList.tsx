@@ -12,6 +12,7 @@ interface EventsListProps {
 
 const EventsList = (props: EventsListProps) => {
   const [eventsList, setEventsList] = useState();
+  const [resetFilterValue, setResetFilterValue] = useState(false);
   const [listCity, setListCity] = useState<Array<string>>([]);
   const [timeFilter, setTimeFilter] = useState<Array<string>>(
     [
@@ -25,7 +26,8 @@ const EventsList = (props: EventsListProps) => {
     "Актуальные 2",
     "Актуальные 3"
   ]);
-// получаем список городов для фильтра
+
+  // получаем список городов для фильтра
   useEffect(() => {
     GetCitiList().then((res: City[]) => {
       const resArr = res.map((item) => item.name);
@@ -35,22 +37,16 @@ const EventsList = (props: EventsListProps) => {
   }, []);
 
   //получаем список интересов/увлечений для фильтра
-
   useEffect(() => {
-    // @ts-ignore
-    // GetInterest().then((res: InterestDto[]) =>setListInterest([...listInterest, ...res]))
-    // GetInterest().then((res: any) => res.map((item) => {
-    //     console.log(item.interestsDto.title);
-    //       setListInterest([...listInterest, item.interestsDto.title]);
-    //     }
-    //   )
     GetInterest().then((res: any) =>
       setListInterest([...listInterest, ...res.map((item: any) => item.interestsDto.title)])
-
-
     );
 
   }, []);
+
+  const resetValueFilter = () => {
+    setResetFilterValue(!resetFilterValue);
+    };
 
 
   return (
@@ -69,15 +65,25 @@ const EventsList = (props: EventsListProps) => {
           <FilterButton
             filterPlaceholder = {`По городам`}
             filterFields = {listCity}
+            resetFilterValue = {resetFilterValue}
           />
           <FilterButton
             filterPlaceholder = {`По времени`}
-            filterFields = {timeFilter} />
+            filterFields = {timeFilter}
+            resetFilterValue = {resetFilterValue}
+          />
           <FilterButton
             filterPlaceholder = {`По интересам`}
-            filterFields = {listInterest} />
+            filterFields = {listInterest}
+            resetFilterValue = {resetFilterValue}
+          />
 
-          <button className = {`${s.filter__btn} ${s.btnUnset}`}>Сбросить</button>
+          <button
+            className = {`${s.filter__btn} ${s.btnUnset}`}
+            onClick = {resetValueFilter}
+            onBlur={resetValueFilter}
+          >Сбросить
+          </button>
         </div>
 
         <div className = {`${s.eventsList__actualFilter}`}>
