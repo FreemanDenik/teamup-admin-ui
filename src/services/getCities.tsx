@@ -8,7 +8,8 @@ export const getCities = async (inputId: string): Promise<any> => {
       if (input?.value.trim() === "") {
         return result;
       }
-      const newArr = result.filter((el: any) => el.city.substring(0, input?.value.length).toUpperCase() === input?.value.toUpperCase());
+      const newArr = result.filter((el: any) =>
+        el.city.substring(0, input?.value.length).toUpperCase() === input?.value.toUpperCase());
       return newArr;
     });
 

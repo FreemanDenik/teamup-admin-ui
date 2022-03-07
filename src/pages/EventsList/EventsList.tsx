@@ -3,6 +3,7 @@ import s from "./EventsList.module.scss";
 import CardEvent from "../../components/CardEvent";
 import FilterButton from "../../components/FilterButton";
 import GetCitiList from "../../services/GetCitiList";
+import { City } from "../../types";
 
 interface EventsListProps {
 
@@ -29,8 +30,8 @@ const EventsList = (props: EventsListProps) => {
   ]);
 // получаем список городов для фильтра
   useEffect(() => {
-    GetCitiList().then((res) => {
-      const resArr = res.map((item: { city: string }) => item.city);
+    GetCitiList().then((res: City[]) => {
+      const resArr = res.map((item) => item.name);
       const uniqArr: Array<string> = Array.from(new Set(resArr));
       setListCity([...listCity, ...uniqArr]);
     });

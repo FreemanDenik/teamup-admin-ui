@@ -20,7 +20,7 @@ const FilterButton = (props: FilterButtonProps) => {
     setInputValue(event.target.value);
 
   };
-  const handleClickInput = () => {
+  const showFilterList = () => {
     setShowList(true);
   };
   const handleClickListItem = (item: React.MouseEvent<HTMLLIElement>) => {
@@ -30,17 +30,24 @@ const FilterButton = (props: FilterButtonProps) => {
     setInputValue(item.target.innerHTML);
     setShowList(false);
   };
+  const hideFilterList=()=>{
+    setShowList(false);
+  }
 
 let inputClassName = classNames(s.filter__btn, {[s.filter__btn_green]: green})
   return (
     <div className = {`${s.filter__container}`}>
       <input
+        type='input'
         placeholder = {filterPlaceholder}
         className = {inputClassName}
         value = {inputValue}
         onChange = {(event) => handleChangeInput(event)}
-        onClick = {handleClickInput}
-      />
+        onFocus={showFilterList}
+        onBlur={()=>{
+          setTimeout(hideFilterList,300)
+        }}
+        />
       {showList &&
         <ul className = {`${s.list}`}>
           {filterFields
@@ -50,7 +57,7 @@ let inputClassName = classNames(s.filter__btn, {[s.filter__btn_green]: green})
               <li key = {item} className = {`${s.list__item}`}
                   onClick = {(item: React.MouseEvent<HTMLLIElement>) =>
                     handleClickListItem(item)}
-              >
+                  >
                 {item}
               </li>
             ))}

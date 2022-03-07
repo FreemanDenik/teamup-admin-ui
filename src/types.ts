@@ -154,3 +154,11 @@ export interface SliderProps<T> {
   gap: number;
   startFrom?: SliderStartGuard;
 }
+
+export interface City {
+  id: number;
+  name: string;
+  subject: string;
+  lat: string;
+  lot: string;
+}
