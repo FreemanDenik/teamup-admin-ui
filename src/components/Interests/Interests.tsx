@@ -16,7 +16,8 @@ const Interests: FC<InterestsProps> = ({}) => {
 
 
   useEffect(() => {
-    setInterestList(GetInterest());
+    GetInterest().then((res: any) =>
+      setInterestList([...interestsList, ...res.map((item: any) => item.interestsDto)]))
   }, []);
 
   const handleClickChooseInterest = (item: InterestDto) => {
@@ -31,6 +32,7 @@ const Interests: FC<InterestsProps> = ({}) => {
     setUserInterest(userInterest.filter((item) => item.id !== id));
   };
   const handleClickAddInterest = () => {
+    console.log('Interests', interestsList);
     setShowModal(true);
   };
 
@@ -49,12 +51,15 @@ const Interests: FC<InterestsProps> = ({}) => {
         onClick = {handleClickAddInterest}
       />
 
-      {showModal && <div className = {s.modal}>
+      {showModal &&
+
+        <div className = {s.modal}>
         <Input
           icon = "search"
           value = {searchValue}
           onChange = {(userSearchQuery) => handleChangeSearchValue(userSearchQuery)}
         />
+
         <div className = {s.container}>
           {interestsList
             .filter((item) => !userInterest
@@ -68,7 +73,9 @@ const Interests: FC<InterestsProps> = ({}) => {
               </div>
             ))}
         </div>
-      </div>}
+        </div>
+
+      }
     </div>
   );
 };

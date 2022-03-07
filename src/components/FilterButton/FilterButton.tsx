@@ -25,8 +25,6 @@ const FilterButton = (props: FilterButtonProps) => {
   };
   const handleClickListItem = (item: React.MouseEvent<HTMLLIElement>) => {
     // @ts-ignore
-    console.log(item.target.innerHTML);
-    // @ts-ignore
     setInputValue(item.target.innerHTML);
     setShowList(false);
   };

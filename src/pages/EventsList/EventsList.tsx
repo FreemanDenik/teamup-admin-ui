@@ -3,13 +3,15 @@ import s from "./EventsList.module.scss";
 import CardEvent from "../../components/CardEvent";
 import FilterButton from "../../components/FilterButton";
 import GetCitiList from "../../services/GetCitiList";
-import { City } from "../../types";
+import { City, InterestDto } from "../../types";
+import { GetInterest } from "../../services/GetInterest";
 
 interface EventsListProps {
 
 }
 
 const EventsList = (props: EventsListProps) => {
+  const [eventsList, setEventsList] = useState();
   const [listCity, setListCity] = useState<Array<string>>([]);
   const [timeFilter, setTimeFilter] = useState<Array<string>>(
     [
@@ -17,12 +19,7 @@ const EventsList = (props: EventsListProps) => {
       "Завтра",
       "На текущей неделе"
     ]);
-  const [listInterest, setListInterest] = useState<Array<string>>([
-    "Футбол",
-    "Музыка",
-    "Кино",
-    "Живопись"
-  ]);
+  const [listInterest, setListInterest] = useState<Array<string>>([]);
   const [actualFilter, setActualFilter] = useState<Array<string>>([
     "Актуальные 1",
     "Актуальные 2",
@@ -35,6 +32,24 @@ const EventsList = (props: EventsListProps) => {
       const uniqArr: Array<string> = Array.from(new Set(resArr));
       setListCity([...listCity, ...uniqArr]);
     });
+  }, []);
+
+  //получаем список интересов/увлечений для фильтра
+
+  useEffect(() => {
+    // @ts-ignore
+    // GetInterest().then((res: InterestDto[]) =>setListInterest([...listInterest, ...res]))
+    // GetInterest().then((res: any) => res.map((item) => {
+    //     console.log(item.interestsDto.title);
+    //       setListInterest([...listInterest, item.interestsDto.title]);
+    //     }
+    //   )
+    GetInterest().then((res: any) =>
+      setListInterest([...listInterest, ...res.map((item: any) => item.interestsDto.title)])
+
+
+    );
+
   }, []);
 
 
