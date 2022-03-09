@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import cls from "classnames";
 
 import s from "./Footer.module.scss";
-import LayoutContainer from "../LayoutContainer";
 
 const Footer: FC = () => {
   return (

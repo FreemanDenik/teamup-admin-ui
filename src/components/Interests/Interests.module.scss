@@ -1,10 +1,28 @@
 @use "../forward" as *;
 
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: absolute;
+  top: 0;
+  right: -90%;
+  max-width: 250px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  border: 1px solid $color--base;
+  max-height: 250px;
+  overflow: hidden auto;
+}
+
 .container {
   display: flex;
   flex-wrap: wrap;
   position: relative;
   gap: 20px;
+
+
 }
 
 .add,
@@ -74,16 +92,4 @@
   background-color: transparent;
 }
 
-.modal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  position: absolute;
-  top: 0;
-  right: -90%;
-  max-width: 250px;
-  padding: 10px 20px;
-  box-sizing: border-box;
-  border: 1px solid $color--base;
-}
+
