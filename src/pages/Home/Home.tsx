@@ -28,7 +28,6 @@ const Home: FC<HomeProps> = ({}) => {
       <LayoutContainer>
         <Stats />
         <Organizators />
-
       </LayoutContainer>
     </>
   );
