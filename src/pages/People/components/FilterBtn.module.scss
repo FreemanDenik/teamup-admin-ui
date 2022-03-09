@@ -1,0 +1,35 @@
+@use "../../../scss" as *;
+
+.filter {
+  border: none;
+  background-color: transparent;
+  min-width: 200px;
+  height: 48px;
+  border: 1px solid $color--base;
+  font-size: 1rem;
+  cursor: pointer;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  color: $color--base;
+  padding: 0px 9px;
+}
+
+.green {
+  background-color: $color--base;
+  color: white;
+}
+
+.downArrow {
+  width: 10px;
+}
+
+.downArrow * {
+  fill: $color--base;
+}
+
+.green .downArrow * {
+  fill: white;
+}

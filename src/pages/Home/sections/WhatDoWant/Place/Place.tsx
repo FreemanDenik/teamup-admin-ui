@@ -15,16 +15,13 @@ export const Place: FC<PlaceProps> = ({ value }) => {
 
   const autocomplete = () => document.getElementById("list");
 
-  const closeAutoComplete = (e: any) => !e.path.some((el: React.ReactNode) => el === autocomplete()
-    || el === input()) ? setState((state) => ({
-    ...state,
-    edit: false
-  })) : null;
+  const closeAutoComplete = (e: any) => !e.path.some((el: React.ReactNode) => (
+      el === autocomplete() || el === input()) ? setState((state) => ({...state, edit: false})) : null
+  );
 
   document.addEventListener("click", closeAutoComplete);
 
   const autoCompleteClick = (e: any) => {
-    console.log(e.target.innerText);
     setState((state) => ({ ...state, city: e.target.innerText, edit: false }));
   };
 
@@ -46,9 +43,7 @@ export const Place: FC<PlaceProps> = ({ value }) => {
     setState((state) => ({ ...state, edit: true, city: inputValue }));
     // /check/city/{name} GET
     getCities("place")
-      .then((result) => result ?
-        setState((state) => ({ ...state, cities: result }))
-        : null);
+      .then((result) => result ? setState((state) => ({ ...state, cities: result })) : null);
   };
 
   return (
