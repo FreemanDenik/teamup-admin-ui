@@ -72,11 +72,11 @@ export interface EventDto extends Dto {
   // Город
   city: string;
   // Время проведения
-  timeEvent: string;
+  timeEvent: number[];
   // Приватность
   eventPrivacy: boolean;
   // Кол-во участников
-  participantsCount: number;
+  eventNumberOfParticipant: number;
   // Тип мероприятия
   eventType: EventTypeDto;
   // Id автора

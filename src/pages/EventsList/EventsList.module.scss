@@ -79,6 +79,9 @@ body{
 
 .eventList__container{
   margin-bottom: 54px;
+  display: grid;
+  gap: 37px;
+  grid-template-columns: repeat(auto-fill, minmax(466px, 1fr));
 }
 
 .eventList__button{

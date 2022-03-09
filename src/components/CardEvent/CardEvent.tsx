@@ -1,10 +1,22 @@
 import React from "react";
 import citiImg from "../../assets/img/citiCard.png";
 import s from "./CardEvent.module.scss";
+import { EventDto } from "../../types";
+import formatTime from "../../utilites/formatTime";
+import formatDate from "../../utilites/formatDate";
 
-const CardEvent = () => {
+interface CardEventProps{
+  event: EventDto
+}
+
+const CardEvent = (props:CardEventProps) => {
+  const {event} = props
+  const beginEventTime = formatTime(event.timeEvent[3],event.timeEvent[4])
+const yearEvent = event.timeEvent[0]
+const monthEvent = event.timeEvent[1]
+const dayEvent = event.timeEvent[2]
   return (
-    <div className = {`${s.card__container}`}>
+    <div className = {`${s.card__container}`} key={event.id}>
       <div className = {`${s.card}`}>
         <img className = {`${s.card__img}`}
              src = {citiImg}
@@ -16,24 +28,24 @@ const CardEvent = () => {
         </div>
         <section className = {`${s.card__textSection}`}>
           <p className = {`${s.eventDescription__title}`}>
-            Встретиться поиграть на гитаре
+            {event.eventName}
           </p>
           <p className = {`${s.eventDescription__description}`}>
-            Место для краткого описания события
+            {event.descriptionEvent}
           </p>
           <div className = {`${s.card__eventPlace}`}>
             <div className = {`${s.eventPlace__textField}`}>
               <div className = {`${s.eventPlace__day}`}>
-                13 января
+                {formatDate(yearEvent, monthEvent, dayEvent)}
               </div>
               <div className = {`${s.eventPlace__time}`}>
-                с 12:00 до 13:00
+                {`с ${beginEventTime}  до 13:00`}
               </div>
               <div className = {`${s.eventPlace__sharer}`}>
-                <span>Участники:</span> 13
+                <span>Участники:</span> {event.eventNumberOfParticipant}
               </div>
               <div className = {`${s.eventPlace__place}`}>
-                <span>Место проведения:</span> Москва, ул. Академическая дом 5
+                <span>Место проведения:</span> {event.placeEvent}
               </div>
             </div>
             <div className = {`${s.eventPlace__ageLimit}`}>12+</div>

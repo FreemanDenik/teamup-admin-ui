@@ -3,15 +3,16 @@ import s from "./EventsList.module.scss";
 import CardEvent from "../../components/CardEvent";
 import FilterButton from "../../components/FilterButton";
 import GetCitiList from "../../services/GetCitiList";
-import { City, InterestDto } from "../../types";
+import { City, EventDto } from "../../types";
 import { GetInterest } from "../../services/GetInterest";
+import { GetAllEvents } from "../../services/GetAllEvents";
 
 interface EventsListProps {
 
 }
 
 const EventsList = (props: EventsListProps) => {
-  const [eventsList, setEventsList] = useState();
+  const [eventsList, setEventsList] = useState<EventDto[]>([]);
   const [resetFilterValue, setResetFilterValue] = useState(false);
   const [listCity, setListCity] = useState<Array<string>>([]);
   const [timeFilter, setTimeFilter] = useState<Array<string>>(
@@ -43,6 +44,11 @@ const EventsList = (props: EventsListProps) => {
     );
 
   }, []);
+
+ //получаем список всех мероприятий
+  useEffect(()=>{
+    GetAllEvents().then((res: EventDto[])=>setEventsList([...res]))
+  },[])
 
   const resetValueFilter = () => {
     setResetFilterValue(!resetFilterValue);
@@ -95,7 +101,10 @@ const EventsList = (props: EventsListProps) => {
 
         </div>
         <div className = {`${s.eventList__container}`}>
-          <CardEvent />
+          {eventsList.map((event:EventDto)=>{
+            return <CardEvent event={event} key={event.id} />
+          })}
+
         </div>
         <button className = {`${s.eventList__button}`}>Больше мероприятий</button>
       </div>
