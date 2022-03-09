@@ -6,7 +6,6 @@ import Form from "../../pages/SignPage/Form";
 import Interests from "../Interests";
 import Input from "../Input";
 import { ValidateEmail } from "../../services/ValidateEmail";
-
 import { ValidateUserName } from "../../services/ValidateUserName";
 
 import s from "../../pages/SignPage/Form.module.scss";

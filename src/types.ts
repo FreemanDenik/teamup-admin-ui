@@ -72,11 +72,11 @@ export interface EventDto extends Dto {
   // Город
   city: string;
   // Время проведения
-  timeEvent: string;
+  timeEvent: number[];
   // Приватность
   eventPrivacy: boolean;
   // Кол-во участников
-  participantsCount: number;
+  eventNumberOfParticipant: number;
   // Тип мероприятия
   eventType: EventTypeDto;
   // Id автора
@@ -153,4 +153,12 @@ export interface SliderProps<T> {
   height: number;
   gap: number;
   startFrom?: SliderStartGuard;
+}
+
+export interface City {
+  id: number;
+  name: string;
+  subject: string;
+  lat: string;
+  lot: string;
 }
