@@ -72,6 +72,7 @@
 }
 
 .filterInput {
+  width: 180px;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
@@ -81,10 +82,6 @@
   padding: 0px 9px;
   min-width: 200px;
   height: 48px;
-}
-
-.filterInput {
-  width: 180px;
 }
 
 .autoCompleteList {

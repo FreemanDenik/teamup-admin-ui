@@ -1,15 +1,19 @@
 import React, {useState} from "react";
 import s from "./People.module.scss";
 import {ReactComponent as SearchIcon} from './../../assets/img/search.svg';
+import AutoComplete from "./components/AutoComplete";
 import UserCard from '../../components/UserCard/UserCard';
 import FilterBtn from "./components/FilterBtn";
 import getUsers from "../../services/getUsers";
 import {getCities} from "../../services/getCities";
 import {IState} from "./types";
+import {ICity} from "./types";
 
 const PeoplePage = () => {
 
-    const [state, setState] = useState<IState>({filterCity: false, cities: []});
+    const [state, setState] = useState<IState>({filterCity: false, cities: [], interests: []});
+
+    const cities = state.cities.map((el: ICity) => el.city);
 
     const showAutoCompleteCities = () => {
         getCities(0).then(cities => {
@@ -17,7 +21,7 @@ const PeoplePage = () => {
             })
     };
 
-    const hideAutoCompleteCities = () => setState((state) => ({state, filterCity: false}));
+    const hideAutoCompleteCities = () => setState((state: IState) => ({...state, filterCity: false}));
 
     const filterCityBtn = <FilterBtn func={showAutoCompleteCities} textBtn="По городам" />;
 
@@ -32,13 +36,15 @@ const PeoplePage = () => {
 
     const autoCompleteCities = (
         <div className={s.autoCompleteList}>
-            { state.cities?.slice(0, 5).map((el: any, i) => (
+            { cities.slice(0, 5).map((el, i) => (
                     <span key={i} className={s.autoCompleteItem}>
-                    {el.city}
+                    {el}
                     </span>
                 )) }
         </div>
     );
+
+    const autoCompleteCities2 = <AutoComplete arr={cities} />
 
     const peopleList = getUsers().map(el => (<UserCard key={el.id} {...el} />));
 
