@@ -7,15 +7,25 @@ interface FilterButtonProps extends HTMLProps<HTMLInputElement> {
   filterFields: string[];
   green?: boolean;
   resetFilterValue?: boolean;
+  value?: string;
+  getFilterValue?: (value:string)=> void;
 }
 
 const FilterButton = (props: FilterButtonProps) => {
 
-  const { filterPlaceholder, filterFields, green, resetFilterValue } = props;
+  const {
+    filterPlaceholder,
+    filterFields,
+    green,
+    resetFilterValue,
+    value,
+    getFilterValue
+  } = props;
 
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(value || "");
   const [showList, setShowList] = useState(false);
 
+  //сброс значения фильтра
   useEffect(() => {
     if (resetFilterValue) setInputValue("");
   }, [resetFilterValue]);
@@ -29,8 +39,13 @@ const FilterButton = (props: FilterButtonProps) => {
   };
   const handleClickListItem = (item: React.MouseEvent<HTMLLIElement>) => {
     // @ts-ignore
+    console.log('item.target.innerHTML', item.target.innerHTML);
+    // @ts-ignore
     setInputValue(item.target.innerHTML);
     setShowList(false);
+    // @ts-ignore
+    if(getFilterValue) getFilterValue(item.target.innerHTML);
+
   };
   const hideFilterList = () => {
     setShowList(false);
