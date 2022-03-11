@@ -13,9 +13,10 @@ interface EventsListProps {
 }
 
 const EventsList = (props: EventsListProps) => {
-  const {city} = useParams()
+  const { city } = useParams();
 
   const [eventsList, setEventsList] = useState<EventDto[]>([]);
+  const [searchValue, setSearchValue] = useState("");
   // списки значений для фильтров
   const [listCity, setListCity] = useState<Array<string>>([]);
   const [listInterest, setListInterest] = useState<Array<string>>([]);
@@ -23,7 +24,8 @@ const EventsList = (props: EventsListProps) => {
     [
       "Сегодня",
       "Завтра",
-      "На текущей неделе"
+      "На текущей неделе",
+      'В текущем месяце'
     ]);
 
   const [actualFilterList, setActualFilterList] = useState<Array<string>>([
@@ -32,13 +34,13 @@ const EventsList = (props: EventsListProps) => {
     "Актуальные 3"
   ]);
   // текущие значения фильтров
-  const [filterValueCity, setFilterValueCity] = useState(city||"");
+  const [filterValueCity, setFilterValueCity] = useState(city || "");
   const [filterValueInterest, setFilterValueInterest] = useState("");
   const [filterValueTime, setFilterValueTime] = useState("");
   const [filterValueActual, setFilterValueActual] = useState("");
+
   //сброс значения фильтров
   const [resetFilterValue, setResetFilterValue] = useState(false);
-
 
   // получаем список городов для фильтра
   useEffect(() => {
@@ -55,48 +57,41 @@ const EventsList = (props: EventsListProps) => {
     );
 
   }, []);
-
   //получение событий по определенному городу
-  useEffect(()=>{
+  useEffect(() => {
     // TODO переписать setEventsList([...res]) когда бэк исправит возвращаемые данные
     // eventDtoList - лишний объект в ответе с бэка
-    GetSingleCityEvents(`${filterValueCity}`).then((res: any) => setEventsList([...res.eventDtoList]))
-  },[filterValueCity])
+    GetSingleCityEvents(`${filterValueCity}`).then((res: any) => setEventsList([...res.eventDtoList]));
+  }, [filterValueCity]);
 
   const resetValueFilter = () => {
     setResetFilterValue(true);
-    setFilterValueCity('')
-    setFilterValueInterest('')
-    setFilterValueTime('')
-    setTimeout(()=>setResetFilterValue(false),300)
+    setFilterValueCity("");
+    setFilterValueInterest("");
+    setFilterValueTime("");
+    setTimeout(() => setResetFilterValue(false), 300);
   };
 
   // изменение значений фильтров
-  const getFilterValueCity = (value:string)=>{
-    setFilterValueCity(value)
-  }
-  const getFilterValueInterest = (value:string)=>{
-    setFilterValueInterest(value)
-  }
-  const getFilterValueTime = (value:string)=>{
-    setFilterValueTime(value)
-  }
-  const getFilterValueActual = (value:string)=>{
-    setFilterValueActual(value)
-  }
+  const getFilterValueCity = (value: string) => {
+    setFilterValueCity(value);
+  };
+  const getFilterValueInterest = (value: string) => {
+    setFilterValueInterest(value);
+  };
+  const getFilterValueTime = (value: string) => {
+    setFilterValueTime(value);
+  };
+  const getFilterValueActual = (value: string) => {
+    setFilterValueActual(value);
+  };
 
-  const filterEventsList = ()=>{
-    let res = eventsList
-      if(filterValueCity){
-        res = res.filter((item) =>item.city.search(filterValueCity) !=-1)
-      }
-     if (filterValueInterest){
-        res = res.filter((item)=>item.eventInterests.find((item)=>item.title === filterValueInterest ))
-      }
-    return res
-  }
-
-
+  const filterEventsList = (item:EventDto, interest?:string, time?:string) => {
+   if (interest) {
+      return item.eventInterests.find((val)=>val.title=== interest)
+    }
+    return true
+  };
 
   return (
     <div className = {`${s.eventsList}`}>
@@ -107,7 +102,11 @@ const EventsList = (props: EventsListProps) => {
         <form className = {`${s.eventsList__search}, ${s.searchForm}`}>
           <input className = {`${s.searchForm__input}`}
                  type = "text"
-                 placeholder = "Я хочу найти мероприятие" />
+                 placeholder = "Я хочу найти мероприятие"
+                 value = {searchValue}
+                 onChange={(event)=>
+                   setSearchValue(event.target.value)}
+          />
           <button className = {`${s.searchForm__button}`} />
         </form>
         <div className = {`${s.eventsList__filter}`}>
@@ -115,27 +114,26 @@ const EventsList = (props: EventsListProps) => {
             filterPlaceholder = {`По городам`}
             filterFields = {listCity}
             resetFilterValue = {resetFilterValue}
-            getFilterValue={getFilterValueCity}
-            value={filterValueCity}
+            getFilterValue = {getFilterValueCity}
+            value = {filterValueCity}
           />
           <FilterButton
             filterPlaceholder = {`По времени`}
             filterFields = {timeFilterList}
             resetFilterValue = {resetFilterValue}
-            getFilterValue={getFilterValueTime}
+            getFilterValue = {getFilterValueTime}
           />
           <FilterButton
             filterPlaceholder = {`По интересам`}
             filterFields = {listInterest}
             resetFilterValue = {resetFilterValue}
-            getFilterValue={getFilterValueInterest}
+            getFilterValue = {getFilterValueInterest}
           />
-
           <button
             className = {`${s.filter__btn} ${s.btnUnset}`}
             onClick = {resetValueFilter}
-            // onBlur = {resetValueFilter}
-          >Сбросить
+           >
+            Сбросить
           </button>
         </div>
 
@@ -145,12 +143,14 @@ const EventsList = (props: EventsListProps) => {
             filterPlaceholder = {`По актуальности`}
             filterFields = {actualFilterList}
             green
-            getFilterValue={getFilterValueActual}
+            getFilterValue = {getFilterValueActual}
           />
 
         </div>
         <div className = {`${s.eventList__container}`}>
-          {eventsList.map((event: EventDto) => {
+          {eventsList
+            .filter((item)=>filterEventsList(item, filterValueInterest))
+            .map((event: EventDto) => {
             return <CardEvent event = {event} key = {event.id} />;
           })}
 

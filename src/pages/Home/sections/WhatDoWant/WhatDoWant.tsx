@@ -7,7 +7,8 @@ import s from "./WhatDoWant.module.scss";
 import { Place } from "./Place/Place";
 
 const WhatDoWant = () => {
-  const [cityName, setCityName] = useState('')
+  //TODO прокинуть значения из header-> YourCity
+  const [cityName, setCityName] = useState('Москва')
 
   const navigate = useNavigate();
   const handleClickSearchButton = () => {
@@ -25,6 +26,7 @@ const WhatDoWant = () => {
           <Input placeholder = {"Поищите \"Игры\""} icon = "search" />
           <Place
             getCityName={getCityName}
+            value={cityName}
           />
         </div>
 
