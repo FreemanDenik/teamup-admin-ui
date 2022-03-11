@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
-import s from "./EventsList.module.scss";
+import { useParams } from "react-router-dom";
 import CardEvent from "../../components/CardEvent";
 import FilterButton from "../../components/FilterButton";
 import GetCitiList from "../../services/GetCitiList";
 import { City, EventDto } from "../../types";
 import { GetInterest } from "../../services/GetInterest";
 import GetSingleCityEvents from "../../services/GetSingleCityEvents";
+import s from "./EventsList.module.scss";
 
 interface EventsListProps {
 
 }
 
 const EventsList = (props: EventsListProps) => {
+  const {city} = useParams()
+
   const [eventsList, setEventsList] = useState<EventDto[]>([]);
   // списки значений для фильтров
   const [listCity, setListCity] = useState<Array<string>>([]);
@@ -29,18 +32,20 @@ const EventsList = (props: EventsListProps) => {
     "Актуальные 3"
   ]);
   // текущие значения фильтров
-  const [filterValueCity, setFilterValueCity] = useState("");
+  const [filterValueCity, setFilterValueCity] = useState(city||"");
   const [filterValueInterest, setFilterValueInterest] = useState("");
   const [filterValueTime, setFilterValueTime] = useState("");
   const [filterValueActual, setFilterValueActual] = useState("");
   //сброс значения фильтров
   const [resetFilterValue, setResetFilterValue] = useState(false);
+
+
   // получаем список городов для фильтра
   useEffect(() => {
     GetCitiList().then((res: City[]) => {
-      const resArr = res.map((item) => item.name);
-      const uniqArr: Array<string> = Array.from(new Set(resArr));
-      setListCity([...listCity, ...uniqArr]);
+      setListCity([...Array.from(new Set(res.map((item) => item.name)))]);
+      // const uniqArr: Array<string> = Array.from(new Set(resArr));
+      // setListCity([...resArr]);
     });
   }, []);
   //получаем список интересов/увлечений для фильтра
@@ -53,8 +58,10 @@ const EventsList = (props: EventsListProps) => {
 
   //получение событий по определенному городу
   useEffect(()=>{
-    GetSingleCityEvents('Москва').then((res: any) => setEventsList([...res.eventDtoList]))
-  },[])
+    // TODO переписать setEventsList([...res]) когда бэк исправит возвращаемые данные
+    // eventDtoList - лишний объект в ответе с бэка
+    GetSingleCityEvents(`${filterValueCity}`).then((res: any) => setEventsList([...res.eventDtoList]))
+  },[filterValueCity])
 
   const resetValueFilter = () => {
     setResetFilterValue(true);
@@ -66,7 +73,6 @@ const EventsList = (props: EventsListProps) => {
 
   // изменение значений фильтров
   const getFilterValueCity = (value:string)=>{
-    console.log('value', value);
     setFilterValueCity(value)
   }
   const getFilterValueInterest = (value:string)=>{
@@ -110,6 +116,7 @@ const EventsList = (props: EventsListProps) => {
             filterFields = {listCity}
             resetFilterValue = {resetFilterValue}
             getFilterValue={getFilterValueCity}
+            value={filterValueCity}
           />
           <FilterButton
             filterPlaceholder = {`По времени`}

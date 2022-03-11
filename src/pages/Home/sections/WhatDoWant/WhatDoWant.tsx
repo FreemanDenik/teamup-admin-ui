@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "./Input/Input";
 import Title from "./Title";
@@ -7,10 +7,15 @@ import s from "./WhatDoWant.module.scss";
 import { Place } from "./Place/Place";
 
 const WhatDoWant = () => {
+  const [cityName, setCityName] = useState('')
+
   const navigate = useNavigate();
   const handleClickSearchButton = () => {
-  navigate('/events')
+  navigate(`/events/${cityName}`)
   };
+  const getCityName = (value: string)=>{
+   setCityName(value)
+  }
   return (
     <section className = {s.whatDoWant}>
       <div className = {`${s.whatDoWant__search} ${s.whatDoWantSearch}`}>
@@ -18,11 +23,12 @@ const WhatDoWant = () => {
 
         <div className = {s.whatDoWantSearch__top}>
           <Input placeholder = {"Поищите \"Игры\""} icon = "search" />
-          <Place />
+          <Place
+            getCityName={getCityName}
+          />
         </div>
 
         <button
-
           className = {s.whatDoWantSearch__btn}
           onClick = {handleClickSearchButton}
         >Поиск
