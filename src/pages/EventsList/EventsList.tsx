@@ -5,9 +5,9 @@ import FilterButton from "../../components/FilterButton";
 import GetCitiList from "../../services/GetCitiList";
 import { GetInterest } from "../../services/GetInterest";
 import GetSingleCityEvents from "../../services/GetSingleCityEvents";
+import filterEventsList from "../../utilites/filterEventsList";
 import { City, EventDto } from "../../types";
 import s from "./EventsList.module.scss";
-import { log } from "util";
 
 interface EventsListProps {
 
@@ -59,7 +59,8 @@ const EventsList = (props: EventsListProps) => {
   useEffect(() => {
     // TODO переписать setEventsList([...res]) когда бэк исправит возвращаемые данные
     // eventDtoList - лишний объект в ответе с бэка
-    GetSingleCityEvents(`${filterValueCity}`).then((res: any) => setEventsList([...res.eventDtoList]));
+    GetSingleCityEvents(`${filterValueCity}`)
+      .then((res: any) => setEventsList([...res.eventDtoList]));
   }, [filterValueCity]);
 
   const resetValueFilter = () => {
@@ -88,15 +89,7 @@ const EventsList = (props: EventsListProps) => {
     setNumShowEvents(numShowEvents + 5);
   };
 
-  const filterEventsList = (item: EventDto, interest?: string, titleSearch?: string) => {
-    if (interest) {
-      return item.eventInterests.find((val) => val.title === interest);
-    }
-    if(titleSearch){
-      return item.eventName.includes(titleSearch)
-    }
-    return true;
-  };
+
   return (
     <div className = {`${s.eventsList}`}>
       <div className = {`${s.eventsList__container}`}>
