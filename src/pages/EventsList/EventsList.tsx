@@ -7,7 +7,6 @@ import { City, EventDto } from "../../types";
 import { GetInterest } from "../../services/GetInterest";
 import GetSingleCityEvents from "../../services/GetSingleCityEvents";
 import s from "./EventsList.module.scss";
-
 interface EventsListProps {
 
 }
@@ -17,6 +16,7 @@ const EventsList = (props: EventsListProps) => {
 
   const [eventsList, setEventsList] = useState<EventDto[]>([]);
   const [searchValue, setSearchValue] = useState("");
+  const [numShowEvents, setNumShowEvents] = useState(5);
   // списки значений для фильтров
   const [listCity, setListCity] = useState<Array<string>>([]);
   const [listInterest, setListInterest] = useState<Array<string>>([]);
@@ -25,9 +25,8 @@ const EventsList = (props: EventsListProps) => {
       "Сегодня",
       "Завтра",
       "На текущей неделе",
-      'В текущем месяце'
+      "В текущем месяце"
     ]);
-
   const [actualFilterList, setActualFilterList] = useState<Array<string>>([
     "Актуальные 1",
     "Актуальные 2",
@@ -38,16 +37,12 @@ const EventsList = (props: EventsListProps) => {
   const [filterValueInterest, setFilterValueInterest] = useState("");
   const [filterValueTime, setFilterValueTime] = useState("");
   const [filterValueActual, setFilterValueActual] = useState("");
-
   //сброс значения фильтров
   const [resetFilterValue, setResetFilterValue] = useState(false);
-
   // получаем список городов для фильтра
   useEffect(() => {
     GetCitiList().then((res: City[]) => {
       setListCity([...Array.from(new Set(res.map((item) => item.name)))]);
-      // const uniqArr: Array<string> = Array.from(new Set(resArr));
-      // setListCity([...resArr]);
     });
   }, []);
   //получаем список интересов/увлечений для фильтра
@@ -86,13 +81,15 @@ const EventsList = (props: EventsListProps) => {
     setFilterValueActual(value);
   };
 
-  const filterEventsList = (item:EventDto, interest?:string, time?:string) => {
-   if (interest) {
-      return item.eventInterests.find((val)=>val.title=== interest)
-    }
-    return true
+  const showMoreEvents = () => {
+    setNumShowEvents(numShowEvents + 5);
   };
-
+  const filterEventsList = (item: EventDto, interest?: string, time?: string) => {
+    if (interest) {
+      return item.eventInterests.find((val) => val.title === interest);
+    }
+    return true;
+  };
   return (
     <div className = {`${s.eventsList}`}>
       <div className = {`${s.eventsList__container}`}>
@@ -104,7 +101,7 @@ const EventsList = (props: EventsListProps) => {
                  type = "text"
                  placeholder = "Я хочу найти мероприятие"
                  value = {searchValue}
-                 onChange={(event)=>
+                 onChange = {(event) =>
                    setSearchValue(event.target.value)}
           />
           <button className = {`${s.searchForm__button}`} />
@@ -132,11 +129,10 @@ const EventsList = (props: EventsListProps) => {
           <button
             className = {`${s.filter__btn} ${s.btnUnset}`}
             onClick = {resetValueFilter}
-           >
+          >
             Сбросить
           </button>
         </div>
-
         <div className = {`${s.eventsList__actualFilter}`}>
           <p className = {`${s.actualFilter__title}`}>Всего мероприятий: 548</p>
           <FilterButton
@@ -149,13 +145,18 @@ const EventsList = (props: EventsListProps) => {
         </div>
         <div className = {`${s.eventList__container}`}>
           {eventsList
-            .filter((item)=>filterEventsList(item, filterValueInterest))
+            .slice(0,numShowEvents)
+            .filter((item) => filterEventsList(item, filterValueInterest))
             .map((event: EventDto) => {
-            return <CardEvent event = {event} key = {event.id} />;
-          })}
+              return <CardEvent event = {event} key = {event.id} />;
+            })}
 
         </div>
-        <button className = {`${s.eventList__button}`}>Больше мероприятий</button>
+        <button
+          className = {`${s.eventList__button}`}
+          onClick = {showMoreEvents}
+        >Больше мероприятий
+        </button>
       </div>
     </div>
 
