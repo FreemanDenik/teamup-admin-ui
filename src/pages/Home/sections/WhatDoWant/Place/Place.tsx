@@ -5,9 +5,10 @@ import s from "./Place.module.scss";
 
 interface PlaceProps {
   value?: string;
+  getCityName: (value:string)=> void
 }
 
-export const Place: FC<PlaceProps> = ({ value }) => {
+export const Place: FC<PlaceProps> = ({ value , getCityName}) => {
 
   const [state, setState] = useState({ city: value || "", cities: [], edit: false });
 
@@ -23,6 +24,7 @@ export const Place: FC<PlaceProps> = ({ value }) => {
 
   const autoCompleteClick = (e: any) => {
     setState((state) => ({ ...state, city: e.target.innerText, edit: false }));
+    getCityName(e.target.innerText)
   };
 
   const autocompleteArr = state.cities.slice(0, 5).map((el: any, i) => (

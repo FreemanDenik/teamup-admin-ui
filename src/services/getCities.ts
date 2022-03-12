@@ -1,4 +1,4 @@
-export const getCities = async (inputId: string): Promise<any> => {
+export const getCities = async (inputId: any): Promise<any> => {
 
     // /check/city/{name} GET
     return fetch('https://gist.githubusercontent.com/gorborukov/0722a93c35dfba96337b/raw/')
