@@ -3,10 +3,12 @@ import { useParams } from "react-router-dom";
 import CardEvent from "../../components/CardEvent";
 import FilterButton from "../../components/FilterButton";
 import GetCitiList from "../../services/GetCitiList";
-import { City, EventDto } from "../../types";
 import { GetInterest } from "../../services/GetInterest";
 import GetSingleCityEvents from "../../services/GetSingleCityEvents";
+import { City, EventDto } from "../../types";
 import s from "./EventsList.module.scss";
+import { log } from "util";
+
 interface EventsListProps {
 
 }
@@ -16,6 +18,7 @@ const EventsList = (props: EventsListProps) => {
 
   const [eventsList, setEventsList] = useState<EventDto[]>([]);
   const [searchValue, setSearchValue] = useState("");
+  const [inputValue, setInputValue] = useState("");
   const [numShowEvents, setNumShowEvents] = useState(5);
   // списки значений для фильтров
   const [listCity, setListCity] = useState<Array<string>>([]);
@@ -84,9 +87,13 @@ const EventsList = (props: EventsListProps) => {
   const showMoreEvents = () => {
     setNumShowEvents(numShowEvents + 5);
   };
-  const filterEventsList = (item: EventDto, interest?: string, time?: string) => {
+
+  const filterEventsList = (item: EventDto, interest?: string, titleSearch?: string) => {
     if (interest) {
       return item.eventInterests.find((val) => val.title === interest);
+    }
+    if(titleSearch){
+      return item.eventName.includes(titleSearch)
     }
     return true;
   };
@@ -96,16 +103,17 @@ const EventsList = (props: EventsListProps) => {
         <h1 className = {`${s.eventsList__title}`}>
           Чем хотите заняться?
         </h1>
-        <form className = {`${s.eventsList__search}, ${s.searchForm}`}>
+        <div className = {`${s.eventsList__search}, ${s.searchForm}`}>
           <input className = {`${s.searchForm__input}`}
                  type = "text"
                  placeholder = "Я хочу найти мероприятие"
-                 value = {searchValue}
+                 value = {inputValue}
                  onChange = {(event) =>
-                   setSearchValue(event.target.value)}
+                   setInputValue(event.target.value)}
           />
-          <button className = {`${s.searchForm__button}`} />
-        </form>
+          <button className = {`${s.searchForm__button}`}
+                  onClick={()=>setSearchValue(inputValue)}/>
+        </div>
         <div className = {`${s.eventsList__filter}`}>
           <FilterButton
             filterPlaceholder = {`По городам`}
@@ -146,7 +154,7 @@ const EventsList = (props: EventsListProps) => {
         <div className = {`${s.eventList__container}`}>
           {eventsList
             .slice(0,numShowEvents)
-            .filter((item) => filterEventsList(item, filterValueInterest))
+            .filter((item) => filterEventsList(item, filterValueInterest, searchValue))
             .map((event: EventDto) => {
               return <CardEvent event = {event} key = {event.id} />;
             })}
