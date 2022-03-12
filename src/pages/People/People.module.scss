@@ -34,7 +34,7 @@
   border: 2px solid $color--base;
   gap: $gutter-small;
   font-size: $size-text--base;
-  color: #3e3e3e;
+  color: $color-text--dark;
 }
 
 .searchButton {
@@ -52,8 +52,6 @@
 .searchIcon * {
   fill: white;
   stroke: transparent;
-  width: 37px;
-  height: 37px;
 }
 
 .reset, .moreBtn {
@@ -64,72 +62,26 @@
   cursor: pointer;
 }
 
-.filterCityWrapper {
+.filterWrapper {
   box-sizing: border-box;
   position: relative;
   display: flex;
   margin-right: 20px;
 }
 
-.filterInput {
-  width: 180px;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-  align-items: center;
-  color: $color--base;
-  padding: 0px 9px;
-  min-width: 200px;
-  height: 48px;
+.downArrow {
+  width: 10px;
 }
 
-.autoCompleteList {
-  box-sizing: border-box;
-  position: absolute;
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  z-index: 99;
-  top: 100%;
-  left: 0px;
-  right: 0px;
-  padding: 0;
-  margin-top: -1px;
-  gap: $gutter-small;
-  border: 1px solid $color--base;
-  background-color: white;
-}
-
-.autoCompleteItem {
-  @include text($size-text--base);
-
-  display: flex;
-  width: 100%;
-  min-height: 10px;
-  max-height: 30px;
-  padding: inherit;
-  font-size: 1rem;
-  color: $color--base;
-  padding: 5px 9px;
-  background-color: white;
-  cursor: pointer;
-}
-
-.autoCompleteItem:hover {
-  background-color: $color--base;
-  color: white;
-  cursor: pointer;
+.downArrow * {
+  fill: $color--base;
 }
 
 .reset {
   width: 180px;
   height: 48px;
-  min-width: 150px;
   color: white;
   background-color: $color--base;
-  margin-right: 0px;
-  margin-left: 20px;
 }
 
 .peopleList {
@@ -138,7 +90,6 @@
   flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
-  min-height: 20px;
   margin-top: 20px;
 }
 
@@ -154,14 +105,12 @@
 }
 
 .allUsers {
-  display: flex;
   margin-right: 20px;
   font-weight: bold;
 }
 
 .moreBtn {
   min-width: 180px;
-  align-self: center;
   margin: 0px auto;
   font-size: $size-form-link;
   background-color: $color--base;
