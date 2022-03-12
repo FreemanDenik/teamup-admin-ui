@@ -1,5 +1,5 @@
 import React from "react";
-import citiImg from "../../assets/img/citiCard.png";
+import citiImg from "../../assets/img/admin.png";
 import s from "./CardEvent.module.scss";
 import { EventDto } from "../../types";
 import formatTime from "../../utilites/formatTime";
