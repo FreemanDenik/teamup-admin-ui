@@ -1,12 +1,8 @@
 import React from "react";
 import s from './FilterBtn.module.scss';
-import {ReactComponent as ArrowDown} from "../../../assets/img/down-arrow.svg";
+import {ReactComponent as ArrowDown} from "../../../../assets/img/down-arrow.svg";
+import {IFilterBtn} from "../../types";
 
-interface IFilterBtn {
-    func: () => void;
-    textBtn: string;
-    color?: string;
-}
 
 const FilterBtn: React.FC<IFilterBtn> = ({func, textBtn, color}) => {
     const classes = color ? `${s.filter} ${s.green}` : s.filter;
