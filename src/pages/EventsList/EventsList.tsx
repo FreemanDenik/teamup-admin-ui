@@ -62,7 +62,6 @@ const EventsList = (props: EventsListProps) => {
     GetSingleCityEvents(`${filterValueCity}`)
       .then((res: any) => setEventsList([...res.eventDtoList]));
   }, [filterValueCity]);
-
   const resetValueFilter = () => {
     setResetFilterValue(true);
     setFilterValueCity("");
@@ -70,7 +69,6 @@ const EventsList = (props: EventsListProps) => {
     setFilterValueTime("");
     setTimeout(() => setResetFilterValue(false), 300);
   };
-
   // изменение значений фильтров
   const getFilterValueCity = (value: string) => {
     setFilterValueCity(value);
@@ -84,11 +82,9 @@ const EventsList = (props: EventsListProps) => {
   const getFilterValueActual = (value: string) => {
     setFilterValueActual(value);
   };
-
   const showMoreEvents = () => {
     setNumShowEvents(numShowEvents + 5);
   };
-
 
   return (
     <div className = {`${s.eventsList}`}>
@@ -136,14 +132,7 @@ const EventsList = (props: EventsListProps) => {
         </div>
         <div className = {`${s.eventsList__actualFilter}`}>
           <p className = {`${s.actualFilter__title}`}>Всего мероприятий: 548</p>
-          <FilterButton
-            filterPlaceholder = {`По актуальности`}
-            filterFields = {actualFilterList}
-            green
-            getFilterValue = {getFilterValueActual}
-          />
-
-        </div>
+          </div>
         <div className = {`${s.eventList__container}`}>
           {eventsList
             .slice(0,numShowEvents)
@@ -151,7 +140,6 @@ const EventsList = (props: EventsListProps) => {
             .map((event: EventDto) => {
               return <CardEvent event = {event} key = {event.id} />;
             })}
-
         </div>
         <button
           className = {`${s.eventList__button}`}
@@ -160,7 +148,6 @@ const EventsList = (props: EventsListProps) => {
         </button>
       </div>
     </div>
-
   );
 };
 
