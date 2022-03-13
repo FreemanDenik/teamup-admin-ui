@@ -63,7 +63,7 @@ const EventsList = (props: EventsListProps) => {
   //сброс значений фильтра
   const resetValueFilter = () => {
     setResetFilterValue(true);
-    setFilterValueCity("");
+    setFilterValueCity(`${city}`);
     setFilterValueRegion("");
     setFilterValueInterest("");
     setFilterValueTime("");
@@ -147,7 +147,12 @@ const EventsList = (props: EventsListProps) => {
             .sort((a, b) =>
               new Date(a.timeEvent.join("-")) > new Date(b.timeEvent.join("-")) ? 1 : -1)
             // фильтрация массива по разным условиям
-            .filter((item) => filterEventsList(item, filterValueInterest, searchValue))
+            .filter((item) => filterEventsList(
+              item,
+              filterValueInterest,
+              searchValue,
+              filterValueTime
+            ))
             .map((event: EventDto) => {
               return <CardEvent event = {event} key = {event.id} />;
             })}
