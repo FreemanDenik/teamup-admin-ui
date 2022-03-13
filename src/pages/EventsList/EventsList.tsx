@@ -42,7 +42,7 @@ const EventsList = (props: EventsListProps) => {
   useEffect(() => {
     GetCitiList().then((res: City[]) => {
       setListCity([...Array.from(new Set(res.map((item) => item.name)))]);
-      setListRegion([...Array.from(new Set(res.map((item) => item.subject)))])
+      setListRegion([...Array.from(new Set(res.map((item) => item.subject)))]);
     });
   }, []);
   //получаем список интересов/увлечений для фильтра
@@ -101,7 +101,7 @@ const EventsList = (props: EventsListProps) => {
                    setInputValue(event.target.value)}
           />
           <button className = {`${s.searchForm__button}`}
-                  onClick={()=>setSearchValue(inputValue)}/>
+                  onClick = {() => setSearchValue(inputValue)} />
         </div>
         <div className = {`${s.eventsList__filter}`}>
           <FilterButton
@@ -139,10 +139,14 @@ const EventsList = (props: EventsListProps) => {
         </div>
         <div className = {`${s.eventsList__actualFilter}`}>
           <p className = {`${s.actualFilter__title}`}>Всего мероприятий: 548</p>
-          </div>
+        </div>
         <div className = {`${s.eventList__container}`}>
           {eventsList
-            .slice(0,numShowEvents)
+            .slice(0, numShowEvents)
+            // сортировка по дате/времени проведения мероприятия
+            .sort((a, b) =>
+              new Date(a.timeEvent.join("-")) > new Date(b.timeEvent.join("-")) ? 1 : -1)
+            // фильтрация массива по разным условиям
             .filter((item) => filterEventsList(item, filterValueInterest, searchValue))
             .map((event: EventDto) => {
               return <CardEvent event = {event} key = {event.id} />;
