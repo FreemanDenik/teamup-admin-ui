@@ -14,7 +14,6 @@ let wasViewed = false;
 const Home: FC<HomeProps> = ({}) => {
   useEffect(() => {
     wasViewed = !wasViewed;
-    console.log(wasViewed);
   }, [wasViewed]);
 
   return (

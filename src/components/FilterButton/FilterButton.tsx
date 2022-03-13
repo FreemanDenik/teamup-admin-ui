@@ -49,7 +49,7 @@ const FilterButton = (props: FilterButtonProps) => {
   };
   let inputClassName = classNames(s.filter__btn, { [s.filter__btn_green]: green });
   return (
-    <div className = {`${s.filter__container}`}>
+    <>
       <input
         type = "input"
         placeholder = {filterPlaceholder}
@@ -76,7 +76,7 @@ const FilterButton = (props: FilterButtonProps) => {
             ))}
         </ul>
       }
-    </div>
+    </>
   );
 };
 export default FilterButton;

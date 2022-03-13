@@ -15,7 +15,6 @@ interface EventsListProps {
 
 const EventsList = (props: EventsListProps) => {
   const { city } = useParams();
-
   const [eventsList, setEventsList] = useState<EventDto[]>([]);
   const [searchValue, setSearchValue] = useState("");
   const [inputValue, setInputValue] = useState("");
@@ -137,10 +136,10 @@ const EventsList = (props: EventsListProps) => {
             Сбросить
           </button>
         </div>
-        <div className = {`${s.eventsList__actualFilter}`}>
-          <p className = {`${s.actualFilter__title}`}>Всего мероприятий: 548</p>
-        </div>
-        <div className = {`${s.eventList__container}`}>
+
+          <p className = {`${s.eventsList__totalCount}`}>Всего мероприятий: 548</p>
+
+        <div className = {`${s.eventList__cardContainer}`}>
           {eventsList
             .slice(0, numShowEvents)
             // сортировка по дате/времени проведения мероприятия
