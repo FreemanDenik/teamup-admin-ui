@@ -15,13 +15,13 @@ interface EventsListProps {
 
 const EventsList = (props: EventsListProps) => {
   const { city } = useParams();
-
   const [eventsList, setEventsList] = useState<EventDto[]>([]);
   const [searchValue, setSearchValue] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [numShowEvents, setNumShowEvents] = useState(5);
-  // списки значений для фильтров
+  // значения для выпадающих списков в фильтрах
   const [listCity, setListCity] = useState<Array<string>>([]);
+  const [listRegion, setListRegion] = useState<Array<string>>([]);
   const [listInterest, setListInterest] = useState<Array<string>>([]);
   const [timeFilterList, setTimeFilterList] = useState<Array<string>>(
     [
@@ -30,22 +30,18 @@ const EventsList = (props: EventsListProps) => {
       "На текущей неделе",
       "В текущем месяце"
     ]);
-  const [actualFilterList, setActualFilterList] = useState<Array<string>>([
-    "Актуальные 1",
-    "Актуальные 2",
-    "Актуальные 3"
-  ]);
   // текущие значения фильтров
   const [filterValueCity, setFilterValueCity] = useState(city || "");
+  const [filterValueRegion, setFilterValueRegion] = useState("");
   const [filterValueInterest, setFilterValueInterest] = useState("");
   const [filterValueTime, setFilterValueTime] = useState("");
-  const [filterValueActual, setFilterValueActual] = useState("");
   //сброс значения фильтров
   const [resetFilterValue, setResetFilterValue] = useState(false);
-  // получаем список городов для фильтра
+  // получаем список городов и областей для фильтра
   useEffect(() => {
     GetCitiList().then((res: City[]) => {
       setListCity([...Array.from(new Set(res.map((item) => item.name)))]);
+      setListRegion([...Array.from(new Set(res.map((item) => item.subject)))]);
     });
   }, []);
   //получаем список интересов/увлечений для фильтра
@@ -63,14 +59,15 @@ const EventsList = (props: EventsListProps) => {
       .then((res: any) => setEventsList([...res.eventDtoList]));
   }, [filterValueCity]);
 
+  //сброс значений фильтра
   const resetValueFilter = () => {
     setResetFilterValue(true);
-    setFilterValueCity("");
+    setFilterValueCity(`${city}`);
+    setFilterValueRegion("");
     setFilterValueInterest("");
     setFilterValueTime("");
     setTimeout(() => setResetFilterValue(false), 300);
   };
-
   // изменение значений фильтров
   const getFilterValueCity = (value: string) => {
     setFilterValueCity(value);
@@ -81,14 +78,12 @@ const EventsList = (props: EventsListProps) => {
   const getFilterValueTime = (value: string) => {
     setFilterValueTime(value);
   };
-  const getFilterValueActual = (value: string) => {
-    setFilterValueActual(value);
+  const getFilterValueRegion = (value: string) => {
+    setFilterValueRegion(value);
   };
-
   const showMoreEvents = () => {
     setNumShowEvents(numShowEvents + 5);
   };
-
 
   return (
     <div className = {`${s.eventsList}`}>
@@ -105,9 +100,16 @@ const EventsList = (props: EventsListProps) => {
                    setInputValue(event.target.value)}
           />
           <button className = {`${s.searchForm__button}`}
-                  onClick={()=>setSearchValue(inputValue)}/>
+                  onClick = {() => setSearchValue(inputValue)} />
         </div>
         <div className = {`${s.eventsList__filter}`}>
+          <FilterButton
+            filterPlaceholder = {`По Областям`}
+            filterFields = {listRegion}
+            resetFilterValue = {resetFilterValue}
+            getFilterValue = {getFilterValueRegion}
+            value = {filterValueRegion}
+          />
           <FilterButton
             filterPlaceholder = {`По городам`}
             filterFields = {listCity}
@@ -134,24 +136,25 @@ const EventsList = (props: EventsListProps) => {
             Сбросить
           </button>
         </div>
-        <div className = {`${s.eventsList__actualFilter}`}>
-          <p className = {`${s.actualFilter__title}`}>Всего мероприятий: 548</p>
-          <FilterButton
-            filterPlaceholder = {`По актуальности`}
-            filterFields = {actualFilterList}
-            green
-            getFilterValue = {getFilterValueActual}
-          />
 
-        </div>
-        <div className = {`${s.eventList__container}`}>
+          <p className = {`${s.eventsList__totalCount}`}>Всего мероприятий: 548</p>
+
+        <div className = {`${s.eventList__cardContainer}`}>
           {eventsList
-            .slice(0,numShowEvents)
-            .filter((item) => filterEventsList(item, filterValueInterest, searchValue))
+            .slice(0, numShowEvents)
+            // сортировка по дате/времени проведения мероприятия
+            .sort((a, b) =>
+              new Date(a.timeEvent.join("-")) > new Date(b.timeEvent.join("-")) ? 1 : -1)
+            // фильтрация массива по разным условиям
+            .filter((item) => filterEventsList(
+              item,
+              filterValueInterest,
+              searchValue,
+              filterValueTime
+            ))
             .map((event: EventDto) => {
               return <CardEvent event = {event} key = {event.id} />;
             })}
-
         </div>
         <button
           className = {`${s.eventList__button}`}
@@ -160,7 +163,6 @@ const EventsList = (props: EventsListProps) => {
         </button>
       </div>
     </div>
-
   );
 };
 

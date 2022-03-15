@@ -1,11 +1,9 @@
-import React, { FC } from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { AnimatePresence, motion as m } from "framer-motion";
-
+import { AnimatePresence } from "framer-motion";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
-// import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { SignInPage, SignUpPage} from "./pages/SignPage";
+import { SignInPage, SignUpPage } from "./pages/SignPage";
 import PeoplePage from "./pages/People/PeoplePage";
 import EventsList from "./pages/EventsList";
 

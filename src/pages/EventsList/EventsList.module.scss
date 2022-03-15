@@ -4,16 +4,18 @@
 * {
   box-sizing: border-box;
 }
-body{
+
+body {
   background-color: #FBFBFB;
 }
+
 .eventsList {
   padding-top: 62px;
   font-family: ptsans-bold, sans-serif;
 
   &__container {
     display: grid;
-    }
+  }
 
   &__title {
     justify-self: center;
@@ -22,19 +24,21 @@ body{
   }
 
   &__filter {
-    max-width: 867px;
+    max-width: 80%;
+    position: relative;
     display: grid;
     grid-gap: 18px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(5, auto);
+    align-items: start;
+    justify-items: flex-start;
     margin-bottom: 56px;
+
   }
 
-  &__actualFilter{
+  &__totalCount {
     justify-self: end;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 17px;
     margin-bottom: 44px;
+    font-weight: bold;
   }
 }
 
@@ -54,39 +58,33 @@ body{
     outline: none;
     border: 1px solid #4dc43f;
     padding-left: 77px;
-
   }
 
-  &__input::placeholder{
+  &__input::placeholder {
     font-size: $size-text--base * 1.3;
-
   }
 
   &__button {
     border: none;
     background: url("../../assets/img/loupe.svg") no-repeat center #4dc43f;
-
   }
 }
-.filter__btn{
+
+.filter__btn {
   @include fill-widget;
   max-width: 144px;
 }
 
-.actualFilter__title{
-  font-weight: bold;
-}
-
-.eventList__container{
+.eventList__cardContainer {
   margin-bottom: 54px;
   display: grid;
   gap: 37px;
   grid-template-columns: repeat(auto-fill, minmax(466px, 1fr));
 }
 
-.eventList__button{
+.eventList__button {
   @include fill-widget;
- width: 457px;
- height: 92px;
+  width: 457px;
+  height: 92px;
   margin: auto;
 }

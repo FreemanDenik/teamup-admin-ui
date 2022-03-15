@@ -9,7 +9,7 @@ interface FilterButtonProps extends HTMLProps<HTMLInputElement> {
   resetFilterValue?: boolean;
   value?: string;
   getFilterValue?: (value:string)=> void;
-}
+};
 
 const FilterButton = (props: FilterButtonProps) => {
 
@@ -43,16 +43,13 @@ const FilterButton = (props: FilterButtonProps) => {
     setShowList(false);
     // @ts-ignore
     if(getFilterValue) getFilterValue(item.target.innerHTML);
-
   };
   const hideFilterList = () => {
     setShowList(false);
   };
-
-
   let inputClassName = classNames(s.filter__btn, { [s.filter__btn_green]: green });
   return (
-    <div className = {`${s.filter__container}`}>
+    <div className={`${s.filter}`}>
       <input
         type = "input"
         placeholder = {filterPlaceholder}
@@ -82,5 +79,4 @@ const FilterButton = (props: FilterButtonProps) => {
     </div>
   );
 };
-
 export default FilterButton;
