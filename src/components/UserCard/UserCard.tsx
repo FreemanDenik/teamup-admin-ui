@@ -4,7 +4,7 @@ import {UserDto} from "../../types";
 
 interface IUserCard extends UserDto {
     photo?: string;
-    age?: number;
+    age: number;
 }
 
 const UserCard: React.FC<IUserCard> = ({photo,

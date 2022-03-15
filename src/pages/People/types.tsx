@@ -1,10 +1,25 @@
+import React from 'react';
+import {InterestDto, UserDto} from "../../types";
+export type {InterestDto};
+
+
 export interface IState {
-    filterCity?: boolean;
-    filterInterest?: boolean;
+    filterCityBtnText: string | null;
+    filterInterestBtnText: string | null;
+    filterSortText: string | null;
+    filterCity: boolean;
+    filterInterest: boolean;
     filterSort: boolean;
-    cities: [] | string[];
-    autoComplete: [] | string[];
-    interests?:[] | string[];
+    cities: ICity[];
+    interests: InterestDto[];
+    users: IUser[];
+    autoCompleteArr: string[];
+    usersForRender: IUser[];
+}
+
+export interface IUser extends UserDto {
+    photo?: string;
+    age: number;
 }
 
 export interface ICity {
@@ -14,11 +29,21 @@ export interface ICity {
 
 export interface IAutoCompleteProps {
     arr: string[];
-    color?: boolean;
+    changeTextOnFilterBtn: (filterBtnText: string, targetText: string) => void;
+    sortUsers: (sortOption: string) => void;
+    filterBtn: string;
 }
 
 export interface IFilterBtn {
     func: () => void;
-    textBtn: string;
+    textBtn: string | null;
     color?: string;
 }
+
+export interface IFilterInputProps {
+    onBlur: (filter: string) => void;
+    onChange?: any;
+    data: any;
+    filter: string;
+}
+
