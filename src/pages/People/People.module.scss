@@ -3,70 +3,34 @@
 .wrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
 }
 
 .header {
   @include text($size-text--title);
 
-  text-align: center;
-  margin-top: 60px;
-  margin-bottom: 60px;
   width: 100%;
   text-align: center;
+  margin: 60px auto 60px;
+  text-align: center;
 }
 
-.inputWrapper {
-  display: flex;
-  width: 100%;
-  min-height: 48px;
-  margin-bottom: 12px;
-}
-
-.input {
-  @include input($color--base);
-
-  width: 100%;
-  min-height: 48px;
-  background-color: transparent;
-  padding: 0 12px;
-  box-sizing: border-box;
-  border: 2px solid $color--base;
-  gap: $gutter-small;
-  font-size: $size-text--base;
-  color: $color-text--dark;
-}
-
-.searchButton {
-  width: 100px;
-  border: none;
+.resetBtn, .moreBtn {
+  font-size: 1rem;
+  color: white;
+  border: 1px solid $color--base;
   background-color: $color--base;
   cursor: pointer;
 }
 
-.searchIcon {
-  width: 32px;
-  height: 32px;
-}
-
-.searchIcon * {
-  fill: white;
-  stroke: transparent;
-}
-
-.reset, .moreBtn {
-  border: none;
-  background-color: transparent;
-  border: 1px solid $color--base;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
 .filterWrapper {
-  box-sizing: border-box;
-  position: relative;
   display: flex;
+  position: relative;
+  box-sizing: border-box;
   margin-right: 20px;
+}
+
+.filterWrapper:nth-last-child(1) {
+  margin-right: 0px;
 }
 
 .downArrow {
@@ -77,29 +41,29 @@
   fill: $color--base;
 }
 
-.reset {
+.resetBtn {
   width: 180px;
   height: 48px;
-  color: white;
-  background-color: $color--base;
 }
 
 .peopleList {
+  display: grid;
+  grid-template-columns: repeat(3, 31%);
+  width: 100%;
   box-sizing: border-box;
-  display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 100%;
   margin-top: 20px;
 }
+
 
 .sort {
   @include text($size-text--base);
 
   display: flex;
+  width: 100%;
   justify-content: flex-end;
   align-items: center;
-  width: 100%;
   font-size: 1rem;
   margin-top: 40px;
 }
@@ -113,7 +77,5 @@
   min-width: 180px;
   margin: 0px auto;
   font-size: $size-form-link;
-  background-color: $color--base;
-  color: white;
   padding: 20px 80px;
 }

@@ -5,9 +5,8 @@
 
   display: flex;
   flex-wrap: wrap;
+  flex-flow: row wrap;
   justify-content: center;
-  box-sizing: border-box;
-  width: 31%;
   max-height: 580px;
   margin-bottom: 60px;
   box-shadow: 6px 6px 5px #00000029;

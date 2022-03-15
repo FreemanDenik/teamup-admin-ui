@@ -1,10 +1,10 @@
 @use "../../../../scss" as *;
 
 .autoCompleteList {
-  box-sizing: border-box;
-  position: absolute;
   display: flex;
   flex-wrap: wrap;
+  box-sizing: border-box;
+  position: absolute;
   width: 100%;
   z-index: 99;
   top: 100%;
@@ -13,13 +13,12 @@
   padding: 0;
   margin-top: -1px;
   gap: $gutter-small;
-  border: 1px solid $color--base;
   background-color: white;
+  border: 1px solid $color--base;
 }
 
 .autoCompleteList.green {
   border: 1px solid $color--base;
-  border-top: 1px solid white;
   background-color: $color--base;
 }
 
@@ -30,26 +29,15 @@
   width: 100%;
   min-height: 10px;
   max-height: 30px;
-  padding: inherit;
   font-size: 1rem;
-  color: $color--base;
   padding: 5px 9px;
   background-color: white;
+  color: $color--base;
   cursor: pointer;
-}
-
-.autoCompleteItem.green {
-  color: white;
-  background-color: $color--base;
 }
 
 .autoCompleteItem:hover {
-  background-color: $color--base;
   color: white;
+  background-color: $color--base;
   cursor: pointer;
-}
-
-.autoCompleteItem.green:hover {
-  background-color: white;
-  color: $color--base;
 }

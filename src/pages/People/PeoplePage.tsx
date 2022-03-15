@@ -1,113 +1,169 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {useEffect, useState} from "react";
 import s from "./People.module.scss";
-import {ReactComponent as SearchIcon} from './../../assets/img/search.svg';
 import AutoComplete from "./components/AutoComplete/AutoComplete";
-import UserCard from '../../components/UserCard/UserCard';
+import UserCard from "../../components/UserCard/UserCard";
 import FilterBtn from "./components/FilterBtn/FilterBtn";
 import getUsers from "../../services/getUsers";
 import {getCities} from "../../services/getCities";
 import {getInterests} from "../../services/GetInterest";
-import {IState} from "./types";
-import {getCitiesArr, getAutoCompleteCities} from "./functions/getCitiesArr";
-import {getInterestsArr, getAutoCompleteInterests} from "./functions/getInterestsArr";
 import {getAutoCompleteArr} from "./functions/getAutoCompleteArr";
 import FilterInput from "./components/FilterInput/FilterInput";
+import MainInput from "./components/MainInput/MainInput";
+import {IState, ICity, InterestDto} from "./types";
+import {initialState} from "./state";
+import sortOptionsArr from "./assets/sortOptionsArr";
+import {sortUsersFunc} from "./functions/sortUsers";
 
 
 const PeoplePage = () => {
 
-    const [state, setState] = useState<IState>({
-        filterCity: false,
-        filterInterest: false,
-        filterSort: false,
-        cities: [],
-        interests: [],
-        autoComplete: [],
-    });
+    const [state, setState] = useState<IState>({...initialState});
 
-    const {cities, interests, autoComplete: autoCompleteArr} = state;
+    const {
+        users,
+        cities,
+        interests,
+        autoCompleteArr,
+        filterCityBtnText,
+        filterInterestBtnText,
+        filterSortText,
+        usersForRender
+    } = state;
 
-    const autoComplete = <AutoComplete arr={autoCompleteArr} />;
+    useEffect(() => {
 
-    const sortOptions = <AutoComplete arr={['По популярности', 'По росту', 'По возрасту', 'Сейчас онлайн']} color />;
+        getUsers().then((users) => {
+            setState((state) => ({...state, users, usersForRender: users}));
+        });
+
+        getCities(0).then((cities) => {
+            setState((state) => ({...state, cities}));
+        });
+
+        getInterests().then((interests) => {
+            setState((state) => ({...state, interests}));
+        })
+
+    }, []);
+
+
+    const sortUsers = (sortOption: string) => {
+        setState((state) => ({
+            ...state,
+            usersForRender: sortUsersFunc(sortOption, users)
+        }));
+    };
+
+    const changeTextOnFilterBtn = (filterBtnText: string, textContent: string) => {
+        setState((state) => ({
+            ...state,
+            [filterBtnText]: textContent
+        }));
+    };
 
     const showAutoCompleteCities = () => {
-        getCities(0).then(arr => {
-            setState((state) => ({
-                ...state,
-                filterCity: true,
-                cities: getCitiesArr(arr),
-                autoComplete: getAutoCompleteCities(arr)
-            }));
-        })
+        setState((state) => ({
+            ...state,
+            filterCity: true,
+            autoCompleteArr: getAutoCompleteArr(cities, "")
+        }));
     };
 
     const showAutoCompleteInterests = () => {
         setState((state) => ({
             ...state,
             filterInterest: true,
-            interests: getInterestsArr(getInterests()),
-            autoComplete: getAutoCompleteInterests(getInterests())
+            autoCompleteArr: getAutoCompleteArr(interests, "")
         }));
     };
 
-    const showSortOptions = () => setState((state: IState) => ({...state, filterSort: !state.filterSort}));
-
-    const hideAutoCompleteCities = () => setState((state: IState) => ({...state, filterCity: false}));
-
-    const hideAutoCompleteInterests = () => setState((state: IState) => ({...state, filterInterest: false}));
-
-    const setAutoCompleteToState = (e: ChangeEvent<HTMLInputElement>, arr: string[]) => {
-        const {value: inputText} = e.target;
-        setState((state) => ({...state, autoComplete: getAutoCompleteArr(arr, inputText)}));
+    const showSortOptions = () => {
+        setState((state) => ({
+            ...state,
+            filterSort: !state.filterSort
+        }))
     };
 
-    const onChangeCities = (e: ChangeEvent<HTMLInputElement>) => setAutoCompleteToState(e, cities as string[]);
+    const hideFilterList = (filter: string) => {
+        setState((state) => ({
+            ...state,
+            [filter]: false
+        }));
+    };
 
-    const onChangeInterests = (e: ChangeEvent<HTMLInputElement>) => setAutoCompleteToState(e, interests as string[]);
+    const changeAutoComplete = (arr: ICity[] | InterestDto[], inputText: string) => {
+        setState((state) => ({
+            ...state,
+            autoCompleteArr: getAutoCompleteArr(arr, inputText)
+        }));
+    };
 
-    const filterCityInput = <FilterInput onChange={onChangeCities} onBlur={hideAutoCompleteCities} />;
+    const onClickResetBtn = () => {
+        setState((state) => ({
+            ...state,
+            filterCityBtnText: "По городам",
+            filterInterestBtnText: "По интересам",
+            filterSortText: "По популярности",
+            usersForRender: state.users
+        }));
+    };
 
-    const filterInterestInput = <FilterInput onChange={onChangeInterests} onBlur={hideAutoCompleteInterests} />;
+    const hideSortOptions = () => {
+        setTimeout(() => hideFilterList("filterSort"), 500);
+    };
 
-    const filterCityBtn = <FilterBtn func={showAutoCompleteCities} textBtn="По городам" />;
+    const getAutoComplete = (arr: string[], filterBtn: string) => {
+        return (
+            <AutoComplete
+            arr={arr}
+            changeTextOnFilterBtn={changeTextOnFilterBtn}
+            sortUsers={sortUsers}
+            filterBtn={filterBtn} />
+        );
+    };
 
-    const filterInterestBtn = <FilterBtn func={showAutoCompleteInterests} textBtn="По интересам" />;
+    const cityAutoComplete = getAutoComplete(autoCompleteArr, "filterCityBtnText");
 
-    const peopleList = getUsers().map(el => (<UserCard key={el.id} {...el} />));
+    const interestAutoComplete = getAutoComplete(autoCompleteArr, "filterInterestBtnText");
+
+    const sortOptions = getAutoComplete(sortOptionsArr, "filterSortText");
+
+    const filterCityInput = <FilterInput data={cities} onChange={changeAutoComplete} onBlur={hideFilterList}
+        filter="filterCity" />;
+
+    const filterInterestInput = <FilterInput data={interests} onChange={changeAutoComplete} onBlur={hideFilterList}
+        filter="filterInterest" />;
+
+    const filterCityBtn = <FilterBtn func={showAutoCompleteCities} textBtn={filterCityBtnText} />;
+
+    const filterInterestBtn = <FilterBtn func={showAutoCompleteInterests} textBtn={filterInterestBtnText} />;
+
+    const sortBtn = <FilterBtn func={showSortOptions} textBtn={filterSortText} color="green" />;
+
+    const peopleList = usersForRender?.map(el => (<UserCard key={el.id} {...el} />));
 
     return (
         <div className={s.wrapper}>
             <h1 className={s.header}>Кого хотите найти?</h1>
-            <div className={s.inputWrapper}>
-                <input
-                    type="text"
-                    className={s.input}
-                    defaultValue="Москва"
-                    placeholder="Я хочу найти товарища"
-                />
-                <button type="submit" className={s.searchButton}>
-                    <SearchIcon className={s.searchIcon} />
-                </button>
-            </div>
+            <MainInput />
             <div className={s.filterWrapper}>
                 {state.filterCity ? filterCityInput : filterCityBtn}
-                {state.filterCity && autoComplete}
+                {state.filterCity && cityAutoComplete}
             </div>
             <div className={s.filterWrapper}>
                 {state.filterInterest ? filterInterestInput : filterInterestBtn}
-                {state.filterInterest && autoComplete}
+                {state.filterInterest && interestAutoComplete}
             </div>
-            <button className={s.reset}>
+            <button className={s.resetBtn} onClick={onClickResetBtn}>
                 Сбросить
             </button>
             <div className={s.sort}>
                 <span className={s.allUsers}>
                     Всего участников: 1328
                 </span>
-                <div className={s.filterWrapper} onBlur={() => setState((state) => ({...state, filterSort: false}))}>
-                <FilterBtn func={showSortOptions} textBtn="По популярности" color="green" />
-                {state.filterSort && sortOptions}
+                <div className={s.filterWrapper} onBlur={hideSortOptions}>
+                    {sortBtn}
+                    {state.filterSort && sortOptions}
                 </div>
             </div>
             <div className={s.peopleList}>
