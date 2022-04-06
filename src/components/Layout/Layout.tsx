@@ -15,9 +15,9 @@ const Layout = () => (
 
     <Header />
     <LayoutContainer>
-       <Outlet />
-    <Footer/>
-      </LayoutContainer>
+      <Outlet />
+      <Footer />
+    </LayoutContainer>
   </motion.main>
 
 );
