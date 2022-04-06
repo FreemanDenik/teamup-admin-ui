@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { Link } from "react-router-dom";
 
 import s from "./HowWorks.module.scss";
 
@@ -10,9 +11,8 @@ const HowWorks: FC = () => {
         {["anchor", "flag", "achieve"].map((iconName) => (
           <div className={s.howWorksCard} key={iconName}>
             <div
-              className={`${s.howWorksCard__icon} ${
-                s[`howWorksCard__icon_${iconName}`]
-              }`}
+              className={`${s.howWorksCard__icon} ${s[`howWorksCard__icon_${iconName}`]
+                }`}
             />
             <h1 className={s.howWorksCard__title}>Solution</h1>
             <p className={s.howWorksCard__text}>
@@ -22,7 +22,9 @@ const HowWorks: FC = () => {
           </div>
         ))}
       </div>
-      <button className={s.howWorks__joinToUs}>Присоединиться к нам</button>
+      <Link to='/sign-up'>
+        <button className={s.howWorks__joinToUs}>Присоединиться к нам</button>
+      </Link>
     </section>
   );
 };
