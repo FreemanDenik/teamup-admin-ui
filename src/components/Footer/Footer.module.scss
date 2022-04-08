@@ -42,6 +42,9 @@
       @include icon-button($icon, $shadow: true);
     }
   }
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .nav {

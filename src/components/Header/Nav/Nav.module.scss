@@ -1,4 +1,4 @@
-@use "../../forward" as *;
+@use "../../forward"as *;
 
 .wrapper {
   margin-left: auto;
@@ -23,5 +23,6 @@
 
   &_active {
     border-bottom-color: $color--base;
+    color: $color-text--dark;
   }
 }

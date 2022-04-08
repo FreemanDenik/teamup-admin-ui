@@ -22,27 +22,27 @@ const Input: FC<InputProps> = (
   const [focused, setFocused] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState(value || '');
 
-  useEffect(()=>{
-    if(value) setInputValue(value)
-  },[value])
+  useEffect(() => {
+    if (value) setInputValue(value)
+  }, [value])
 
 
   const handleOnChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
     if (onChange) {
       onChange(event.target.value);
-     }
+    }
   };
 
   return (
     <div
-      className = {cls("input", {
+      className={cls("input", {
         input_focus: focused
       })}
     >
       <div
-        className = {cls("input__icon", `input__icon--${icon}`)}
-        onClick = {() => inputRef.current?.focus()}
+        className={cls("input__icon", `input__icon--${icon}`)}
+        onClick={() => inputRef.current?.focus()}
       />
       <input
         type="text"
@@ -50,7 +50,7 @@ const Input: FC<InputProps> = (
         value={inputValue}
         className="input__field"
         placeholder={placeholder}
-        onChange={(event)=>handleOnChangeInput(event)}
+        onChange={(event) => handleOnChangeInput(event)}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         ref={inputRef}

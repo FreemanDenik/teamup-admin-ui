@@ -18,10 +18,16 @@
   transition-duration: $transition-duration--long;
   transition-property: transform box-shadow;
   position: relative;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .slide_active {
   box-shadow: 0 -10px 0 $color--base;
+  &:hover {
+    cursor: default;
+  }
 }
 
 .slide:first-of-type.slide--active {

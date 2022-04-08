@@ -1,5 +1,5 @@
 @use "sass:map";
-@use "../../scss" as *;
+@use "../../scss"as *;
 
 .wrapper {
   background-color: $header--bgcol;
@@ -69,6 +69,7 @@
     color: $color--base;
   }
 }
+
 .input {
   @include input;
 
@@ -94,12 +95,20 @@
   gap: $size-text--base;
   align-items: center;
   user-select: none;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .check,
 .pseudo {
   height: $size-text--base * 2;
   width: $size-text--base * 2;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .check {
@@ -114,18 +123,18 @@
   border: 1px solid $color--base;
 }
 
-.check:checked + .pseudo {
+.check:checked+.pseudo {
   background-image: url(../../assets/img/check.svg);
   background-color: $color--base;
 }
 
-.check:checked:focus + .pseudo {
+.check:checked:focus+.pseudo {
   background-image: url(../../assets/img/check.svg);
   background-color: $color--base;
   outline: 1px solid black;
 }
 
-.check:focus + .pseudo {
+.check:focus+.pseudo {
   outline: 1px solid black;
 }
 
@@ -153,6 +162,9 @@
 
 .googleButton {
   @include icon-button-fill(google);
+    &:hover{
+    cursor: pointer;
+  }
 }
 
 .image {
@@ -165,18 +177,16 @@
 
   margin-top: 30px;
 
-  $images: (
-    "fontg": (
-      width: 277px,
-      height: 412px,
-    ),
-    "new": (
-      width: 380px,
-      height: 360px,
-    ),
-  );
+  $images: ("fontg": (width: 277px,
+        height: 412px,
+      ),
+      "new": (width: 380px,
+        height: 360px,
+      ),
+    );
 
-  @each $imageName, $size in $images {
+  @each $imageName,
+  $size in $images {
     &_#{$imageName} {
       background-image: url(../../assets/img/#{$imageName}.svg);
       min-width: map.get($size, width);
@@ -195,6 +205,10 @@
 
   right: $offset;
   top: $offset;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .rowHalf {
@@ -210,6 +224,7 @@
   display: block;
   width: 100%;
   box-sizing: border-box;
+  outline: none;
 
   padding: $size-text--base;
   margin-top: $size-text--base;
