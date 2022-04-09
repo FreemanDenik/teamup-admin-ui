@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React, { FC } from 'react'
 
-import s from "./LayoutContainer.module.scss";
+import s from './LayoutContainer.module.scss'
 
 const LayoutContainer: FC = ({ children }) => {
-  return <div className={s.container}>{children}</div>;
-};
+  return <div className={s.container}>{children}</div>
+}
 
-export default LayoutContainer;
+export default LayoutContainer

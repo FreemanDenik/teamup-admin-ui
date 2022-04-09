@@ -1,6 +1,6 @@
-export const ValidateEmail = (email: string)=>{
-    if(email === "user@mail.ru") {
-       return true
+export const ValidateEmail = (email: string) => {
+  if (email === 'user@mail.ru') {
+    return true
   } else {
     return false
   }

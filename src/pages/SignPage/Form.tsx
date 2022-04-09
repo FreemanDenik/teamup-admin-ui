@@ -1,20 +1,19 @@
-import React, { FC, HTMLProps, ReactNode } from "react";
+import React, { FC, HTMLProps } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
-import classNames from "classnames";
-import s from "./Form.module.scss";
-import { Link, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import s from './Form.module.scss'
 
-type FormImageGuard = "fontg" | "new";
+type FormImageGuard = 'fontg' | 'new'
 
 interface FormProps {
-  dontHasAccount: string;
-  eyeCatching: string;
-  title: string;
-  submitText: string;
-  imageName: FormImageGuard;
-  extraHeight?: boolean;
-  redirectTo: "/sign-in" | "/sign-up";
+  dontHasAccount: string
+  eyeCatching: string
+  title: string
+  submitText: string
+  imageName: FormImageGuard
+  extraHeight?: boolean
+  redirectTo: '/sign-in' | '/sign-up'
 }
 
 const Form: FC<FormProps & HTMLProps<HTMLFormElement>> = ({
@@ -26,24 +25,24 @@ const Form: FC<FormProps & HTMLProps<HTMLFormElement>> = ({
   children,
   extraHeight = false,
   redirectTo,
-  onSubmit,
+  onSubmit
 }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   return (
     <motion.form
       onSubmit={onSubmit}
       className={s.wrapper}
-      initial={{ opacity: 0, translateX: "-10%" }}
+      initial={{ opacity: 0, translateX: '-10%' }}
       animate={{ opacity: 1, translateX: 0 }}
-      exit={{ opacity: 0, translateX: "10%" }}
+      exit={{ opacity: 0, translateX: '10%' }}
       transition={{ duration: 0.5 }}
     >
-      <div className={`${s.inner} ${extraHeight ? s.inner_height : ""}`}>
+      <div className={`${s.inner} ${extraHeight ? s.inner_height : ''}`}>
         <motion.div
           className={`${s.form}`}
-          initial={{ opacity: 0, translateX: "-10%" }}
+          initial={{ opacity: 0, translateX: '-10%' }}
           animate={{ opacity: 1, translateX: 0 }}
-          exit={{ opacity: 0, translateX: "10%" }}
+          exit={{ opacity: 0, translateX: '10%' }}
           transition={{ duration: 0.5 }}
         >
           {/* HEADER */}
@@ -78,10 +77,10 @@ const Form: FC<FormProps & HTMLProps<HTMLFormElement>> = ({
 
         <div className={`${s.image} ${s[`image_${imageName}`]}`} />
 
-        <button className={s.close} onClick={() => navigate("/")}></button>
+        <button className={s.close} onClick={() => navigate('/')}></button>
       </div>
     </motion.form>
-  );
-};
+  )
+}
 
-export default Form;
+export default Form

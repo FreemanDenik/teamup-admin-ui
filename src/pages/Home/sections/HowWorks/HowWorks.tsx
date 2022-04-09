@@ -1,13 +1,13 @@
-import React, { FC } from "react";
+import React, { FC } from 'react'
 
-import s from "./HowWorks.module.scss";
+import s from './HowWorks.module.scss'
 
 const HowWorks: FC = () => {
   return (
     <section className={`${s.howWorks}`}>
       <h1 className={`${s.howWorks__title}`}>Как работает TeamUp</h1>
       <div className={`${s.howWorks__cardList}`}>
-        {["anchor", "flag", "achieve"].map((iconName) => (
+        {['anchor', 'flag', 'achieve'].map((iconName) => (
           <div className={s.howWorksCard} key={iconName}>
             <div
               className={`${s.howWorksCard__icon} ${
@@ -24,7 +24,7 @@ const HowWorks: FC = () => {
       </div>
       <button className={s.howWorks__joinToUs}>Присоединиться к нам</button>
     </section>
-  );
-};
+  )
+}
 
-export default HowWorks;
+export default HowWorks

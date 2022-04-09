@@ -1,3 +1,3 @@
-import YourCity from "./YourCity";
+import YourCity from './YourCity'
 
-export default YourCity;
+export default YourCity

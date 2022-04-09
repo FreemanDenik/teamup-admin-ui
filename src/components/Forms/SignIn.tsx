@@ -1,22 +1,22 @@
-import React from "react";
-import s from "../../pages/SignPage/Form.module.scss";
-import Form from "../../pages/SignPage/Form";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { LoginUserModel } from "../../types";
-import Input from "../../components/Input";
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
-const SignIn = ({}) => {
+import s from '../../pages/SignPage/Form.module.scss'
+import Form from '../../pages/SignPage/Form'
+import { LoginUserModel } from '../../types'
+import Input from '../../components/Input'
+
+const SignIn = () => {
   const { control, handleSubmit } = useForm<LoginUserModel>({
     defaultValues: {
-      email: "",
-      password: "",
-      rememberMe: false,
-    },
-  });
+      email: '',
+      password: '',
+      rememberMe: false
+    }
+  })
 
   const login: SubmitHandler<LoginUserModel> = async (data) => {
-    console.log(data);
-  };
+    console.log(data)
+  }
   return (
     <Form
       onSubmit={handleSubmit(login)}
@@ -34,8 +34,8 @@ const SignIn = ({}) => {
           required: true,
           pattern: {
             value: /\w+@\w+\.\w+/gi,
-            message: "Your email should be valid",
-          },
+            message: 'Your email should be valid'
+          }
         }}
         render={({ field: { ref, ...field }, fieldState: { error } }) => {
           return (
@@ -43,7 +43,7 @@ const SignIn = ({}) => {
               <Input {...field} placeholder="Почта" />
               {error && error.message}
             </>
-          );
+          )
         }}
       />
 
@@ -54,8 +54,8 @@ const SignIn = ({}) => {
           required: true,
           pattern: {
             value: /(\w|\d){3, 20}/,
-            message: "Invalid password",
-          },
+            message: 'Invalid password'
+          }
         }}
         render={({ field: { ref, ...field }, fieldState: { error } }) => {
           return (
@@ -63,7 +63,7 @@ const SignIn = ({}) => {
               <Input {...field} placeholder="Пароль" />
               {error && error.message}
             </>
-          );
+          )
         }}
       />
 
@@ -77,11 +77,11 @@ const SignIn = ({}) => {
               <div className={s.pseudo} />
               <span>Оставаться в сети</span>
             </label>
-          );
+          )
         }}
       />
     </Form>
-  );
-};
+  )
+}
 
-export default SignIn;
+export default SignIn

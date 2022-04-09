@@ -1,10 +1,9 @@
-import React, { FC } from "react";
-import s from "./SignPage.module.scss";
+import React, { FC } from 'react'
 
-interface SignPageProps {}
+import s from './SignPage.module.scss'
 
-const SignPage: FC<SignPageProps> = ({ children }) => {
-  return <div className={s.signPage}>{children}</div>;
-};
+const SignPage: FC = ({ children }) => {
+  return <div className={s.signPage}>{children}</div>
+}
 
-export default SignPage;
+export default SignPage

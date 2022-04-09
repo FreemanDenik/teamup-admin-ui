@@ -1,15 +1,17 @@
-import React, { FC } from "react";
-import { v4 } from "uuid";
-import { CardProps } from "../../../../../types";
-import s from "./Card.module.scss";
-import mockone from "../../../../../assets/img/mock-org1.png";
-import mocktwo from "../../../../../assets/img/mock-org2.png";
+import React, { FC } from 'react'
+import { v4 } from 'uuid'
+
+import { CardProps } from '../../../../../types'
+import mockone from '../../../../../assets/img/mock-org1.png'
+import mocktwo from '../../../../../assets/img/mock-org2.png'
+
+import s from './Card.module.scss'
 
 const Card: FC<Partial<CardProps>> = ({
-  name = "name",
-  surname = "surname",
-  desc = "desc",
-  age = 23,
+  name = 'name',
+  surname = 'surname',
+  desc = 'desc',
+  age = 23
 }) => {
   return (
     <div className={s.wrapper}>
@@ -36,10 +38,10 @@ const Card: FC<Partial<CardProps>> = ({
                   style={{
                     left: `${(33 * index) / 2}px`,
                     zIndex: `${length - index}`,
-                    backgroundImage: `url(${mocktwo})`,
+                    backgroundImage: `url(${mocktwo})`
                   }}
                 ></div>
-              );
+              )
             })}
         </div>
         <a className={s.moreDetail} href="#">
@@ -47,7 +49,7 @@ const Card: FC<Partial<CardProps>> = ({
         </a>
       </footer>
     </div>
-  );
-};
+  )
+}
 
-export default Card;
+export default Card

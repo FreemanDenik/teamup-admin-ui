@@ -1,10 +1,10 @@
-import React, { FC } from "react";
-import { Link } from "react-router-dom";
-import cls from "classnames";
+import React, { FC } from 'react'
+import { Link } from 'react-router-dom'
+import cls from 'classnames'
 
-import s from "./ButtonPanel.module.scss";
+import s from './ButtonPanel.module.scss'
 
-const ButtonPanel = () => {
+const ButtonPanel: FC = () => {
   return (
     <div className={cls(s.wrapper)}>
       <Link to="sign-in">
@@ -15,7 +15,7 @@ const ButtonPanel = () => {
         <button className={cls(s.btnFill, s.btn)}>Get started</button>
       </Link>
     </div>
-  );
-};
+  )
+}
 
-export default ButtonPanel;
+export default ButtonPanel

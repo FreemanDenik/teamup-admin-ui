@@ -1,31 +1,37 @@
-import React from "react";
-import s from './AutoComplete.module.scss';
-import {IAutoCompleteProps} from "../../types";
+import React from 'react'
 
+import { IAutoCompleteProps } from '../../types'
 
-const AutoComplete: React.FC<IAutoCompleteProps> = ({arr, changeTextOnFilterBtn, filterBtn, sortUsers}) => {
+import s from './AutoComplete.module.scss'
 
-    if (!arr.length) {return null}
+const AutoComplete: React.FC<IAutoCompleteProps> = ({
+  arr,
+  changeTextOnFilterBtn,
+  filterBtn,
+  sortUsers
+}) => {
+  if (!arr.length) {
+    return null
+  }
 
-    const onClickAutoComplete = (e: React.MouseEvent<HTMLSpanElement>) => {
-        const {textContent} = e.target as HTMLSpanElement;
+  const onClickAutoComplete = (e: React.MouseEvent<HTMLSpanElement>) => {
+    const { textContent } = e.target as HTMLSpanElement
 
-        if (textContent?.trim()) { changeTextOnFilterBtn(filterBtn, textContent) }
+    if (textContent?.trim()) {
+      changeTextOnFilterBtn(filterBtn, textContent)
+    }
 
-        if (textContent && filterBtn === "filterSortText") { sortUsers(textContent) }
-    };
+    if (textContent && filterBtn === 'filterSortText') {
+      sortUsers(textContent)
+    }
+  }
+  const autoCompleteList = arr.map((el: string, i: number) => (
+    <span key={i} className={s.autoCompleteItem} onClick={onClickAutoComplete}>
+      {el}
+    </span>
+  ))
 
-    const autoCompleteList = arr.map((el: string, i: number) => (
-        <span key={i} className={s.autoCompleteItem} onClick={onClickAutoComplete}>
-            {el}
-        </span>
-    ));
+  return <div className={s.autoCompleteList}>{autoCompleteList}</div>
+}
 
-    return (
-        <div className={s.autoCompleteList}>
-            {autoCompleteList}
-        </div>
-    );
-};
-
-export default AutoComplete;
+export default AutoComplete

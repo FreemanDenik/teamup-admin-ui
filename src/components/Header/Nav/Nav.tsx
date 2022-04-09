@@ -1,7 +1,8 @@
-import React, { FC } from "react";
-import s from "./Nav.module.scss";
+import React, { FC } from 'react'
 
-const Nav = () => {
+import s from './Nav.module.scss'
+
+const Nav: FC = () => {
   return (
     <nav className={s.wrapper}>
       <ul className={s.list}>
@@ -10,7 +11,7 @@ const Nav = () => {
         <li className={`${s.listItem}`}>Pricing</li>
       </ul>
     </nav>
-  );
-};
+  )
+}
 
-export default Nav;
+export default Nav

@@ -1,3 +1,3 @@
-const sortOptionsArr = ['По популярности', 'По возрасту', 'Сейчас онлайн'];
+const sortOptionsArr = ['По популярности', 'По возрасту', 'Сейчас онлайн']
 
-export default sortOptionsArr;
+export default sortOptionsArr

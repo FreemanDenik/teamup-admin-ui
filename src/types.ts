@@ -1,164 +1,160 @@
-import { ReactElement } from "react";
-import { Path, RegisterOptions, UseFormRegister } from "react-hook-form";
+import { ReactElement } from 'react'
+import { Path, RegisterOptions, UseFormRegister } from 'react-hook-form'
 
 interface Dto {
   // Первичный ключ
-  id: number;
+  id: number
 }
 
 export interface InterestDto extends Dto {
   // Название
-  title: string;
+  title: string
 
   // Краткое описание
-  shortDescription: string;
+  shortDescription: string
 }
 
 export interface UserDto extends Dto {
   // Username
-  name: string;
+  name: string
 
   // Имя
-  firstName: string;
+  firstName: string
 
   // Фамилия
-  lastName: string;
+  lastName: string
 
   // Отчество
-  middleName: string;
+  middleName: string
 
   // Почта
-  email: string;
+  email: string
 
   // Город проживания
-  city: string;
+  city: string
 
   // Доп.Инфо
-  aboutUser: string;
+  aboutUser: string
 
   // Интересы, заполняется не всегда
-  userInterests?: InterestDto[];
+  userInterests?: InterestDto[]
 }
 
 export interface EventTypeDto extends Dto {
   // Название
-  type: string;
+  type: string
 }
 
 export interface EventReviewDto extends Dto {
   // Кто оставил отзыв
-  reviewer: UserDto;
+  reviewer: UserDto
 
   // сообщение
-  message: string;
+  message: string
 
   // Для какого мероприятия
-  eventId: number;
+  eventId: number
 
   // Время
-  time: string;
+  time: string
 
   // оценка
-  EventGrade: number;
+  EventGrade: number
 }
 
 export interface EventDto extends Dto {
   // Название
-  eventName: string;
+  eventName: string
   // Краткое описание
-  descriptionEvent: string;
+  descriptionEvent: string
   // Место провидения
-  placeEvent: string;
+  placeEvent: string
   // Город
-  city: string;
+  city: string
   // Время проведения
-  timeEvent: number[];
+  timeEvent: number[]
   // Приватность
-  eventPrivacy: boolean;
+  eventPrivacy: boolean
   // Кол-во участников
-  eventNumberOfParticipant: number;
+  eventNumberOfParticipant: number
   // Тип мероприятия
-  eventType: EventTypeDto;
+  eventType: EventTypeDto
   // Id автора
-  authorId: number;
+  authorId: number
   // Интересы
-  eventInterests: InterestDto[];
+  eventInterests: InterestDto[]
   // Status	StatusDto	Статус мероприятия. Строка-временный тип данных
-  status: string;
+  status: string
   // Минимальный возраст
-  minYear: number;
+  minYear: number
 }
 
 export interface LoginUserModel {
-  email: string;
-  password: string;
-  rememberMe?: boolean;
+  email: string
+  password: string
+  rememberMe?: boolean
 }
 
 export interface SignUpFields {
-  email: string;
-  password: string;
-  username: string;
-  firstname: string;
+  email: string
+  password: string
+  username: string
+  firstname: string
 
-  lastname: string;
-  aboutUser: string;
-  city: string;
-  age: string;
+  lastname: string
+  aboutUser: string
+  city: string
+  age: string
 }
 
 export interface InputProps<T> {
-  label: Path<T>;
-  register: UseFormRegister<T>;
-  config: RegisterOptions;
-  area?: boolean;
+  label: Path<T>
+  register: UseFormRegister<T>
+  config: RegisterOptions
+  area?: boolean
 }
 
 export interface CardProps {
-  name: string;
-  surname: string;
-  desc: string;
-  age: number;
+  name: string
+  surname: string
+  desc: string
+  age: number
 }
-
-export interface OrganizatorsProps {
-}
-
 export interface BoxGeometry {
-  width: number;
-  height: number;
+  width: number
+  height: number
 }
 
 export interface LoopItemProps extends BoxGeometry {
-  left: number;
+  left: number
 }
 
 export interface LoopProps<T> extends BoxGeometry {
-  data: T[];
+  data: T[]
 
-  renderItem(el: T, index?: number, arr?: T[]): ReactElement;
+  renderItem(el: T, index?: number, arr?: T[]): ReactElement
 
-  gap: number;
-  run?: boolean;
+  gap: number
+  run?: boolean
 }
 
-export type SliderStartGuard = "start" | "middle" | "end";
+export type SliderStartGuard = 'start' | 'middle' | 'end'
 
 export interface SliderProps<T> {
-  data: T[];
+  data: T[]
 
-  renderItem(dataElement: T): ReactElement;
+  renderItem(dataElement: T): ReactElement
 
-  width: number;
-  height: number;
-  gap: number;
-  startFrom?: SliderStartGuard;
+  width: number
+  height: number
+  gap: number
+  startFrom?: SliderStartGuard
 }
 
 export interface City {
-  id: number;
-  name: string;
-  subject: string;
-  lat: string;
-  lot: string;
+  id: number
+  name: string
+  subject: string
+  lat: string
+  lot: string
 }

@@ -1,11 +1,13 @@
-import React, { FC } from "react";
-import ButtonPanel from "./ButtonPanel";
-import Nav from "./Nav";
-import YourCity from "./YourCity";
-import LayoutContainer from "../LayoutContainer";
-import headerStyle from "./Header.module.scss";
+import React, { FC } from 'react'
 
-const Header = () => {
+import LayoutContainer from '../LayoutContainer'
+
+import ButtonPanel from './ButtonPanel'
+import Nav from './Nav'
+import YourCity from './YourCity'
+import headerStyle from './Header.module.scss'
+
+const Header: FC = () => {
   return (
     <header className={headerStyle.header}>
       <LayoutContainer>
@@ -15,9 +17,9 @@ const Header = () => {
           <Nav />
           <ButtonPanel />
         </div>
-        </LayoutContainer>
+      </LayoutContainer>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

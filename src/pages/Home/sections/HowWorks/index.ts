@@ -1,3 +1,3 @@
-import HowWorks from "./HowWorks";
+import HowWorks from './HowWorks'
 
-export default HowWorks;
+export default HowWorks

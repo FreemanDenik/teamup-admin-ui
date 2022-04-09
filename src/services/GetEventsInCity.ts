@@ -1,12 +1,11 @@
-import { EventDto } from "../types";
+import { EventDto } from '../types'
 
-
-interface InterestsProps {
-  city?: string;
-}
+// interface InterestsProps {
+//   city?: string
+// }
 
 export const GetEventsInCity = (): EventDto[] => {
-// TODO получить данные с сервера (когда заработает)
+  // TODO получить данные с сервера (когда заработает)
   /*try {
     const res = await fetch(' https://localhost:3000//public/event/city/{city});
     if (!res.ok) {
@@ -19,136 +18,138 @@ export const GetEventsInCity = (): EventDto[] => {
   return [
     {
       id: 0,
-      eventName: "Выставка картин",
-      descriptionEvent: "Выставка разнообразных картин",
-      placeEvent: "Эрмитаж",
-      city: "Санкт-Петербург",
-      timeEvent: [1,2,3],
+      eventName: 'Выставка картин',
+      descriptionEvent: 'Выставка разнообразных картин',
+      placeEvent: 'Эрмитаж',
+      city: 'Санкт-Петербург',
+      timeEvent: [1, 2, 3],
       eventPrivacy: false,
       eventNumberOfParticipant: 100,
       eventType: {
         id: 0,
-        type: "Выставка"
+        type: 'Выставка'
       },
       authorId: 0,
-      eventInterests: [{
-        id: 0,
-        title: "Искусство",
-        shortDescription: "Прекрасно, просто прекрасно"
-      }],
-      status: "Еще не началось",
+      eventInterests: [
+        {
+          id: 0,
+          title: 'Искусство',
+          shortDescription: 'Прекрасно, просто прекрасно'
+        }
+      ],
+      status: 'Еще не началось',
       minYear: 0
     },
     {
       id: 1,
-      eventName: "Выставка ретро автомобилей",
-      descriptionEvent: "Выставка ретро автомобилей (20-е столетие)",
-      placeEvent: "ВДНХ",
-      city: "Москва",
-      timeEvent: [1,2,3],
+      eventName: 'Выставка ретро автомобилей',
+      descriptionEvent: 'Выставка ретро автомобилей (20-е столетие)',
+      placeEvent: 'ВДНХ',
+      city: 'Москва',
+      timeEvent: [1, 2, 3],
       eventPrivacy: false,
       eventNumberOfParticipant: 200,
       eventType: {
         id: 0,
-        type: "Выставка"
+        type: 'Выставка'
       },
       authorId: 1,
       eventInterests: [
         {
           id: 0,
-          title: "Автомобили",
-          shortDescription: "Дорого-богато, дрын-дын-дын"
+          title: 'Автомобили',
+          shortDescription: 'Дорого-богато, дрын-дын-дын'
         },
         {
           id: 1,
-          title: "Техника-механика",
-          shortDescription: "Чиним-ломаем, дрын-дын-дын"
+          title: 'Техника-механика',
+          shortDescription: 'Чиним-ломаем, дрын-дын-дын'
         }
       ],
-      status: "Еще не началось",
+      status: 'Еще не началось',
       minYear: 6
     },
     {
       id: 2,
-      eventName: "Выступление оперного певца",
-      descriptionEvent: "Выступление оперного певца",
-      placeEvent: "Опера-Холл",
-      city: "Казань",
-      timeEvent: [1,2,3],
+      eventName: 'Выступление оперного певца',
+      descriptionEvent: 'Выступление оперного певца',
+      placeEvent: 'Опера-Холл',
+      city: 'Казань',
+      timeEvent: [1, 2, 3],
       eventPrivacy: false,
       eventNumberOfParticipant: 500,
       eventType: {
         id: 0,
-        type: "Выступление"
+        type: 'Выступление'
       },
       authorId: 2,
       eventInterests: [
         {
           id: 0,
-          title: "Концерт",
-          shortDescription: "Поем-танцуем"
+          title: 'Концерт',
+          shortDescription: 'Поем-танцуем'
         },
         {
           id: 1,
-          title: "Опера",
-          shortDescription: "Хорошо поем и не танцуем"
+          title: 'Опера',
+          shortDescription: 'Хорошо поем и не танцуем'
         }
       ],
-      status: "Еще не началось",
+      status: 'Еще не началось',
       minYear: 6
     },
     {
       id: 3,
-      eventName: "Конкурс поедания пельменей",
-      descriptionEvent: "Конкурс поедания пельменей",
-      placeEvent: "Пельменная",
-      city: "Омск",
-      timeEvent: [1,2,3],
+      eventName: 'Конкурс поедания пельменей',
+      descriptionEvent: 'Конкурс поедания пельменей',
+      placeEvent: 'Пельменная',
+      city: 'Омск',
+      timeEvent: [1, 2, 3],
       eventPrivacy: false,
       eventNumberOfParticipant: 500,
       eventType: {
         id: 0,
-        type: "Ярмарки"
+        type: 'Ярмарки'
       },
       authorId: 3,
       eventInterests: [
         {
           id: 0,
-          title: "Еда",
-          shortDescription: "Вкусно и приятно проводим время"
+          title: 'Еда',
+          shortDescription: 'Вкусно и приятно проводим время'
         },
         {
           id: 1,
-          title: "Пельмени",
-          shortDescription: "Очень вкусно и приятно проводим время"
+          title: 'Пельмени',
+          shortDescription: 'Очень вкусно и приятно проводим время'
         }
       ],
-      status: "Еще не началось",
+      status: 'Еще не началось',
       minYear: 6
     },
     {
       id: 4,
-      eventName: "Играем на гитаре",
-      descriptionEvent: "Ждем всех желающих поиграть на гитаре",
-      placeEvent: "Соседний двор-Холл",
-      city: "Владивосток",
-      timeEvent: [1,2,3],
+      eventName: 'Играем на гитаре',
+      descriptionEvent: 'Ждем всех желающих поиграть на гитаре',
+      placeEvent: 'Соседний двор-Холл',
+      city: 'Владивосток',
+      timeEvent: [1, 2, 3],
       eventPrivacy: false,
       eventNumberOfParticipant: 500,
       eventType: {
         id: 0,
-        type: "Фестиваль"
+        type: 'Фестиваль'
       },
       authorId: 4,
       eventInterests: [
         {
           id: 0,
-          title: "Гитара",
-          shortDescription: "Поем-танцуем"
+          title: 'Гитара',
+          shortDescription: 'Поем-танцуем'
         }
       ],
-      status: "Еще не началось",
+      status: 'Еще не началось',
       minYear: 6
     }
-  ];
-};
+  ]
+}
