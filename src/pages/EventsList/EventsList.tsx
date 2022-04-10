@@ -86,60 +86,60 @@ const EventsList = (props: EventsListProps) => {
   };
 
   return (
-    <div className = {`${s.eventsList}`}>
-      <div className = {`${s.eventsList__container}`}>
-        <h1 className = {`${s.eventsList__title}`}>
+    <div className={`${s.eventsList}`}>
+      <div className={`${s.eventsList__container}`}>
+        <h1 className={`${s.eventsList__title}`}>
           Чем хотите заняться?
         </h1>
-        <div className = {`${s.eventsList__search}, ${s.searchForm}`}>
-          <input className = {`${s.searchForm__input}`}
-                 type = "text"
-                 placeholder = "Я хочу найти мероприятие"
-                 value = {inputValue}
-                 onChange = {(event) =>
-                   setInputValue(event.target.value)}
+        <div className={`${s.eventsList__search}, ${s.searchForm}`}>
+          <input className={`${s.searchForm__input}`}
+            type="text"
+            placeholder="Я хочу найти мероприятие"
+            value={inputValue}
+            onChange={(event) =>
+              setInputValue(event.target.value)}
           />
-          <button className = {`${s.searchForm__button}`}
-                  onClick = {() => setSearchValue(inputValue)} />
+          <button className={`${s.searchForm__button}`}
+            onClick={() => setSearchValue(inputValue)} />
         </div>
-        <div className = {`${s.eventsList__filter}`}>
+        <div className={`${s.eventsList__filter}`}>
           <FilterButton
-            filterPlaceholder = {`По Областям`}
-            filterFields = {listRegion}
-            resetFilterValue = {resetFilterValue}
-            getFilterValue = {getFilterValueRegion}
-            value = {filterValueRegion}
+            filterPlaceholder={`По Областям`}
+            filterFields={listRegion}
+            resetFilterValue={resetFilterValue}
+            getFilterValue={getFilterValueRegion}
+            value={filterValueRegion}
           />
           <FilterButton
-            filterPlaceholder = {`По городам`}
-            filterFields = {listCity}
-            resetFilterValue = {resetFilterValue}
-            getFilterValue = {getFilterValueCity}
-            value = {filterValueCity}
+            filterPlaceholder={`По городам`}
+            filterFields={listCity}
+            resetFilterValue={resetFilterValue}
+            getFilterValue={getFilterValueCity}
+            value={filterValueCity}
           />
           <FilterButton
-            filterPlaceholder = {`По времени`}
-            filterFields = {timeFilterList}
-            resetFilterValue = {resetFilterValue}
-            getFilterValue = {getFilterValueTime}
+            filterPlaceholder={`По времени`}
+            filterFields={timeFilterList}
+            resetFilterValue={resetFilterValue}
+            getFilterValue={getFilterValueTime}
           />
           <FilterButton
-            filterPlaceholder = {`По интересам`}
-            filterFields = {listInterest}
-            resetFilterValue = {resetFilterValue}
-            getFilterValue = {getFilterValueInterest}
+            filterPlaceholder={`По интересам`}
+            filterFields={listInterest}
+            resetFilterValue={resetFilterValue}
+            getFilterValue={getFilterValueInterest}
           />
           <button
-            className = {`${s.filter__btn} ${s.btnUnset}`}
-            onClick = {resetValueFilter}
+            className={`${s.filter__btn} ${s.btnUnset}`}
+            onClick={resetValueFilter}
           >
             Сбросить
           </button>
         </div>
 
-          <p className = {`${s.eventsList__totalCount}`}>Всего мероприятий: 548</p>
+        <p className={`${s.eventsList__totalCount}`}>Всего мероприятий: 548</p>
 
-        <div className = {`${s.eventList__cardContainer}`}>
+        <div className={`${s.eventList__cardContainer}`}>
           {eventsList
             .slice(0, numShowEvents)
             // сортировка по дате/времени проведения мероприятия
@@ -153,12 +153,12 @@ const EventsList = (props: EventsListProps) => {
               filterValueTime
             ))
             .map((event: EventDto) => {
-              return <CardEvent event = {event} key = {event.id} />;
+              return <CardEvent event={event} key={event.id} />;
             })}
         </div>
         <button
-          className = {`${s.eventList__button}`}
-          onClick = {showMoreEvents}
+          className={`${s.eventList__button}`}
+          onClick={showMoreEvents}
         >Больше мероприятий
         </button>
       </div>

@@ -89,6 +89,18 @@ export interface EventDto extends Dto {
   minYear: number;
 }
 
+export interface UserDtoRedux extends UserDto {
+  //Токен
+  token: string;
+
+  //Возраст
+  age: number;
+
+  //Роль пользователя
+  role: string;
+
+}
+
 export interface LoginUserModel {
   email: string;
   password: string;
