@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { Link } from 'react-router-dom'
 
 import LayoutContainer from '../LayoutContainer'
 
@@ -13,7 +14,9 @@ const Header: FC = () => {
       <LayoutContainer>
         <div className={headerStyle.inner}>
           <YourCity />
-          <div className={headerStyle.logo}>TeamUp Group</div>
+          <Link to={'/'} className={headerStyle.logo}>
+            TeamUp Group
+          </Link>
           <Nav />
           <ButtonPanel />
         </div>
