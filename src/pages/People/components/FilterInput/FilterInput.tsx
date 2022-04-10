@@ -1,27 +1,33 @@
-import React, {ChangeEvent} from "react";
-import s from "./FilterInput.module.scss";
-import {IFilterInputProps} from "../../types";
+import React, { ChangeEvent } from 'react'
 
-const FilterInput: React.FC<IFilterInputProps> = ({onBlur, onChange, data, filter}) => {
+import { IFilterInputProps } from '../../types'
 
-    const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-        const {value: inputText} = e.target;
-        onChange(data, inputText);
-    };
+import s from './FilterInput.module.scss'
 
-    const onBlurInput = (e: React.FocusEvent<HTMLInputElement>) => {
-        setTimeout(() => onBlur(filter), 500);
-    };
+const FilterInput: React.FC<IFilterInputProps> = ({
+  onBlur,
+  onChange,
+  data,
+  filter
+}) => {
+  const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value: inputText } = e.target
+    onChange(data, inputText)
+  }
 
-    return (
-        <input
-            type="text"
-            className={s.filterInput}
-            autoFocus
-            onChange={onChangeInput}
-            onBlur={onBlurInput}
-        />
-    );
-};
+  const onBlurInput = (e: React.FocusEvent<HTMLInputElement>) => {
+    setTimeout(() => onBlur(filter), 500)
+  }
 
-export default FilterInput;
+  return (
+    <input
+      type="text"
+      className={s.filterInput}
+      autoFocus
+      onChange={onChangeInput}
+      onBlur={onBlurInput}
+    />
+  )
+}
+
+export default FilterInput

@@ -1,15 +1,17 @@
-import React, { FC } from "react";
-import SignPage from "./SignPage";
-import { SignUp } from "../../components/Forms";
+import React, { FC } from 'react'
 
-interface SignUpPageProps {}
+import { SignUp } from '../../components/Forms'
 
-const SignUpPage: FC<SignUpPageProps> = ({}) => {
+import SignPage from './SignPage'
+
+// interface SignUpPageProps {}
+
+const SignUpPage: FC = () => {
   return (
     <SignPage>
       <SignUp />
-     </SignPage>
-  );
-};
+    </SignPage>
+  )
+}
 
-export default SignUpPage;
+export default SignUpPage

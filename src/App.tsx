@@ -1,11 +1,12 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
-import Layout from "./components/Layout";
-import Home from "./pages/Home";
-import { SignInPage, SignUpPage } from "./pages/SignPage";
-import PeoplePage from "./pages/People/PeoplePage";
-import EventsList from "./pages/EventsList";
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
+
+import Layout from './components/Layout'
+import Home from './pages/Home'
+import { SignInPage, SignUpPage } from './pages/SignPage'
+import PeoplePage from './pages/People/PeoplePage'
+import EventsList from './pages/EventsList'
 
 const App = () => {
   return (
@@ -20,7 +21,7 @@ const App = () => {
         <Route path="/sign-in" element={<SignInPage />} />
       </Routes>
     </AnimatePresence>
-  );
-};
+  )
+}
 
-export default App;
+export default App

@@ -1,26 +1,28 @@
-import React, { FC } from "react";
-import ButtonPanel from "./ButtonPanel";
-import { Link } from "react-router-dom";
-import Nav from "./Nav";
-import YourCity from "./YourCity";
-import LayoutContainer from "../LayoutContainer";
-import headerStyle from "./Header.module.scss";
+import React, { FC } from 'react'
+import { Link } from 'react-router-dom'
 
-const Header = () => {
+import LayoutContainer from '../LayoutContainer'
+
+import ButtonPanel from './ButtonPanel'
+import Nav from './Nav'
+import YourCity from './YourCity'
+import headerStyle from './Header.module.scss'
+
+const Header: FC = () => {
   return (
     <header className={headerStyle.header}>
       <LayoutContainer>
         <div className={headerStyle.inner}>
           <YourCity />
-          <Link to='/'>
-            <div className={headerStyle.logo}>TeamUp Group</div>
+          <Link to={'/'} className={headerStyle.logo}>
+            TeamUp Group
           </Link>
           <Nav />
           <ButtonPanel />
         </div>
       </LayoutContainer>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

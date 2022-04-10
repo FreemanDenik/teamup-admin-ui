@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { v4 } from "uuid";
-import { Link } from "react-router-dom";
-import s from "./UpcomingEvents.module.scss";
-import Slider from "../../../../components/Slider";
-import { EventDto } from "../../../../types";
-import { GetEventsInCity } from "../../../../services/GetEventsInCity";
+import React, { useEffect, useState } from 'react'
+import { v4 } from 'uuid'
+import { Link } from 'react-router-dom'
 
-interface UpcomingEventsProps { }
+import Slider from '../../../../components/Slider'
+import { EventDto } from '../../../../types'
+import { GetEventsInCity } from '../../../../services/GetEventsInCity'
+
+import s from './UpcomingEvents.module.scss'
 
 const UpcomingEvents = () => {
-
-  const [events, setEvents] = useState<EventDto[]>([]);
+  const [events, setEvents] = useState<EventDto[]>([])
 
   useEffect(() => {
     setEvents(GetEventsInCity())
@@ -30,23 +29,24 @@ const UpcomingEvents = () => {
             <div className={s.eventCard} key={v4()}>
               <div className={s.eventCard__tags}>
                 {event.eventInterests.map((item) => (
-                  <div key={item.id} className={s.eventCard__tag}>{item.title}</div>
-                )
-                )}
+                  <div key={item.id} className={s.eventCard__tag}>
+                    {item.title}
+                  </div>
+                ))}
               </div>
               <div className={s.eventCard__info}>
                 <div className={s.eventCard__name}>{event.eventName}</div>
-                <div className={s.eventCard__desc}>{event.descriptionEvent}</div>
-                <div className={s.eventCard__dateTime}>
-                  {event.timeEvent}
+                <div className={s.eventCard__desc}>
+                  {event.descriptionEvent}
                 </div>
+                <div className={s.eventCard__dateTime}>{event.timeEvent}</div>
                 <div className={s.eventCard__address}>город {event.city}</div>
               </div>
             </div>
-          );
+          )
         }}
       />
-      <Link to={`/events/moscow`}>
+      <Link to={'/events/moscow'}>
         <button className={s.upcomingEvents__otherEvents}>
           Другие мероприятия
         </button>
@@ -70,7 +70,7 @@ const UpcomingEvents = () => {
         ))}
       </div> */}
     </section>
-  );
-};
+  )
+}
 
-export default UpcomingEvents;
+export default UpcomingEvents

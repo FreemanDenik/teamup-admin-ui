@@ -1,6 +1,6 @@
-import React from "react";
-import { motion } from "framer-motion";
-import s from "./StartScreen.module.scss";
+import React from 'react'
+
+import s from './StartScreen.module.scss'
 
 const StartScreen = () => {
   return (
@@ -13,7 +13,7 @@ const StartScreen = () => {
         </p>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default StartScreen;
+export default StartScreen

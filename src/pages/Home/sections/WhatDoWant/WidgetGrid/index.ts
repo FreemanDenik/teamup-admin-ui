@@ -1,3 +1,3 @@
-import WidgetGrid from "./WidgetGrid";
+import WidgetGrid from './WidgetGrid'
 
-export default WidgetGrid;
+export default WidgetGrid

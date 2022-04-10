@@ -4,11 +4,13 @@ import {
   useEffect,
   useMemo,
   useRef,
-  useState,
-} from "react";
-import { LoopProps } from "../../types";
-import LoopItem from "./LoopItem";
-import s from "./style.module.scss";
+  useState
+} from 'react'
+
+import { LoopProps } from '../../types'
+
+import LoopItem from './LoopItem'
+import s from './style.module.scss'
 
 function Loop<T>({
   data,
@@ -16,52 +18,52 @@ function Loop<T>({
   width,
   height,
   gap,
-  run = false,
+  run = false
 }: LoopProps<T>): ReactElement {
-  const loopRef = useRef<number>(0);
-  const boxBounding = useMemo(() => width + gap, [width, gap]);
-  const lastLeavedIndexRef = useRef<number>(0);
+  const loopRef = useRef<number>(0)
+  const boxBounding = useMemo(() => width + gap, [width, gap])
+  const lastLeavedIndexRef = useRef<number>(0)
   const [state, setState] = useState(() => {
-    const places = data.map(({}, i) => {
-      const left = boxBounding * i;
-      const leaveOn = left + boxBounding;
+    const places = data.map((el, i) => {
+      const left = boxBounding * i
+      const leaveOn = left + boxBounding
 
-      return { left, leaveOn };
-    });
+      return { left, leaveOn }
+    })
 
     return {
       places,
-      offset: 0,
-    };
-  });
+      offset: 0
+    }
+  })
 
   const loop = useCallback(() => {
-    loopRef.current = requestAnimationFrame(loop);
+    loopRef.current = requestAnimationFrame(loop)
 
     setState((prev) => {
-      const { places, offset } = prev;
-      let { current: lastLeavedIndex } = lastLeavedIndexRef;
+      const { places, offset } = prev
+      const { current: lastLeavedIndex } = lastLeavedIndexRef
       if (offset >= places[lastLeavedIndex].leaveOn) {
-        const current = places[lastLeavedIndex];
-        const max = Math.max(...places.map(({ left }) => left));
-        const next = max + boxBounding;
-        current.left = next;
-        current.leaveOn = next + boxBounding;
-        lastLeavedIndexRef.current++;
+        const current = places[lastLeavedIndex]
+        const max = Math.max(...places.map(({ left }) => left))
+        const next = max + boxBounding
+        current.left = next
+        current.leaveOn = next + boxBounding
+        lastLeavedIndexRef.current++
         if (lastLeavedIndexRef.current === places.length) {
-          lastLeavedIndexRef.current = 0;
+          lastLeavedIndexRef.current = 0
         }
       }
-      return { ...prev, offset: prev.offset + 0.5 };
-    });
-  }, [loopRef]);
+      return { ...prev, offset: prev.offset + 0.5 }
+    })
+  }, [loopRef])
 
   useEffect(() => {
     if (run) {
-      loop();
-      return () => cancelAnimationFrame(loopRef.current);
+      loop()
+      return () => cancelAnimationFrame(loopRef.current)
     }
-  }, [loopRef, run]);
+  }, [loopRef, run])
 
   return (
     <div className={s.profiles}>
@@ -70,17 +72,17 @@ function Loop<T>({
         style={{ transform: `translateX(-${state.offset}px)`, height }}
       >
         {data.map((el, index) => {
-          const { left } = state.places[index];
+          const { left } = state.places[index]
 
           return (
             <LoopItem key={left} left={left} width={width} height={height}>
               {renderItem(el)}
             </LoopItem>
-          );
+          )
         })}
       </div>
     </div>
-  );
+  )
 }
 
-export default Loop;
+export default Loop

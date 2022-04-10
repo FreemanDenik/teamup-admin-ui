@@ -1,9 +1,10 @@
-import React, { FC } from "react";
-import { v4 } from "uuid";
-import s from "./WidgetGrid.module.scss";
+import React, { FC } from 'react'
+import { v4 } from 'uuid'
+
+import s from './WidgetGrid.module.scss'
 
 interface WidgetGrid {
-  widgetList: string[];
+  widgetList: string[]
 }
 
 const WidgetGrid: FC<WidgetGrid> = ({ widgetList }) => {
@@ -15,7 +16,7 @@ const WidgetGrid: FC<WidgetGrid> = ({ widgetList }) => {
         </li>
       ))}
     </ul>
-  );
-};
+  )
+}
 
-export default WidgetGrid;
+export default WidgetGrid

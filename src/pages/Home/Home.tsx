@@ -1,20 +1,20 @@
-import React, { FC, useEffect } from "react";
-import LayoutContainer from "../../components/LayoutContainer";
-import StartScreen from "./sections/StartScreen";
-import WhatDoWant from "./sections/WhatDoWant";
-import HowWorks from "./sections/HowWorks";
-import UpcomingEvents from "./sections/UpcomingEvents";
-import Stats from "./sections/Stats";
-import Organizators from "./sections/Organizators";
+import React, { FC, useEffect } from 'react'
 
-interface HomeProps {}
+import LayoutContainer from '../../components/LayoutContainer'
 
-let wasViewed = false;
+import StartScreen from './sections/StartScreen'
+import WhatDoWant from './sections/WhatDoWant'
+import HowWorks from './sections/HowWorks'
+import UpcomingEvents from './sections/UpcomingEvents'
+import Stats from './sections/Stats'
+import Organizators from './sections/Organizators'
 
-const Home: FC<HomeProps> = ({}) => {
+let wasViewed = false
+
+const Home: FC = () => {
   useEffect(() => {
-    wasViewed = !wasViewed;
-  }, [wasViewed]);
+    wasViewed = !wasViewed
+  }, [wasViewed])
 
   return (
     <>
@@ -29,7 +29,7 @@ const Home: FC<HomeProps> = ({}) => {
         <Organizators />
       </LayoutContainer>
     </>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

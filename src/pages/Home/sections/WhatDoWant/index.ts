@@ -1,3 +1,3 @@
-import WhatDoWant from "./WhatDoWant";
+import WhatDoWant from './WhatDoWant'
 
-export default WhatDoWant;
+export default WhatDoWant
