@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { v4 } from 'uuid'
+import { Link } from 'react-router-dom'
 
 import Slider from '../../../../components/Slider'
 import { EventDto } from '../../../../types'
 import { GetEventsInCity } from '../../../../services/GetEventsInCity'
 
 import s from './UpcomingEvents.module.scss'
-
-// interface UpcomingEventsProps {}
 
 const UpcomingEvents = () => {
   const [events, setEvents] = useState<EventDto[]>([])
@@ -47,10 +46,12 @@ const UpcomingEvents = () => {
           )
         }}
       />
+      <Link to={'/events/moscow'}>
+        <button className={s.upcomingEvents__otherEvents}>
+          Другие мероприятия
+        </button>
+      </Link>
 
-      <button className={s.upcomingEvents__otherEvents}>
-        Другие мероприятия
-      </button>
       {/* <div className={s.stats}>
         {[
           {

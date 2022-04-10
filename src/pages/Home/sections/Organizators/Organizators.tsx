@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import Loop from '../../../../components/Loop/Loop'
 import { CardProps } from '../../../../types'
@@ -79,8 +80,9 @@ const Organizators: FC = () => {
         gap={6}
         run={runLoop}
       />
-
-      <button className={s.more}>Больше организаторов</button>
+      <Link to="/people">
+        <button className={s.more}>Больше организаторов</button>
+      </Link>
     </section>
   )
 }

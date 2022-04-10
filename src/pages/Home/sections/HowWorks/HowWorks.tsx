@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { Link } from 'react-router-dom'
 
 import s from './HowWorks.module.scss'
 
@@ -22,7 +23,9 @@ const HowWorks: FC = () => {
           </div>
         ))}
       </div>
-      <button className={s.howWorks__joinToUs}>Присоединиться к нам</button>
+      <Link to="/sign-up">
+        <button className={s.howWorks__joinToUs}>Присоединиться к нам</button>
+      </Link>
     </section>
   )
 }
