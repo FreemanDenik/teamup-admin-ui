@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { v4 } from "uuid";
-
+import { Link } from "react-router-dom";
 import s from "./UpcomingEvents.module.scss";
 import Slider from "../../../../components/Slider";
 import { EventDto } from "../../../../types";
 import { GetEventsInCity } from "../../../../services/GetEventsInCity";
 
-interface UpcomingEventsProps {}
+interface UpcomingEventsProps { }
 
 const UpcomingEvents = () => {
 
   const [events, setEvents] = useState<EventDto[]>([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     setEvents(GetEventsInCity())
-  },[])
+  }, [])
 
   return (
     <section className={s.upcomingEvents}>
@@ -29,9 +29,9 @@ const UpcomingEvents = () => {
           return (
             <div className={s.eventCard} key={v4()}>
               <div className={s.eventCard__tags}>
-                {event.eventInterests.map((item)=>(
+                {event.eventInterests.map((item) => (
                   <div key={item.id} className={s.eventCard__tag}>{item.title}</div>
-                  )
+                )
                 )}
               </div>
               <div className={s.eventCard__info}>
@@ -46,10 +46,12 @@ const UpcomingEvents = () => {
           );
         }}
       />
+      <Link to={`/events/moscow`}>
+        <button className={s.upcomingEvents__otherEvents}>
+          Другие мероприятия
+        </button>
+      </Link>
 
-      <button className={s.upcomingEvents__otherEvents}>
-        Другие мероприятия
-      </button>
       {/* <div className={s.stats}>
         {[
           {

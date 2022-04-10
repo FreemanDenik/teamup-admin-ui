@@ -1,10 +1,11 @@
 import React, { FC, useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import Loop from "../../../../components/Loop/Loop";
 import { CardProps, OrganizatorsProps } from "../../../../types";
 import Card from "./Card";
 import s from "./Organizators.module.scss";
 
-const Organizators: FC<OrganizatorsProps> = ({}) => {
+const Organizators: FC<OrganizatorsProps> = ({ }) => {
   const [runLoop, setRunLoop] = useState<boolean>(false);
   const [data, setData] = useState<Partial<CardProps>[]>([
     {
@@ -77,8 +78,9 @@ const Organizators: FC<OrganizatorsProps> = ({}) => {
         gap={6}
         run={runLoop}
       />
-
-      <button className={s.more}>Больше организаторов</button>
+      <Link to='/people'>
+        <button className={s.more}>Больше организаторов</button>
+      </Link>
     </section>
   );
 };

@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import ButtonPanel from "./ButtonPanel";
+import { Link } from "react-router-dom";
 import Nav from "./Nav";
 import YourCity from "./YourCity";
 import LayoutContainer from "../LayoutContainer";
@@ -11,11 +12,13 @@ const Header = () => {
       <LayoutContainer>
         <div className={headerStyle.inner}>
           <YourCity />
-          <div className={headerStyle.logo}>TeamUp Group</div>
+          <Link to='/'>
+            <div className={headerStyle.logo}>TeamUp Group</div>
+          </Link>
           <Nav />
           <ButtonPanel />
         </div>
-        </LayoutContainer>
+      </LayoutContainer>
     </header>
   );
 };
