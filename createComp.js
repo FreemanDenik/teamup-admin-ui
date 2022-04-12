@@ -1,13 +1,13 @@
-import { resolve } from "path";
-import { mkdirSync, rmdirSync, writeFileSync } from "fs";
+import { resolve } from 'path'
+import { mkdirSync, rmdirSync, writeFileSync } from 'fs'
 
-const compName = process.argv.slice(2).join();
-const compFolder = resolve("src", "components", compName);
+const compName = process.argv.slice(2).join()
+const compFolder = resolve('src', 'components', compName)
 
 const files = [
   {
     name: `${compName}.module.scss`,
-    value: ``,
+    value: ``
   },
 
   {
@@ -29,19 +29,19 @@ const ${compName}: FC<${compName}Props> = ({}) => {
 )
 };
 
-export default ${compName};`,
+export default ${compName};`
   },
 
   {
     name: `index.ts`,
     value: `import ${compName} from './${compName}'
 
-export default ${compName}`,
-  },
-];
+export default ${compName}`
+  }
+]
 
-mkdirSync(compFolder);
+mkdirSync(compFolder)
 
 files.forEach(({ name, value }) => {
-  writeFileSync(resolve(compFolder, name), value);
-});
+  writeFileSync(resolve(compFolder, name), value)
+})
