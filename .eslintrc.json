@@ -43,7 +43,14 @@
         "newlines-between": "always"
       }
     ],
-    // "indent": ["error", 2],
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1,
+        "ignoredNodes": ["ConditionalExpression"]
+      }
+    ],
     "linebreak-style": [0, "unix"],
     "prettier/prettier": "error",
     "quotes": ["error", "single"],

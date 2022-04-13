@@ -91,14 +91,13 @@ export interface EventDto extends Dto {
 
 export interface UserDtoRedux extends UserDto {
   //Токен
-  token: string;
+  token: string
 
   //Возраст
-  age: number;
+  age: number
 
   //Роль пользователя
-  role: string;
-
+  role: string
 }
 
 export interface LoginUserModel {

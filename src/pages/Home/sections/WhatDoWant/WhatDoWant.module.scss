@@ -5,6 +5,7 @@
   justify-content: space-between;
 
   &Search {
+    padding: 20px;
     display: flex;
     flex-direction: column;
     gap: $gutter-small;
