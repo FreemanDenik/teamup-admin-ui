@@ -14,9 +14,14 @@ export interface InterestDto extends Dto {
   shortDescription: string
 }
 
+export interface InterestDtoApi {
+  interestsDtoList: InterestDto
+}
+
 export interface UserDto extends Dto {
   // Username
-  name: string
+  username: string
+  //было name, для стандартизации с сервером сделал username. если в итоге что-то сломается вернуть обратно
 
   // Имя
   firstName: string
@@ -38,6 +43,15 @@ export interface UserDto extends Dto {
 
   // Интересы, заполняется не всегда
   userInterests?: InterestDto[]
+
+  //Возраст
+  age?: number
+
+  //Роль пользователя
+  role?: string
+
+  //Фото
+  photo?: string
 }
 
 export interface EventTypeDto extends Dto {
@@ -89,15 +103,16 @@ export interface EventDto extends Dto {
   minYear: number
 }
 
-export interface UserDtoRedux extends UserDto {
+export interface UserDtoRedux {
   //Токен
   token: string
+  //Данные юсера
+  userDto: UserDto
+}
 
-  //Возраст
-  age: number
-
-  //Роль пользователя
-  role: string
+export interface servicesReducer {
+  //Флаг переключения локальный API/сетевой API
+  apiFlagLocal: boolean
 }
 
 export interface LoginUserModel {
@@ -130,6 +145,7 @@ export interface CardProps {
   surname: string
   desc: string
   age: number
+  photo?: string
 }
 export interface BoxGeometry {
   width: number

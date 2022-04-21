@@ -27,7 +27,6 @@ function Loop<T>({
     const places = data.map((el, i) => {
       const left = boxBounding * i
       const leaveOn = left + boxBounding
-
       return { left, leaveOn }
     })
 
@@ -73,7 +72,6 @@ function Loop<T>({
       >
         {data.map((el, index) => {
           const { left } = state.places[index]
-
           return (
             <LoopItem key={left} left={left} width={width} height={height}>
               {renderItem(el)}

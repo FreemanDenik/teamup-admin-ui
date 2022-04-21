@@ -3,24 +3,32 @@ import { createSlice } from '@reduxjs/toolkit'
 import { UserDtoRedux } from '../../types'
 
 const initialState: UserDtoRedux = {
-  id: 1,
   token: '',
-  name: '',
-  firstName: 'Иван',
-  lastName: 'Иванов',
-  middleName: 'Иванович',
-  email: '',
-  city: '',
-  aboutUser: '',
-  userInterests: [],
-  age: 18,
-  role: ''
+  userDto: {
+    id: 0,
+    username: '',
+    firstName: 'Иван',
+    lastName: 'Иванов',
+    middleName: 'Иванович',
+    photo: 'https://images.unsplash.com/photo-1532318065232-2ba7c6676cd5?w=200',
+    email: '',
+    city: '',
+    aboutUser: '',
+    userInterests: [],
+    age: 18,
+    role: ''
+  }
 }
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {}
+  reducers: {
+    userDTO(state, action) {
+      state = action.payload
+    }
+  }
 })
 
 export default userSlice.reducer
+export const { userDTO } = userSlice.actions

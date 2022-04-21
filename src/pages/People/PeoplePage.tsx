@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import UserCard from '../../components/UserCard/UserCard'
 import getUsers from '../../services/getUsers'
 import { getCities } from '../../services/getCities'
-import { getInterests } from '../../services/GetInterest'
+import { getInterest } from '../../services/getInterest'
 
 import AutoComplete from './components/AutoComplete/AutoComplete'
 import FilterBtn from './components/FilterBtn/FilterBtn'
@@ -39,7 +39,8 @@ const PeoplePage = () => {
       setState((state) => ({ ...state, cities }))
     })
 
-    getInterests().then((interests) => {
+    getInterest().then((interest) => {
+      const interests = interest.interestsDtoList
       setState((state) => ({ ...state, interests }))
     })
   }, [])

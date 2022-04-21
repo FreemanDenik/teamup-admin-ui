@@ -1,13 +1,16 @@
 import React, { FC, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 
 import { SignUpFields } from '../../types'
+import { userDTO } from '../../redux/reducers/user'
 import Form from '../../pages/SignPage/Form'
 import Interests from '../Interests'
 import Input from '../Input'
 import { ValidateEmail } from '../../services/ValidateEmail'
 import { ValidateUserName } from '../../services/ValidateUserName'
 import s from '../../pages/SignPage/Form.module.scss'
+import { registerUser } from '../../services/registerUser'
 
 const SignUp: FC = () => {
   const { control, handleSubmit, reset, setError, clearErrors } =
@@ -25,9 +28,32 @@ const SignUp: FC = () => {
     })
   const [serverValidate, setServerValidate] = useState(false)
   const [serverEmailValidate, setServerEmailValidate] = useState(false)
+  const dispatch = useDispatch()
 
   const register: SubmitHandler<SignUpFields> = async (data) => {
     console.log(data)
+    const user = {
+      password: data.password,
+      userDto: {
+        id: 0,
+        firstName: data.firstname,
+        lastName: data.lastname,
+        middleName: 'string',
+        username: data.username,
+        role: 'ROLE_USER',
+        email: data.email,
+        city: data.city,
+        aboutUser: data.aboutUser,
+        userInterests: [
+          {
+            id: 0,
+            title: 'string',
+            shortDescription: 'string'
+          }
+        ]
+      }
+    }
+    registerUser(JSON.stringify(user)).then((user) => dispatch(userDTO(user)))
   }
   return (
     <Form
@@ -119,11 +145,11 @@ const SignUp: FC = () => {
         control={control}
         name="password"
         rules={{
-          required: true,
-          pattern: {
-            value: /(\w|\d){3, 20}/,
-            message: 'Invalid password'
-          }
+          required: true
+          // pattern: {
+          //   value: /(\w|\d){3, 20}/,
+          //   message: 'Invalid password'
+          // }
         }}
         render={({ field: { ref, ...field }, fieldState: { error } }) => {
           return (
@@ -203,9 +229,9 @@ const SignUp: FC = () => {
       <Controller
         control={control}
         name="aboutUser"
-        rules={{
-          required: true
-        }}
+        // rules={{
+        //   required: true
+        // }}
         render={({ field: { ref, ...field }, fieldState: { error } }) => {
           return (
             <>
@@ -213,7 +239,6 @@ const SignUp: FC = () => {
                 <span className={s.dontHasAccount}>О себе</span>
                 <textarea className={s.area}></textarea>
               </label>
-
               {error && error.message}
             </>
           )

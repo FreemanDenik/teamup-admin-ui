@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import CardEvent from '../../components/CardEvent'
 import FilterButton from '../../components/FilterButton'
 import GetCitiList from '../../services/GetCitiList'
-import { GetInterest } from '../../services/GetInterest'
+import { getInterest } from '../../services/getInterest'
 import GetSingleCityEvents from '../../services/GetSingleCityEvents'
 import filterEventsList from '../../utilites/filterEventsList'
 import { City, EventDto } from '../../types'
@@ -43,11 +43,8 @@ const EventsList = () => {
   }, [])
   //получаем список интересов/увлечений для фильтра
   useEffect(() => {
-    GetInterest().then((res: any) =>
-      setListInterest([
-        ...listInterest,
-        ...res.map((item: any) => item.interestsDto.title)
-      ])
+    getInterest().then((res: any) =>
+      setListInterest([...listInterest, ...res.interestsDtoList])
     )
   }, [])
   //получение событий по определенному городу

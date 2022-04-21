@@ -9,10 +9,10 @@ import { GetEventsInCity } from '../../../../services/GetEventsInCity'
 import s from './UpcomingEvents.module.scss'
 
 const UpcomingEvents = () => {
-  const [events, setEvents] = useState<EventDto[]>([])
+  const [events, setEvents] = useState<any>([])
 
   useEffect(() => {
-    setEvents(GetEventsInCity())
+    GetEventsInCity('Москва').then((events) => setEvents(events.eventDtoList))
   }, [])
 
   return (
