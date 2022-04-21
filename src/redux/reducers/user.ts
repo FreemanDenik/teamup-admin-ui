@@ -25,7 +25,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     userDTO(state, action) {
-      state = action.payload
+      return state = action.payload
     }
   }
 })
