@@ -1,7 +1,21 @@
-import './ModeratorPage.scss'
 import { useState } from 'react'
 
 import placeholdermoderator from '../../assets/img/placeholdermoderator.png'
+
+import s from './ModeratorPage.module.scss'
+import { Event } from './components/event'
+
+const initialState = {
+  eventID: 0,
+  eventName: 'INITIAL',
+  eventAuthor: 'INITIAL',
+  eventPlace: 'INITIAL',
+  eventAuthorAge: 1,
+  eventAuthorEventsCount: 0,
+  eventAuthorSignDate: '00.00.0000',
+  eventDescriptionShort: 'INITIAL',
+  eventDescriptionLarge: 'INITIAL'
+}
 
 const events = [
   {
@@ -58,134 +72,114 @@ const events = [
   }
 ]
 
-const initialState = {
-  eventID: 0,
-  eventName: 'INITIAL',
-  eventAuthor: 'INITIAL',
-  eventPlace: 'INITIAL',
-  eventAuthorAge: 1,
-  eventAuthorEventsCount: 0,
-  eventAuthorSignDate: '00.00.0000',
-  eventDescriptionShort: 'INITIAL',
-  eventDescriptionLarge: 'INITIAL'
-}
-
 export const ModeratorPage = () => {
   const [selectedEvent, changeSelectedEvent] = useState(initialState)
+
   return (
     <>
-      <header className="header">
-        <h6 className="header__logo">TeamUp Group</h6>
-        <button className="header__exit">Выйти</button>
+      <header className={s.header}>
+        <h6 className={s.header__logo}>TeamUp Group</h6>
+        <button className={s.header__exit}>Выйти</button>
       </header>
-      <section className="section">
-        <aside className="moderator__info">
-          <div className="moderator__meta">
+      <section className={s.section}>
+        <aside className={s.moderator__info}>
+          <div className={s.moderator__meta}>
             <img
               src={placeholdermoderator}
               alt=""
-              className="moderator__avatar"
+              className={s.moderator__avatar}
             />
-            <h6 className="moderator__name">Валентина Краснова</h6>
+            <h6 className={s.moderator__name}>Валентина Краснова</h6>
           </div>
-          <select className="moderator__status" name="moderator__status">
+          <select className={s.moderator__status} name="moderator__status">
             <option value="ready">Готов</option>
             <option value="not-ready">Не готов</option>
           </select>
-          <ul className="moderator__events">
+          <ul className={s.moderator__events}>
             {events.map((event) => (
-              <li
-                className={
-                  event.eventID === selectedEvent.eventID
-                    ? 'event event-active'
-                    : 'event'
-                }
+              <Event
+                event={event}
+                selectedEvent={selectedEvent}
+                changeSelectedEvent={changeSelectedEvent}
                 key={event.eventID}
-                onClick={() => changeSelectedEvent(event)}
-              >
-                <div className="event__info">
-                  <h4 className="event__name">{event.eventName}</h4>
-                  <h6 className="event__author">Автор: {event.eventAuthor}</h6>
-                  <h6 className="event__place">Город: {event.eventPlace}</h6>
-                </div>
-                <div className="event__timer">
-                  {/* Как только событие подгрузилось (было получено) */}
-                  <h4 className="event__timer-left">0:00</h4>
-                  {/* Время обслуживания (пока находишься на этом мероприятии) */}
-                  <h4 className="event__timer-right">0:05</h4>
-                </div>
-              </li>
+              />
             ))}
           </ul>
         </aside>
-        <main className="event__section">
-          <div className="event__section-header">
-            <div className="event__author-meta">
-              <h4 className="event__author-name">
+        <main className={s.event__section}>
+          <div className={s.event__section_header}>
+            <div className={s.event__author_meta}>
+              <h4 className={s.event__author_name}>
                 {selectedEvent.eventAuthor}
               </h4>
-              <h6 className="event__author-age">
+              <h6 className={s.event__author_age}>
                 {selectedEvent.eventAuthorAge} лет
               </h6>
-              <h6 className="event__author-events_count">
+              <h6 className={s.event__author_events_count}>
                 {selectedEvent.eventAuthorEventsCount} мероприятий
               </h6>
             </div>
-            <h6 className="event__author-sign_date">
+            <h6 className={s.event__author_sign_date}>
               Дата регистрации: {selectedEvent.eventAuthorSignDate}
             </h6>
-            <a href="" className="event__author-card">
+            <a href="" className={s.event__author_card}>
               Открыть карточку пользователя
             </a>
           </div>
-          <div className="event__section-body">
-            <div className="event__section-meta">
+          <div className={s.event__section_body}>
+            <div className={s.event__section_meta}>
               <img
                 src={placeholdermoderator}
                 alt=""
-                className="event__section-img"
+                className={s.event__section_img}
               />
-              <div className="event__section-info">
-                <h3 className="event__section-info_name">
+              <div className={s.event__section_info}>
+                <h3 className={s.event__section_info_name}>
                   {selectedEvent.eventName}
                 </h3>
-                <h4 className="event__section-info_meta">Место проведения:</h4>
-                <h4 className="event__section-info_meta">Город:</h4>
-                <h4 className="event__section-info_meta">Время проведения:</h4>
-                <h4 className="event__section-info_meta">
+                <h4 className={s.event__section_info_meta}>
+                  Место проведения:
+                </h4>
+                <h4 className={s.event__section_info_meta}>Город:</h4>
+                <h4 className={s.event__section_info_meta}>
+                  Время проведения:
+                </h4>
+                <h4 className={s.event__section_info_meta}>
                   Маркер приватности:
                 </h4>
-                <h4 className="event__section-info_meta">Тип мероприятия:</h4>
-                <h4 className="event__section-info_meta">
+                <h4 className={s.event__section_info_meta}>Тип мероприятия:</h4>
+                <h4 className={s.event__section_info_meta}>
                   Минимальный возраст:
                 </h4>
               </div>
             </div>
-            <div className="event__section-description">
-              <div className="event__section-description_short">
-                <h3 className="event__section-description_title">
+            <div className={s.event__section_description}>
+              <div className={s.event__section_description_short}>
+                <h3 className={s.event__section_description_title}>
                   Краткое описание
                 </h3>
                 <textarea
-                  className="event__section-description_short-textarea"
+                  className={s.event__section_description_short_textarea}
                   readOnly
                   value={selectedEvent.eventDescriptionShort}
                 />
               </div>
-              <div className="event__section-description_large">
-                <h3 className="event__section-description_title">
+              <div className={s.event__section_description_large}>
+                <h3 className={s.event__section_description_title}>
                   Описание мероприятия
                 </h3>
                 <textarea
-                  className="event__section-description_large-textarea"
+                  className={s.event__section_description_large_textarea}
                   readOnly
                   value={selectedEvent.eventDescriptionLarge}
                 />
               </div>
             </div>
-            <div className="event__section-buttons">
-              <button className="event__section-buttons_deny">Отклонить</button>
-              <button className="event__section-buttons_approve">
+            <div className={s.event__section_buttons}>
+              <button className={s.event__section_buttons_deny}>
+                Отклонить
+              </button>
+              <button className={s.event__section_buttons_approve}>
                 Разрешить
               </button>
             </div>
