@@ -1,9 +1,9 @@
 export const ValidateEmail = (email: string) => {
-  if (email === 'user@mail.ru') {
-    return true
-  } else {
-    return false
-  }
+  // if (1 == 1) {
+  return true
+  // } else {
+  //   return false
+  // }
 }
 
 // TODO отправить запрос на сервер когда заработает

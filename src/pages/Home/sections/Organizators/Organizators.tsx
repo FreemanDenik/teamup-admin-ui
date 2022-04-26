@@ -2,7 +2,8 @@ import React, { FC, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import Loop from '../../../../components/Loop/Loop'
-import { CardProps } from '../../../../types'
+import { getTopUsers } from '../../../../services/getTopUsers'
+import { CardProps, UserDto } from '../../../../types'
 
 import Card from './Card'
 import s from './Organizators.module.scss'
@@ -38,10 +39,60 @@ const Organizators: FC = () => {
       name: 'Sergey',
       surname: 'Zotov',
       age: 24
+    },
+    {
+      name: 'Danil',
+      surname: 'Ternovoi',
+      age: 24
+    },
+
+    {
+      name: 'Anton',
+      surname: 'Ternovoi',
+      age: 24
+    },
+
+    {
+      name: 'Olga',
+      surname: 'Belova',
+      age: 24
+    },
+
+    {
+      name: 'Lena',
+      surname: 'Zotova',
+      age: 24
+    },
+
+    {
+      name: 'Sergey',
+      surname: 'Zotov',
+      age: 24
+    },
+
+    {
+      name: 'Sergey',
+      surname: 'Zotov',
+      age: 24
     }
   ])
 
   const wrapperRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    getTopUsers('Moscow').then((users) => {
+      const topUsers: Partial<CardProps>[] = users.map((user: UserDto) => {
+        return {
+          name: user.firstName,
+          surname: user.lastName,
+          age: user.age,
+          photo: user.photo,
+          desc: user.aboutUser
+        }
+      })
+      setData(topUsers)
+    })
+  }, [])
 
   useEffect(() => {
     if (wrapperRef.current) {

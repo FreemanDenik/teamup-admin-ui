@@ -1,9 +1,12 @@
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 
+import { userDTO } from '../../redux/reducers/user'
 import s from '../../pages/SignPage/Form.module.scss'
 import Form from '../../pages/SignPage/Form'
 import { LoginUserModel } from '../../types'
 import Input from '../../components/Input'
+import { loginUser } from '../../services/loginUser'
 
 const SignIn = () => {
   const { control, handleSubmit } = useForm<LoginUserModel>({
@@ -14,8 +17,14 @@ const SignIn = () => {
     }
   })
 
+  const dispatch = useDispatch()
+
   const login: SubmitHandler<LoginUserModel> = async (data) => {
-    console.log(data)
+    const user = {
+      username: data.email,
+      password: data.password
+    }
+    loginUser(JSON.stringify(user)).then((user) => dispatch(userDTO(user)))
   }
   return (
     <Form
@@ -31,11 +40,11 @@ const SignIn = () => {
         control={control}
         name="email"
         rules={{
-          required: true,
-          pattern: {
-            value: /\w+@\w+\.\w+/gi,
-            message: 'Your email should be valid'
-          }
+          required: true
+          // pattern: {
+          //   value: /\w+@\w+\.\w+/gi,
+          //   message: 'Your email should be valid'
+          // }
         }}
         render={({ field: { ref, ...field }, fieldState: { error } }) => {
           return (
@@ -51,11 +60,11 @@ const SignIn = () => {
         control={control}
         name="password"
         rules={{
-          required: true,
-          pattern: {
-            value: /(\w|\d){3, 20}/,
-            message: 'Invalid password'
-          }
+          required: true
+          // pattern: {
+          //   value: /(\w|\d){3, 20}/,
+          //   message: 'Invalid password'
+          // }
         }}
         render={({ field: { ref, ...field }, fieldState: { error } }) => {
           return (

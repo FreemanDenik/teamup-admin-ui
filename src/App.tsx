@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import { SignInPage, SignUpPage } from './pages/SignPage'
 import PeoplePage from './pages/People/PeoplePage'
 import EventsList from './pages/EventsList'
+import PersonalArea from './pages/PersonalArea/PersonalArea'
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path="/people" element={<PeoplePage />} />
           <Route path="events/:city" element={<EventsList />} />
+          <Route path="/personal-area" element={<PersonalArea />} />
         </Route>
         <Route path="moderator" element={<ModeratorPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />

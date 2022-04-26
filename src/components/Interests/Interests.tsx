@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react'
 import { v4 } from 'uuid'
 
 import Input from '../../pages/Home/sections/WhatDoWant/Input'
-import { GetInterest } from '../../services/GetInterest'
+import { getInterest } from '../../services/getInterest'
 import { InterestDto } from '../../types'
 
 import s from './Interests.module.scss'
@@ -14,11 +14,8 @@ const Interests: FC = () => {
   const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
-    GetInterest().then((res: any) =>
-      setInterestList([
-        ...interestsList,
-        ...res.map((item: any) => item.interestsDto)
-      ])
+    getInterest().then((res: any) =>
+      setInterestList([...interestsList, ...res.interestsDtoList])
     )
   }, [])
 

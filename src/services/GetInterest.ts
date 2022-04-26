@@ -1,5 +1,11 @@
-export const GetInterest = async () => {
+import store from '../redux/store'
+
+import interests from './localServerAPI/interests.json'
+
+export const getInterest = async () => {
   try {
+    if (store().getState().servicesReducer.apiFlagLocal) return interests //для использования локальных данных вместо сервера
+
     const res = await fetch('http://localhost:8080/public/interest')
     if (!res.ok) {
       throw new Error(`${res.status}`)
@@ -10,16 +16,4 @@ export const GetInterest = async () => {
   } catch (err) {
     return err
   }
-}
-
-// /public/interest/ GET
-export const getInterests = () => {
-  return fetch(
-    'https://gist.githubusercontent.com/elena-anikina/852403ab0b258b332fd53206d5d5b48c/raw/'
-  ).then((response) => {
-    if (!response.ok) {
-      throw new Error(`Ошибка, статус ошибки ${response.status}`)
-    }
-    return response.json()
-  })
 }

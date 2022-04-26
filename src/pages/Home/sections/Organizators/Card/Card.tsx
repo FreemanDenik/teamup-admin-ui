@@ -2,23 +2,14 @@ import React, { FC } from 'react'
 import { v4 } from 'uuid'
 
 import { CardProps } from '../../../../../types'
-import mockone from '../../../../../assets/img/mock-org1.png'
 import mocktwo from '../../../../../assets/img/mock-org2.png'
 
 import s from './Card.module.scss'
 
-const Card: FC<Partial<CardProps>> = ({
-  name = 'name',
-  surname = 'surname',
-  desc = 'desc',
-  age = 23
-}) => {
+const Card: FC<Partial<CardProps>> = ({ name, surname, age, photo, desc }) => {
   return (
     <div className={s.wrapper}>
-      <div
-        className={s.avatar}
-        style={{ backgroundImage: `url(${mockone})` }}
-      />
+      <div className={s.avatar} style={{ backgroundImage: `url(${photo})` }} />
       <div className={s.info}>
         <div className={s.name}>
           {name} {surname}
