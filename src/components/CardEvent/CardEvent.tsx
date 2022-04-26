@@ -22,7 +22,6 @@ const CardEvent = (props: CardEventProps) => {
     <div className={`${s.card__container}`} key={event.id}>
       <div className={`${s.card}`}>
         <img className={`${s.card__img}`} src={citiImg} alt="Фото города" />
-
         <div className={`${s.card__widgetContainer}`}>
           <div className={`${s.card__widget}`}>Досуг</div>
           <div className={`${s.card__widget}`}>Гитара</div>

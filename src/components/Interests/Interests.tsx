@@ -1,14 +1,21 @@
 import React, { FC, useEffect, useState } from 'react'
 import { v4 } from 'uuid'
+import { useSelector } from 'react-redux'
 
 import Input from '../../pages/Home/sections/WhatDoWant/Input'
 import { getInterest } from '../../services/getInterest'
 import { InterestDto } from '../../types'
+import { RootState } from '../../redux/store'
 
 import s from './Interests.module.scss'
 
 const Interests: FC = () => {
-  const [userInterest, setUserInterest] = useState<InterestDto[]>([])
+  const { userInterests } = useSelector(
+    (state: RootState) => state.userReducer.userDto
+  )
+  const [userInterest, setUserInterest] = useState<InterestDto[]>(
+    userInterests || []
+  )
   const [interestsList, setInterestList] = useState<InterestDto[]>([])
   const [searchValue, setSearchValue] = useState('')
   const [showModal, setShowModal] = useState(false)
@@ -30,10 +37,6 @@ const Interests: FC = () => {
   const deleteUserInterestItem = (id: number) => {
     setUserInterest(userInterest.filter((item) => item.id !== id))
   }
-  const handleClickAddInterest = () => {
-    console.log('Interests', interestsList)
-    setShowModal(true)
-  }
 
   return (
     <div className={s.container}>
@@ -46,7 +49,7 @@ const Interests: FC = () => {
           />
         </div>
       ))}
-      <button className={s.add} onClick={handleClickAddInterest} />
+      <button className={s.add} onClick={() => setShowModal(true)} type='button' />
 
       {showModal && (
         <div className={s.modal}>
