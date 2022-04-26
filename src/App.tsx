@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 
+import { ModeratorPage } from './pages/ModeratorPage'
 import Layout from './components/Layout'
 import Home from './pages/Home'
 import { SignInPage, SignUpPage } from './pages/SignPage'
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="/people" element={<PeoplePage />} />
           <Route path="events/:city" element={<EventsList />} />
         </Route>
+        <Route path="moderator" element={<ModeratorPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/sign-in" element={<SignInPage />} />
       </Routes>
