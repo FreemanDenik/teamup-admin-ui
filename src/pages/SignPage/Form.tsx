@@ -63,7 +63,7 @@ const Form: FC<FormProps & HTMLProps<HTMLFormElement>> = ({
           <main className={`${s.main}`}>
             {children}
 
-            <button className={s.auth}>
+            <button onClick={() => navigate(-1)} className={s.auth}>
               {/* Авторизоваться */}
               {submitText}
             </button>
