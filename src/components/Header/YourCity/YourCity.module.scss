@@ -48,6 +48,9 @@
   min-height: 10px;
   max-height: 30px;
   padding: 5px;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .autocompleteItem:hover {

@@ -11,7 +11,7 @@ export const serviceSlice = createSlice({
   initialState,
   reducers: {
     apiFlag(state, action) {
-      return state = action.payload
+      return (state = action.payload)
     }
   }
 })

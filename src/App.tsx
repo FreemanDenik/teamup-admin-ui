@@ -16,9 +16,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="/people" element={<PeoplePage />} />
+          <Route path="people" element={<PeoplePage />} />
           <Route path="events/:city" element={<EventsList />} />
-          <Route path="/personal-area" element={<PersonalArea />} />
+          <Route path="personal-area" element={<PersonalArea />} />
         </Route>
         <Route path="moderator" element={<ModeratorPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
