@@ -3,7 +3,7 @@ import { v4 } from 'uuid'
 import { useSelector } from 'react-redux'
 
 import Input from '../../pages/Home/sections/WhatDoWant/Input'
-import { getInterest } from '../../services/getInterest'
+import { getInterest } from '../../services/GetInterest'
 import { InterestDto } from '../../types'
 import { RootState } from '../../redux/store'
 
@@ -49,7 +49,11 @@ const Interests: FC = () => {
           />
         </div>
       ))}
-      <button className={s.add} onClick={() => setShowModal(true)} type='button' />
+      <button
+        className={s.add}
+        onClick={() => setShowModal(true)}
+        type="button"
+      />
 
       {showModal && (
         <div className={s.modal}>

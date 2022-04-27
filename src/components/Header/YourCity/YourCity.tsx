@@ -52,21 +52,20 @@ const YourCity = () => {
     <div className={s.autocompleteList}>{autocompleteArr}</div>
   )
 
-  const cityInput =
-    state.edit && (
-      <input
-        placeholder={state.city}
-        autoComplete="off"
-        id="cityInput"
-        type="text"
-        autoFocus
-        onBlur={() => {
-          setTimeout(() => setState((state) => ({ ...state, edit: false })), 300)
-        }}
-        className={s.cityInput}
-        onChange={onInputChange}
-      />
-    )
+  const cityInput = state.edit && (
+    <input
+      placeholder={state.city}
+      autoComplete="off"
+      id="cityInput"
+      type="text"
+      autoFocus
+      onBlur={() => {
+        setTimeout(() => setState((state) => ({ ...state, edit: false })), 300)
+      }}
+      className={s.cityInput}
+      onChange={onInputChange}
+    />
+  )
 
   return (
     <div className={s.cityWrapper}>

@@ -1,13 +1,12 @@
-import {useState} from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form'
 
 import Interests from '../../components/Interests'
-
 import { RootState } from '../../redux/store'
+
 import Input from './input'
 import CityField from './CityField'
-
 import s from './PersonalArea.module.scss'
 
 interface PersonalAreaProps {
@@ -21,22 +20,21 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm();
+    formState: { errors }
+  } = useForm()
 
   const [formState, setFormState] = useState({
     lastNameValue: lastName,
-    firstNameValue:firstName,
+    firstNameValue: firstName,
     emailValue: email,
     ageValue: age,
     usernameValue: username,
     aboutUserValue: aboutUser
-  });
+  })
 
-  
   const onSubmit = async (data: any) => {
-    console.log(data);
-  };
+    console.log(data)
+  }
 
   return (
     <div
@@ -104,14 +102,14 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
                 pattern: {
                   value: /[а-яa-z]/gi,
                   message: 'Некорректный username'
-                },
+                }
               })}
             />
             <div className={s.modal_content__cityAndAge}>
               <CityField
                 city={city}
                 {...register('Возраст', {
-                  required: true,
+                  required: true
                 })}
               />
               <Input
@@ -120,7 +118,7 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
                 placeholder="Возраст"
                 type="number"
                 {...register('Возраст', {
-                  required: true,
+                  required: true
                 })}
               />
             </div>

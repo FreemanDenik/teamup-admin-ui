@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import UserCard from '../../components/UserCard/UserCard'
 import getUsers from '../../services/getUsers'
 import { getCities } from '../../services/getCities'
-import { getInterest } from '../../services/getInterest'
+import { getInterest } from '../../services/GetInterest'
 
 import AutoComplete from './components/AutoComplete/AutoComplete'
 import FilterBtn from './components/FilterBtn/FilterBtn'
