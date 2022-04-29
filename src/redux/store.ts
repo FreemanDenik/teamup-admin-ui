@@ -17,6 +17,7 @@ const logger =
         const res = next(actions)
         console.log('User', store.getState().userReducer)
         console.log('Interests', store.getState().userInterestReducer)
+        console.log('Service', store.getState().servicesReducer)
         return res
       }
 

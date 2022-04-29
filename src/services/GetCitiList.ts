@@ -16,3 +16,5 @@ const GetCitiList = async () => {
   }
 }
 export default GetCitiList
+
+//не нашел где используется

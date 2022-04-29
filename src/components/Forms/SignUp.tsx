@@ -33,7 +33,6 @@ const SignUp: FC = () => {
   const dispatch = useDispatch()
 
   const onSubmit: SubmitHandler<SignUpFields> = async (data) => {
-    console.log(data)
     const user = {
       password: data.password,
       userDto: {
@@ -49,7 +48,6 @@ const SignUp: FC = () => {
         userInterests: interests
       }
     }
-    console.log(user)
     registerUser(JSON.stringify(user)).then((user) => dispatch(userDTO(user)))
   }
   return (
@@ -226,9 +224,6 @@ const SignUp: FC = () => {
       <Controller
         control={control}
         name="aboutUser"
-        // rules={{
-        //   required: true
-        // }}
         render={({ field: { ref, ...field }, fieldState: { error } }) => {
           return (
             <>

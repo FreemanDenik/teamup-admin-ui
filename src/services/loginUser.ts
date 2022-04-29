@@ -8,7 +8,6 @@ export const loginUser = async (data: string) => {
 
     const res = await fetch('http://localhost:8080/login', {
       method: 'POST',
-      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -24,3 +23,5 @@ export const loginUser = async (data: string) => {
     return err
   }
 }
+
+//не работает, CORS не дает

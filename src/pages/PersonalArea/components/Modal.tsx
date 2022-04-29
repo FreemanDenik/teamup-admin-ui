@@ -1,12 +1,14 @@
-import {useState} from 'react'
-import { useSelector } from 'react-redux'
+import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form';
 
 import Interests from '../../../components/Interests'
 
 import { RootState } from '../../../redux/store'
+import { userDTO } from '../../../redux/reducers/user'
 import Input from './input'
 import CityField from './CityField'
+import { editUser } from '../../../services/editUser'
 
 import s from '../PersonalArea.module.scss'
 
@@ -18,24 +20,44 @@ interface PersonalAreaProps {
 const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
   const { firstName, lastName, email, age, city, username, aboutUser } =
     useSelector((state: RootState) => state.userReducer.userDto)
+
+  const interests = useSelector((state: RootState) => state.userInterestReducer)
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  const dispatch = useDispatch()
+
   const [formState, setFormState] = useState({
     lastNameValue: lastName,
-    firstNameValue:firstName,
+    firstNameValue: firstName,
     emailValue: email,
     ageValue: age,
     usernameValue: username,
     aboutUserValue: aboutUser
   });
 
-  
+
+  const { lastNameValue, firstNameValue, emailValue, ageValue, usernameValue, aboutUserValue } = formState
+
   const onSubmit = async (data: any) => {
-    console.log(data);
+    //отправка на данный момент сделана только для наглядности. Когда будет работать измененние юзера нужно переделать в соответствии с Request сервера
+    const user = {
+        id: 0,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        middleName: 'string',
+        username: data.username,
+        role: 'ROLE_USER',
+        email: data.email,
+        city: data.city,
+        aboutUser: data.AboutUs,
+        userInterests: interests //данное поле обязательно брать из редакс. Это массив интересов пользователя
+    }
+    editUser(JSON.stringify(user)).then((user) => dispatch(userDTO(user)))
   };
 
   return (
@@ -55,11 +77,12 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
           <div className={s.inputsWrapper}>
             <div className={s.modal_content__name}>
               <Input
-                value={lastName}
+                value={lastNameValue}
                 errors={errors}
                 placeholder="Фамилия"
+                onInput={(e: any) => setFormState((state) => ({ ...state, lastNameValue: e.target.value }))}
                 type="text"
-                {...register('Фамилия', {
+                {...register('lastName', {
                   required: true,
                   pattern: {
                     value: /[а-яa-z]/gi,
@@ -68,11 +91,12 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
                 })}
               />
               <Input
-                value={firstName}
+                value={firstNameValue}
                 errors={errors}
                 placeholder="Имя"
+                onInput={(e: any) => setFormState((state) => ({ ...state, firstNameValue: e.target.value }))}
                 type="text"
-                {...register('Имя', {
+                {...register('firstName', {
                   required: true,
                   pattern: {
                     value: /[а-яa-z]/gi,
@@ -82,9 +106,10 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
               />
             </div>
             <Input
-              value={email}
+              value={emailValue}
               errors={errors}
               placeholder="Email Address"
+              onInput={(e: any) => setFormState((state) => ({ ...state, emailValue: e.target.value }))}
               type="email"
               {...register('email', {
                 required: true,
@@ -95,11 +120,12 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
               })}
             />
             <Input
-              value={username}
+              value={usernameValue}
               errors={errors}
               placeholder="Username"
+              onInput={(e: any) => setFormState((state) => ({ ...state, usernameValue: e.target.value }))}
               type="text"
-              {...register('Username', {
+              {...register('username', {
                 required: true,
                 pattern: {
                   value: /[а-яa-z]/gi,
@@ -110,16 +136,17 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
             <div className={s.modal_content__cityAndAge}>
               <CityField
                 city={city}
-                {...register('Город', {
+                {...register('city', {
                   required: true,
                 })}
               />
               <Input
-                value={`${age}`}
+                value={`${ageValue}`}
                 errors={errors}
                 placeholder="Возраст"
+                onInput={(e: any) => setFormState((state) => ({ ...state, ageValue: e.target.value }))}
                 type="number"
-                {...register('Возраст', {
+                {...register('age', {
                   required: true,
                 })}
               />
@@ -129,9 +156,10 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
             <div className={s.modal_content__title}>О себе</div>
             <div className={s.modal_content__aboutUs__field}>
               <textarea
-                value={aboutUser}
+                value={aboutUserValue}
+                onInput={(e: any) => setFormState((state) => ({ ...state, aboutUserValue: e.target.value }))}
                 placeholder="Например: Увлекаюсь настольными играми и люблю активный отдых на природе"
-                {...register('AboutUs')}
+                {...register('aboutUs')}
               />
             </div>
           </div>

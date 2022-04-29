@@ -80,7 +80,7 @@ const Organizators: FC = () => {
   const wrapperRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    getTopUsers('Moscow').then((users) => {
+    getTopUsers('Москва').then((users) => {
       const topUsers: Partial<CardProps>[] = users.map((user: UserDto) => {
         return {
           name: user.firstName,
