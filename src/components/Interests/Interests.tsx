@@ -51,7 +51,7 @@ const Interests: FC = () => {
           />
         </div>
       ))}
-      <button className={s.add} onClick={() => setShowModal(true)} type='button' />
+      <button className={s.add} onClick={() => setShowModal(() => showModal ? false : true)} type='button' />
 
       {showModal && (
         <div className={s.modal}>
