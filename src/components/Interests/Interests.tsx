@@ -1,51 +1,53 @@
-import React, { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { v4 } from 'uuid'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import Input from '../../pages/Home/sections/WhatDoWant/Input'
 import { getInterest } from '../../services/getInterest'
 import { InterestDto } from '../../types'
+import { userInterests } from '../../redux/reducers/userInterestReducer'
 import { RootState } from '../../redux/store'
 
 import s from './Interests.module.scss'
 
 const Interests: FC = () => {
-  const { userInterests } = useSelector(
-    (state: RootState) => state.userReducer.userDto
-  )
-  const [userInterest, setUserInterest] = useState<InterestDto[]>(
-    userInterests || []
-  )
+  const dispatch = useDispatch()
+  const interests = useSelector((state: RootState) => state.userInterestReducer)
   const [interestsList, setInterestList] = useState<InterestDto[]>([])
   const [searchValue, setSearchValue] = useState('')
   const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
-    getInterest().then((res: any) =>
-      setInterestList([...interestsList, ...res.interestsDtoList])
-    )
+    getInterest().then((res: any) => {
+      const setListArr = res.interestsDtoList
+      setInterestList(setListArr.filter((interest: any) => !interests.find(interes => interes.id === interest.id)))
+    })
   }, [])
 
   const handleClickChooseInterest = (item: InterestDto) => {
-    setUserInterest([...userInterest, item])
+    dispatch(userInterests([...interests, item]))
+    setInterestList(interestsList.filter(interes => interes.id !== item.id))
     setShowModal(false)
     setSearchValue('')
   }
+
   const handleChangeSearchValue = (userSearchQuery: string) => {
     setSearchValue(userSearchQuery.toLowerCase())
   }
-  const deleteUserInterestItem = (id: number) => {
-    setUserInterest(userInterest.filter((item) => item.id !== id))
+
+  const deleteUserInterestItem = (item: InterestDto) => {
+    dispatch(userInterests(interests.filter((interes) => item.id !== interes.id)))
+    setInterestList([item, ...interestsList])
   }
 
   return (
     <div className={s.container}>
-      {userInterest.map((item) => (
+      {interests.map((item) => (
         <div className={s.interest} key={v4()}>
           {item.title}
           <button
             className={s.delete}
-            onClick={() => deleteUserInterestItem(item.id)}
+            onClick={() => deleteUserInterestItem(item)}
           />
         </div>
       ))}
@@ -65,7 +67,7 @@ const Interests: FC = () => {
             {interestsList
               .filter(
                 (item) =>
-                  !userInterest.includes(item) &&
+                  !interests.includes(item) &&
                   item.title.toLowerCase().indexOf(searchValue) !== -1
               )
               .map((item) => (

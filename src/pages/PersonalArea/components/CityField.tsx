@@ -1,9 +1,9 @@
 import React, { useState, forwardRef } from 'react'
 
-import { getCities } from '../../services/getCities'
+import { getCities } from '../../../services/getCities'
 
-import s from '../../components/Header/YourCity/YourCity.module.scss'
-import sPA from './PersonalArea.module.scss'
+import s from '../../../components/Header/YourCity/YourCity.module.scss'
+import sPA from '../PersonalArea.module.scss'
 
 interface inputProps {
     city: string
@@ -59,7 +59,6 @@ const CityField = forwardRef<HTMLInputElement, inputProps>((props, ref) => {
                     autoComplete="off"
                     id="cityInput"
                     type="text"
-                    autoFocus
                     onBlur={() => {
                         setTimeout(() => setState((state) => ({ ...state, edit: false })), 300)
                     }}

@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-import s from './PersonalArea.module.scss'
+import s from '../PersonalArea.module.scss'
 
 interface inputProps {
     name: string

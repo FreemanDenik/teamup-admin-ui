@@ -2,13 +2,13 @@ import {useState} from 'react'
 import { useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form';
 
-import Interests from '../../components/Interests'
+import Interests from '../../../components/Interests'
 
-import { RootState } from '../../redux/store'
+import { RootState } from '../../../redux/store'
 import Input from './input'
 import CityField from './CityField'
 
-import s from './PersonalArea.module.scss'
+import s from '../PersonalArea.module.scss'
 
 interface PersonalAreaProps {
   modalActivate: boolean
@@ -110,7 +110,7 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
             <div className={s.modal_content__cityAndAge}>
               <CityField
                 city={city}
-                {...register('Возраст', {
+                {...register('Город', {
                   required: true,
                 })}
               />

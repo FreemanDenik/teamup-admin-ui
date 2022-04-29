@@ -2,10 +2,12 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
 import userReducer from './reducers/user'
 import servicesReducer from './reducers/servicesReducer'
+import userInterestReducer from './reducers/userInterestReducer'
 
 const rootReducer = combineReducers({
   userReducer,
-  servicesReducer
+  servicesReducer,
+  userInterestReducer
 })
 
 const logger =
@@ -14,6 +16,7 @@ const logger =
       (actions: any) => {
         const res = next(actions)
         console.log('User', store.getState().userReducer)
+        console.log('Interests', store.getState().userInterestReducer)
         return res
       }
 

@@ -14,48 +14,7 @@ const initialState: UserDtoRedux = {
     email: '',
     city: 'Москва',
     aboutUser: '',
-    userInterests: [
-      {
-        'id': 1,
-        'title': 'горные лыжи',
-        'shortDescription': 'короткое описание'
-      },
-      {
-        'id': 2,
-        'title': 'альпинизм',
-        'shortDescription': 'короткое описание'
-      },
-      {
-        'id': 3,
-        'title': 'биткоин',
-        'shortDescription': 'короткое описание'
-      },
-      {
-        'id': 4,
-        'title': 'горные лыжи',
-        'shortDescription': 'короткое описание'
-      },
-      {
-        'id': 5,
-        'title': 'альпинизм',
-        'shortDescription': 'короткое описание'
-      },
-      {
-        'id': 6,
-        'title': 'биткоин',
-        'shortDescription': 'короткое описание'
-      },
-      {
-        'id': 7,
-        'title': 'горные лыжи',
-        'shortDescription': 'короткое описание'
-      },
-      {
-        'id': 8,
-        'title': 'альпинизм',
-        'shortDescription': 'короткое описание'
-      }
-    ],
+    userInterests: [],
     age: 18,
     role: ''
   }
