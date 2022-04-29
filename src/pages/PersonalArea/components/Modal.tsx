@@ -45,17 +45,18 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
 
   const onSubmit = async (data: any) => {
     //отправка на данный момент сделана только для наглядности. Когда будет работать измененние юзера нужно переделать в соответствии с Request сервера
+    console.log(data)
     const user = {
-        id: 0,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        middleName: 'string',
-        username: data.username,
-        role: 'ROLE_USER',
-        email: data.email,
-        city: data.city,
-        aboutUser: data.AboutUs,
-        userInterests: interests //данное поле обязательно брать из редакс. Это массив интересов пользователя
+      id: 0,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      middleName: 'string',
+      username: data.username,
+      role: 'ROLE_USER',
+      email: data.email,
+      city: data.city,
+      aboutUser: data.AboutUs,
+      userInterests: interests //данное поле обязательно брать из редакс. Это массив интересов пользователя
     }
     editUser(JSON.stringify(user)).then((user) => dispatch(userDTO(user)))
   };
@@ -141,14 +142,17 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
                 })}
               />
               <Input
+                min="1"
+                max="150"
                 value={`${ageValue}`}
                 errors={errors}
                 placeholder="Возраст"
                 onInput={(e: any) => setFormState((state) => ({ ...state, ageValue: e.target.value }))}
                 type="number"
                 {...register('age', {
-                  required: true,
-                })}
+                  required: true
+                }
+                )}
               />
             </div>
           </div>
