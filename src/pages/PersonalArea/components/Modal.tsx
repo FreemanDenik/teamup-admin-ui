@@ -1,16 +1,15 @@
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form'
 
 import Interests from '../../../components/Interests'
-
 import { RootState } from '../../../redux/store'
 import { userDTO } from '../../../redux/reducers/user'
+import { editUser } from '../../../services/editUser'
+import s from '../PersonalArea.module.scss'
+
 import Input from './input'
 import CityField from './CityField'
-import { editUser } from '../../../services/editUser'
-
-import s from '../PersonalArea.module.scss'
 
 interface PersonalAreaProps {
   modalActivate: boolean
@@ -26,8 +25,8 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm();
+    formState: { errors }
+  } = useForm()
 
   const dispatch = useDispatch()
 
@@ -38,10 +37,16 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
     ageValue: age,
     usernameValue: username,
     aboutUserValue: aboutUser
-  });
+  })
 
-
-  const { lastNameValue, firstNameValue, emailValue, ageValue, usernameValue, aboutUserValue } = formState
+  const {
+    lastNameValue,
+    firstNameValue,
+    emailValue,
+    ageValue,
+    usernameValue,
+    aboutUserValue
+  } = formState
 
   const onSubmit = async (data: any) => {
     //отправка на данный момент сделана только для наглядности. Когда будет работать измененние юзера нужно переделать в соответствии с Request сервера
@@ -59,7 +64,7 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
       userInterests: interests //данное поле обязательно брать из редакс. Это массив интересов пользователя
     }
     editUser(JSON.stringify(user)).then((user) => dispatch(userDTO(user)))
-  };
+  }
 
   return (
     <div
@@ -81,7 +86,12 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
                 value={lastNameValue}
                 errors={errors}
                 placeholder="Фамилия"
-                onInput={(e: any) => setFormState((state) => ({ ...state, lastNameValue: e.target.value }))}
+                onInput={(e: any) =>
+                  setFormState((state) => ({
+                    ...state,
+                    lastNameValue: e.target.value
+                  }))
+                }
                 type="text"
                 {...register('lastName', {
                   required: true,
@@ -95,7 +105,12 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
                 value={firstNameValue}
                 errors={errors}
                 placeholder="Имя"
-                onInput={(e: any) => setFormState((state) => ({ ...state, firstNameValue: e.target.value }))}
+                onInput={(e: any) =>
+                  setFormState((state) => ({
+                    ...state,
+                    firstNameValue: e.target.value
+                  }))
+                }
                 type="text"
                 {...register('firstName', {
                   required: true,
@@ -110,7 +125,12 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
               value={emailValue}
               errors={errors}
               placeholder="Email Address"
-              onInput={(e: any) => setFormState((state) => ({ ...state, emailValue: e.target.value }))}
+              onInput={(e: any) =>
+                setFormState((state) => ({
+                  ...state,
+                  emailValue: e.target.value
+                }))
+              }
               type="email"
               {...register('email', {
                 required: true,
@@ -124,21 +144,26 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
               value={usernameValue}
               errors={errors}
               placeholder="Username"
-              onInput={(e: any) => setFormState((state) => ({ ...state, usernameValue: e.target.value }))}
+              onInput={(e: any) =>
+                setFormState((state) => ({
+                  ...state,
+                  usernameValue: e.target.value
+                }))
+              }
               type="text"
               {...register('username', {
                 required: true,
                 pattern: {
                   value: /[а-яa-z]/gi,
                   message: 'Некорректный username'
-                },
+                }
               })}
             />
             <div className={s.modal_content__cityAndAge}>
               <CityField
                 city={city}
                 {...register('city', {
-                  required: true,
+                  required: true
                 })}
               />
               <Input
@@ -147,12 +172,16 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
                 value={`${ageValue}`}
                 errors={errors}
                 placeholder="Возраст"
-                onInput={(e: any) => setFormState((state) => ({ ...state, ageValue: e.target.value }))}
+                onInput={(e: any) =>
+                  setFormState((state) => ({
+                    ...state,
+                    ageValue: e.target.value
+                  }))
+                }
                 type="number"
                 {...register('age', {
                   required: true
-                }
-                )}
+                })}
               />
             </div>
           </div>
@@ -161,7 +190,12 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
             <div className={s.modal_content__aboutUs__field}>
               <textarea
                 value={aboutUserValue}
-                onInput={(e: any) => setFormState((state) => ({ ...state, aboutUserValue: e.target.value }))}
+                onInput={(e: any) =>
+                  setFormState((state) => ({
+                    ...state,
+                    aboutUserValue: e.target.value
+                  }))
+                }
                 placeholder="Например: Увлекаюсь настольными играми и люблю активный отдых на природе"
                 {...register('aboutUs')}
               />

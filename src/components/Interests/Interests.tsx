@@ -20,13 +20,18 @@ const Interests: FC = () => {
   useEffect(() => {
     getInterest().then((res: any) => {
       const setListArr = res.interestsDtoList
-      setInterestList(setListArr.filter((interest: any) => !interests.find(interes => interes.id === interest.id)))
+      setInterestList(
+        setListArr.filter(
+          (interest: any) =>
+            !interests.find((interes) => interes.id === interest.id)
+        )
+      )
     })
   }, [])
 
   const handleClickChooseInterest = (item: InterestDto) => {
     dispatch(userInterests([...interests, item]))
-    setInterestList(interestsList.filter(interes => interes.id !== item.id))
+    setInterestList(interestsList.filter((interes) => interes.id !== item.id))
     setShowModal(false)
     setSearchValue('')
   }
@@ -36,7 +41,9 @@ const Interests: FC = () => {
   }
 
   const deleteUserInterestItem = (item: InterestDto) => {
-    dispatch(userInterests(interests.filter((interes) => item.id !== interes.id)))
+    dispatch(
+      userInterests(interests.filter((interes) => item.id !== interes.id))
+    )
     setInterestList([item, ...interestsList])
   }
 
@@ -51,7 +58,11 @@ const Interests: FC = () => {
           />
         </div>
       ))}
-      <button className={s.add} onClick={() => setShowModal(() => showModal ? false : true)} type='button' />
+      <button
+        className={s.add}
+        onClick={() => setShowModal(() => (showModal ? false : true))}
+        type="button"
+      />
 
       {showModal && (
         <div className={s.modal}>

@@ -18,6 +18,4 @@ export const getInterest = async () => {
   }
 }
 
-
-
 //работает

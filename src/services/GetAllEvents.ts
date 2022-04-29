@@ -12,5 +12,4 @@ export const GetAllEvents = async () => {
   }
 }
 
-
 //не используется
