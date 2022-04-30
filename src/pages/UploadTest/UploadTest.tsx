@@ -3,6 +3,13 @@
 import { useState } from 'react'
 import Resizer from 'react-image-file-resizer'
 
+const imageResolution = {
+  quality: 100,
+  maxWidth: 1000,
+  maxHeight: 1000,
+  format: 'base64'
+}
+
 export const UploadTest = () => {
   const [image, setImage] = useState()
   const [loading, setLoading] = useState(false)
@@ -13,15 +20,15 @@ export const UploadTest = () => {
     new Promise((resolve) => {
       Resizer.imageFileResizer(
         file,
-        300,
-        300,
+        imageResolution.maxWidth,
+        imageResolution.maxHeight,
         'JPEG',
-        100,
+        imageResolution.quality,
         0,
         (uri) => {
           resolve(uri)
         },
-        'base64'
+        imageResolution.format
       )
     })
 
@@ -37,6 +44,7 @@ export const UploadTest = () => {
       setLoading(false)
       setImage(image)
       console.log('Image size in MB: ', byteCount(image) * 0.000001)
+      console.log('Base64 length', image.length)
     } catch (err) {
       console.log(err)
     }
