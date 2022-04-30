@@ -1,29 +1,45 @@
 /* eslint-disable */
 // @ts-nocheck
 import { useState } from 'react'
+import Resizer from 'react-image-file-resizer'
 
 export const UploadTest = () => {
   const [image, setImage] = useState()
   const [loading, setLoading] = useState(false)
 
-  // const fileChangeHandler = (event: any) => {}
+  const resizeFile = (
+    file // https://www.npmjs.com/package/react-image-file-resizer - ДОКА
+  ) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        300,
+        300,
+        'JPEG',
+        100,
+        0,
+        (uri) => {
+          resolve(uri)
+        },
+        'base64'
+      )
+    })
 
-  const fileUploadHandler = async (e) => {
-    const files = e.target.files
-    const data = new FormData()
-    data.append('file', files[0])
-    // data.append('upload_preset', 'swift')
-    setLoading(true)
-    const res = await fetch(
-      'https://api.imgbb.com/1/upload?key=9a6872ef998ba332b96a74033020be3e',
-      {
-        method: 'POST',
-        body: data
-      }
-    )
-    const file = await res.json()
-    setImage(file.secure_url)
-    setLoading(false)
+  const byteCount = (s) => {
+    return encodeURI(s).split(/%..|./).length - 1
+  }
+
+  const onChange = async (event) => {
+    try {
+      const file = event.target.files[0]
+      setLoading(true)
+      const image = await resizeFile(file)
+      setLoading(false)
+      setImage(image)
+      console.log('Image size in MB: ', byteCount(image) * 0.000001)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (
@@ -40,14 +56,11 @@ export const UploadTest = () => {
       <h1>Upload File</h1>
       <input
         type="file"
-        onChange={fileUploadHandler}
+        accept="image/*"
+        onChange={onChange}
         style={{ textAlignLast: 'center' }}
       ></input>
-      {loading ? (
-        <h3>Loading...</h3>
-      ) : (
-        <img src={image} style={{ width: '300px' }} />
-      )}
+      {loading ? <h3>Loading...</h3> : <img src={image} />}
     </div>
   )
 }
