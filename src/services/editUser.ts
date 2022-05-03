@@ -2,14 +2,14 @@ import store from '../redux/store'
 
 import user from './localServerAPI/user.json'
 
-export const registerUser = async (data: string) => {
+export const editUser = async (data: string) => {
   if (store().getState().servicesReducer.apiFlagLocal) return user //для использования локальных данных вместо сервера
 
   try {
-    const res = await fetch('http://localhost:8080/registration', {
-      method: 'POST',
+    const res = await fetch('http://localhost:8080/private/account/user', {
+      method: 'PUT',
+      mode: 'no-cors',
       headers: {
-        'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/json'
       },
       body: data
@@ -23,4 +23,4 @@ export const registerUser = async (data: string) => {
   }
 }
 
-//не работает, CORS не дает
+// не работает

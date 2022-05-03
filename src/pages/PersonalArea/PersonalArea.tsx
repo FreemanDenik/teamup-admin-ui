@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import CardEvent from '../../components/CardEvent/CardEvent'
 import { RootState } from '../../redux/store'
 
-import Modal from './Modal'
+import Modal from './components/Modal'
 import s from './PersonalArea.module.scss'
 
 const eventList = [

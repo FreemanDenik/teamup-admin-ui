@@ -2,6 +2,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 
 import { userDTO } from '../../redux/reducers/user'
+import { userAuth } from '../../redux/reducers/servicesReducer'
 import s from '../../pages/SignPage/Form.module.scss'
 import Form from '../../pages/SignPage/Form'
 import { LoginUserModel } from '../../types'
@@ -25,6 +26,7 @@ const SignIn = () => {
       password: data.password
     }
     loginUser(JSON.stringify(user)).then((user) => dispatch(userDTO(user)))
+    dispatch(userAuth(true))
   }
   return (
     <Form

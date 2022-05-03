@@ -5,7 +5,7 @@ import CardEvent from '../../components/CardEvent'
 import FilterButton from '../../components/FilterButton'
 import GetCitiList from '../../services/GetCitiList'
 import { getInterest } from '../../services/getInterest'
-import GetSingleCityEvents from '../../services/GetSingleCityEvents'
+import { GetEventsInCity } from '../../services/GetEventsInCity'
 import filterEventsList from '../../utilites/filterEventsList'
 import { City, EventDto } from '../../types'
 
@@ -51,7 +51,7 @@ const EventsList = () => {
   useEffect(() => {
     // TODO переписать setEventsList([...res]) когда бэк исправит возвращаемые данные
     // eventDtoList - лишний объект в ответе с бэка
-    GetSingleCityEvents(`${filterValueCity}`).then((res: any) =>
+    GetEventsInCity(`${filterValueCity}`).then((res: any) =>
       setEventsList([...res.eventDtoList])
     )
   }, [filterValueCity])

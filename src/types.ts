@@ -113,6 +113,7 @@ export interface UserDtoRedux {
 export interface servicesReducer {
   //Флаг переключения локальный API/сетевой API
   apiFlagLocal: boolean
+  userAuth: boolean
 }
 
 export interface LoginUserModel {

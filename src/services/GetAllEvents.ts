@@ -11,3 +11,5 @@ export const GetAllEvents = async () => {
     return err
   }
 }
+
+//не используется
