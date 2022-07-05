@@ -6,6 +6,8 @@ import FilterButton from '../../components/FilterButton'
 import GetCitiList from '../../services/GetCitiList'
 import { getInterest } from '../../services/getInterest'
 import { GetEventsInCity } from '../../services/GetEventsInCity'
+import { getInterest } from '../../services/GetInterest'
+import GetSingleCityEvents from '../../services/GetSingleCityEvents'
 import filterEventsList from '../../utilites/filterEventsList'
 import { City, EventDto } from '../../types'
 

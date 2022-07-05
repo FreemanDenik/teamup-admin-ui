@@ -2,14 +2,15 @@ import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 
-import Interests from '../../../components/Interests'
-import { RootState } from '../../../redux/store'
+import Interests from '../../components/Interests'
+import { RootState } from '../../redux/store'
+
 import { userDTO } from '../../../redux/reducers/user'
 import { editUser } from '../../../services/editUser'
-import s from '../PersonalArea.module.scss'
 
 import Input from './input'
 import CityField from './CityField'
+import s from './PersonalArea.module.scss'
 
 interface PersonalAreaProps {
   modalActivate: boolean
@@ -49,6 +50,8 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
   } = formState
 
   const onSubmit = async (data: any) => {
+    console.log(data)
+  }
     //отправка на данный момент сделана только для наглядности. Когда будет работать измененние юзера нужно переделать в соответствии с Request сервера
     console.log(data)
     const user = {
@@ -162,7 +165,7 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
             <div className={s.modal_content__cityAndAge}>
               <CityField
                 city={city}
-                {...register('city', {
+                {...register('Возраст', {
                   required: true
                 })}
               />
@@ -179,7 +182,7 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
                   }))
                 }
                 type="number"
-                {...register('age', {
+                {...register('Возраст', {
                   required: true
                 })}
               />

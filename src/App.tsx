@@ -9,6 +9,7 @@ import { SignInPage, SignUpPage } from './pages/SignPage'
 import PeoplePage from './pages/People/PeoplePage'
 import EventsList from './pages/EventsList'
 import PersonalArea from './pages/PersonalArea/PersonalArea'
+import { UploadTest } from './pages/UploadTest'
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="personal-area" element={<PersonalArea />} />
         </Route>
         <Route path="moderator" element={<ModeratorPage />} />
+        <Route path="/upload-test" element={<UploadTest />} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/sign-in" element={<SignInPage />} />
       </Routes>

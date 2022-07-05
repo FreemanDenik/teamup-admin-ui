@@ -3,7 +3,7 @@ import { v4 } from 'uuid'
 import { useSelector, useDispatch } from 'react-redux'
 
 import Input from '../../pages/Home/sections/WhatDoWant/Input'
-import { getInterest } from '../../services/getInterest'
+import { getInterest } from '../../services/GetInterest'
 import { InterestDto } from '../../types'
 import { userInterests } from '../../redux/reducers/userInterestReducer'
 import { RootState } from '../../redux/store'
