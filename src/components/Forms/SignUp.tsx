@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { SignUpFields } from '../../types'
 import { userDTO } from '../../redux/reducers/user'
@@ -11,9 +11,11 @@ import { ValidateEmail } from '../../services/ValidateEmail'
 import { ValidateUserName } from '../../services/ValidateUserName'
 import s from '../../pages/SignPage/Form.module.scss'
 import { registerUser } from '../../services/registerUser'
+import { RootState } from '../../redux/store'
 
 const SignUp: FC = () => {
-  const { control, handleSubmit, reset, setError, clearErrors } =
+  const interests = useSelector((state: RootState) => state.userInterestReducer)
+  const { control, handleSubmit, register, setError, clearErrors } =
     useForm<SignUpFields>({
       defaultValues: {
         email: '',
@@ -30,8 +32,7 @@ const SignUp: FC = () => {
   const [serverEmailValidate, setServerEmailValidate] = useState(false)
   const dispatch = useDispatch()
 
-  const register: SubmitHandler<SignUpFields> = async (data) => {
-    console.log(data)
+  const onSubmit: SubmitHandler<SignUpFields> = async (data) => {
     const user = {
       password: data.password,
       userDto: {
@@ -44,20 +45,14 @@ const SignUp: FC = () => {
         email: data.email,
         city: data.city,
         aboutUser: data.aboutUser,
-        userInterests: [
-          {
-            id: 0,
-            title: 'string',
-            shortDescription: 'string'
-          }
-        ]
+        userInterests: interests
       }
     }
     registerUser(JSON.stringify(user)).then((user) => dispatch(userDTO(user)))
   }
   return (
     <Form
-      onSubmit={handleSubmit(register)}
+      onSubmit={handleSubmit(onSubmit)}
       title="Создание пользователя"
       dontHasAccount="Уже есть пользователь ?"
       eyeCatching="Авторизуйся"
@@ -229,15 +224,16 @@ const SignUp: FC = () => {
       <Controller
         control={control}
         name="aboutUser"
-        // rules={{
-        //   required: true
-        // }}
         render={({ field: { ref, ...field }, fieldState: { error } }) => {
           return (
             <>
               <label className={s.areaLabel}>
                 <span className={s.dontHasAccount}>О себе</span>
-                <textarea className={s.area}></textarea>
+                <textarea
+                  className={s.area}
+                  placeholder="Например: Увлекаюсь настольными играми и люблю активный отдых на природе"
+                  {...register('aboutUser')}
+                ></textarea>
               </label>
               {error && error.message}
             </>

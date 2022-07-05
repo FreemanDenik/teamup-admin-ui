@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom'
 import CardEvent from '../../components/CardEvent'
 import FilterButton from '../../components/FilterButton'
 import GetCitiList from '../../services/GetCitiList'
+import { getInterest } from '../../services/getInterest'
+import { GetEventsInCity } from '../../services/GetEventsInCity'
 import { getInterest } from '../../services/GetInterest'
 import GetSingleCityEvents from '../../services/GetSingleCityEvents'
 import filterEventsList from '../../utilites/filterEventsList'
@@ -51,7 +53,7 @@ const EventsList = () => {
   useEffect(() => {
     // TODO переписать setEventsList([...res]) когда бэк исправит возвращаемые данные
     // eventDtoList - лишний объект в ответе с бэка
-    GetSingleCityEvents(`${filterValueCity}`).then((res: any) =>
+    GetEventsInCity(`${filterValueCity}`).then((res: any) =>
       setEventsList([...res.eventDtoList])
     )
   }, [filterValueCity])

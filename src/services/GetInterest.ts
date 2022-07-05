@@ -17,3 +17,5 @@ export const getInterest = async () => {
     return err
   }
 }
+
+//работает

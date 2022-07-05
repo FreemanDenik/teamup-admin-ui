@@ -1,14 +1,18 @@
-import { IUser } from '../pages/People/types'
+import store from '../redux/store'
 
-const getUsers = (): Promise<IUser[]> => {
-  return fetch(
-    'https://gist.githubusercontent.com/elena-anikina/4b19087c4a431be445040125b8f043f9/raw/'
-  ).then((response: any) => {
-    if (!response.ok) {
-      throw new Error(`Ошибка, статус ошибки ${response.status}`)
-    }
-    return response.json()
-  })
+import users from './localServerAPI/users.json'
+
+const getUsers = async () => {
+  try {
+    if (store().getState().servicesReducer.apiFlagLocal) return users //для использования локальных данных вместо сервера
+    const res = await fetch('http://localhost:8080/public/user/')
+    if (!res.ok) throw new Error(`${res.status}`)
+    return res.json()
+  } catch (err) {
+    return err
+  }
 }
 
 export default getUsers
+
+//работает
