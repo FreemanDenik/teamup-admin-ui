@@ -4,10 +4,8 @@ import { useParams } from 'react-router-dom'
 import CardEvent from '../../components/CardEvent'
 import FilterButton from '../../components/FilterButton'
 import GetCitiList from '../../services/GetCitiList'
-import { getInterest } from '../../services/getInterest'
 import { GetEventsInCity } from '../../services/GetEventsInCity'
 import { getInterest } from '../../services/GetInterest'
-import GetSingleCityEvents from '../../services/GetSingleCityEvents'
 import filterEventsList from '../../utilites/filterEventsList'
 import { City, EventDto } from '../../types'
 
@@ -121,12 +119,14 @@ const EventsList = () => {
             filterFields={timeFilterList}
             resetFilterValue={resetFilterValue}
             getFilterValue={getFilterValueTime}
+            value={filterValueTime}
           />
           <FilterButton
             filterPlaceholder={'По интересам'}
             filterFields={listInterest}
             resetFilterValue={resetFilterValue}
             getFilterValue={getFilterValueInterest}
+            value={filterValueInterest}
           />
           <button
             className={`${s.filter__btn} ${s.btnUnset}`}
