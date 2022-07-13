@@ -64,20 +64,17 @@ const FilterButton = (props: FilterButtonProps) => {
       />
       {showList && (
         <ul className={`${s.list}`}>
-          {filterFields
-            .sort()
-            .filter((item) => item.search(inputValue) !== -1)
-            .map((item) => (
-              <li
-                key={item}
-                className={`${s.list__item}`}
-                onClick={(item: React.MouseEvent<HTMLLIElement>) =>
-                  handleClickListItem(item)
-                }
-              >
-                {item}
-              </li>
-            ))}
+          {filterFields.sort().map((item) => (
+            <li
+              key={item}
+              className={`${s.list__item}`}
+              onClick={(item: React.MouseEvent<HTMLLIElement>) =>
+                handleClickListItem(item)
+              }
+            >
+              {item}
+            </li>
+          ))}
         </ul>
       )}
     </div>
