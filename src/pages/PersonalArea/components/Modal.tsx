@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 
-import Interests from '../../components/Interests'
-import { RootState } from '../../redux/store'
+import Interests from '../../../components/Interests'
+import { RootState } from '../../../redux/store'
 
 import { userDTO } from '../../../redux/reducers/user'
 import { editUser } from '../../../services/editUser'
@@ -53,7 +53,7 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
     console.log(data)
   }
     //отправка на данный момент сделана только для наглядности. Когда будет работать измененние юзера нужно переделать в соответствии с Request сервера
-    console.log(data)
+    
     const user = {
       id: 0,
       firstName: data.firstName,
@@ -67,7 +67,7 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
       userInterests: interests //данное поле обязательно брать из редакс. Это массив интересов пользователя
     }
     editUser(JSON.stringify(user)).then((user) => dispatch(userDTO(user)))
-  }
+  
 
   return (
     <div

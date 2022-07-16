@@ -5,7 +5,7 @@
             "descriptionEvent": "Выставка разнообразных картин",
             "placeEvent": "Эрмитаж",
             "city": "Санкт-Петербург",
-            "timeEvent": [1, 2, 3],
+            "timeEvent": [2022, 7, 13],
             "eventPrivacy": false,
             "eventNumberOfParticipant": 100,
             "eventType": {
