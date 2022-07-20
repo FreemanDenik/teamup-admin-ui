@@ -11,7 +11,7 @@ interface FilterButtonProps extends HTMLProps<HTMLInputElement> {
   value?: string
   getFilterValue?: (value: string) => void
 }
-interface Iinterest {
+interface Interest {
   id: number
   title: string
 }
@@ -73,7 +73,7 @@ const FilterButton = (props: FilterButtonProps) => {
 
             .map((item) => {
               if (typeof item != 'string') {
-                const { id, title } = item as Iinterest
+                const { id, title } = item as Interest
                 return (
                   <li
                     key={id}
