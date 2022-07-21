@@ -80,7 +80,6 @@
   padding: 0 16px;
   width: 100%;
   box-sizing: border-box;
-  text-transform: capitalize;
 
   border: 1px solid transparent;
   outline: none;
@@ -188,7 +187,7 @@
   @each $imageName,
   $size in $images {
     &_#{$imageName} {
-      background-image: url(../../assets/img/#{$imageName}.svg);
+      background-image: url(../../assets/img/{$imageName}.svg);
       min-width: map.get($size, width);
       width: map.get($size, width);
       min-height: map.get($size, height);

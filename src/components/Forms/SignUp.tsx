@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import { SignUpFields } from '../../types'
 import { userDTO } from '../../redux/reducers/user'
@@ -17,6 +18,7 @@ const SignUp: FC = () => {
   const interests = useSelector((state: RootState) => state.userInterestReducer)
   const { control, handleSubmit, register, setError, clearErrors } =
     useForm<SignUpFields>({
+      mode: 'onBlur',
       defaultValues: {
         email: '',
         password: '',
@@ -31,7 +33,7 @@ const SignUp: FC = () => {
   const [serverValidate, setServerValidate] = useState(false)
   const [serverEmailValidate, setServerEmailValidate] = useState(false)
   const dispatch = useDispatch()
-
+  const navigate = useNavigate()
   const onSubmit: SubmitHandler<SignUpFields> = async (data) => {
     const user = {
       password: data.password,
@@ -49,12 +51,13 @@ const SignUp: FC = () => {
       }
     }
     registerUser(JSON.stringify(user)).then((user) => dispatch(userDTO(user)))
+    navigate('/')
   }
   return (
     <Form
       onSubmit={handleSubmit(onSubmit)}
       title="Создание пользователя"
-      dontHasAccount="Уже есть пользователь ?"
+      dontHasAccount="Уже есть пользователь?"
       eyeCatching="Авторизуйся"
       imageName="new"
       submitText="Sign Up"
@@ -67,14 +70,17 @@ const SignUp: FC = () => {
           rules={{
             required: true,
             pattern: {
-              value: /[а-яa-z]/gi,
+              value: /^[a-zа-яё]+$/i,
               message: 'Invalid lastname'
             }
           }}
-          render={({ field: { ref, ...field }, fieldState: { error } }) => {
+          render={({
+            field: { onBlur, ref, ...field },
+            fieldState: { error }
+          }) => {
             return (
               <div>
-                <Input {...field} placeholder="Фамилия" />
+                <Input onBlur={onBlur} {...field} placeholder="Фамилия" />
                 {error && error.message}
               </div>
             )
@@ -87,7 +93,7 @@ const SignUp: FC = () => {
           rules={{
             required: true,
             pattern: {
-              value: /[а-яa-z]/gi,
+              value: /^[a-zа-яё]+$/i,
               message: 'Invalid firstname'
             }
           }}
@@ -140,11 +146,13 @@ const SignUp: FC = () => {
         control={control}
         name="password"
         rules={{
-          required: true
-          // pattern: {
-          //   value: /(\w|\d){3, 20}/,
-          //   message: 'Invalid password'
-          // }
+          required: true,
+          pattern: {
+            value:
+              /(?=^.{6,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*/,
+            message:
+              'Пароль должен состоять из не менее 6 символов, содержать строчные и прописные буквы, цифры и спец.символы'
+          }
         }}
         render={({ field: { ref, ...field }, fieldState: { error } }) => {
           return (
@@ -189,38 +197,46 @@ const SignUp: FC = () => {
           )
         }}
       />
-      <div className={s.rowHalf}>
-        <Controller
-          control={control}
-          name="city"
-          rules={{
-            required: true
-          }}
-          render={({ field: { ref, ...field }, fieldState: { error } }) => {
-            return (
-              <>
-                <Input {...field} placeholder="Город" />
-                {error && error.message}
-              </>
-            )
-          }}
-        />
-        <Controller
-          control={control}
-          name="age"
-          rules={{
-            required: true
-          }}
-          render={({ field: { ref, ...field }, fieldState: { error } }) => {
-            return (
-              <>
-                <Input {...field} placeholder="Возраст" />
-                {error && error.message}
-              </>
-            )
-          }}
-        />
-      </div>
+
+      <Controller
+        control={control}
+        name="city"
+        rules={{
+          required: true,
+          pattern: {
+            value: /^[а-яё]+$/i,
+            message: 'Введите корректный город'
+          }
+        }}
+        render={({ field: { ref, ...field }, fieldState: { error } }) => {
+          return (
+            <>
+              <Input {...field} placeholder="Город" />
+              {error && error.message}
+            </>
+          )
+        }}
+      />
+      <Controller
+        control={control}
+        name="age"
+        rules={{
+          required: true,
+          pattern: {
+            value: /^(?:1(?:00?|\d)|[2-5]\d|[6-9]\d?)$/,
+            message: 'Неверный возраст'
+          }
+        }}
+        render={({ field: { ref, ...field }, fieldState: { error } }) => {
+          return (
+            <>
+              <Input {...field} placeholder="Возраст" />
+              {error && error.message}
+            </>
+          )
+        }}
+      />
+
       <Controller
         control={control}
         name="aboutUser"
