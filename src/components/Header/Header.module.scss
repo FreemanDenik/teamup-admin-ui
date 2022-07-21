@@ -12,7 +12,10 @@
 }
 
 .inner {
+  padding-left: 50px;
+  padding-right: 422px;
   display: flex;
+  flex-grow: 1;
   gap: 10px;
   align-items: center;
   justify-content: space-between;
@@ -20,6 +23,7 @@
 
 .logo {
   font-size: $size-text--base;
+  font-weight: bold;
   display: flex;
   gap: $gutter-small;
   font-family: ptsans-bold, sans-serif;
@@ -31,4 +35,8 @@
 a{
   text-decoration: inherit;
   color: inherit;
+}
+
+.wrapper {
+  display: flex;
 }

@@ -19,39 +19,38 @@ const WhatDoWant = () => {
     setCityName(value)
   }
   return (
-    <section className={s.whatDoWant}>
-      <div className={`${s.whatDoWant__search} ${s.whatDoWantSearch}`}>
-        <Title />
+    <>
+      <Title />
+      <section className={s.whatDoWant}>
+        <div className={`${s.whatDoWantSearch}`}>
+          <div className={s.whatDoWantSearch__top}>
+            <Input placeholder={'Поищите "Игры"'} icon="search" />
+            <Place getCityName={getCityName} value={cityName} />
+          </div>
 
-        <div className={s.whatDoWantSearch__top}>
-          <Input placeholder={'Поищите "Игры"'} icon="search" />
-          <Place getCityName={getCityName} value={cityName} />
+          <button
+            className={s.whatDoWantSearch__btn}
+            onClick={handleClickSearchButton}
+          >
+            Поиск
+          </button>
         </div>
 
-        <button
-          className={s.whatDoWantSearch__btn}
-          onClick={handleClickSearchButton}
-        >
-          Поиск
-        </button>
-      </div>
-
-      <div className={`${s.whatDoWant__search} ${s.whatDoWantSearch}`}>
-        <Title />
-
-        <WidgetGrid
-          widgetList={[
-            'Скоро начнутся',
-            'Сегодня',
-            'Завтра',
-            'Сегодня',
-            'Завтра',
-            'Сегодня',
-            'Завтра'
-          ]}
-        />
-      </div>
-    </section>
+        <div className={`${s.whatDoWantSearch}`}>
+          <WidgetGrid
+            widgetList={[
+              'Скоро начнутся',
+              'Сегодня',
+              'Завтра',
+              'Сегодня',
+              'Завтра',
+              'Сегодня',
+              'Завтра'
+            ]}
+          />
+        </div>
+      </section>
+    </>
   )
 }
 
