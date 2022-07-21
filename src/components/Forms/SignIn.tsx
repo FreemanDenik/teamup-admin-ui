@@ -1,5 +1,6 @@
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import { userDTO } from '../../redux/reducers/user'
 import { userAuth } from '../../redux/reducers/servicesReducer'
@@ -8,7 +9,6 @@ import Form from '../../pages/SignPage/Form'
 import { LoginUserModel } from '../../types'
 import Input from '../../components/Input'
 import { loginUser } from '../../services/loginUser'
-import { useNavigate } from 'react-router-dom'
 
 const SignIn = () => {
   const { control, handleSubmit } = useForm<LoginUserModel>({

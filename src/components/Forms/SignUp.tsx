@@ -1,21 +1,23 @@
 import React, { FC, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import { SignUpFields } from '../../types'
 import { userDTO } from '../../redux/reducers/user'
 import Form from '../../pages/SignPage/Form'
 import Interests from '../Interests'
 import Input from '../Input'
-
 import { ValidateEmail } from '../../services/ValidateEmail'
 import { ValidateUserName } from '../../services/ValidateUserName'
 import s from '../../pages/SignPage/Form.module.scss'
 import { registerUser } from '../../services/registerUser'
 import { RootState } from '../../redux/store'
-import { useNavigate } from 'react-router-dom'
+
+import Calendar from './components/Calendar'
 
 const SignUp: FC = () => {
+  const [value, onChange] = useState(new Date())
   const interests = useSelector((state: RootState) => state.userInterestReducer)
   const { control, handleSubmit, register, setError, clearErrors } =
     useForm<SignUpFields>({
@@ -47,6 +49,7 @@ const SignUp: FC = () => {
         role: 'ROLE_USER',
         email: data.email,
         city: data.city,
+        birthDate: value,
         aboutUser: data.aboutUser,
         userInterests: interests
       }
@@ -54,6 +57,9 @@ const SignUp: FC = () => {
     registerUser(JSON.stringify(user)).then((user) => dispatch(userDTO(user)))
     navigate('/')
   }
+
+  console.log('value', value)
+
   return (
     <Form
       onSubmit={handleSubmit(onSubmit)}
@@ -218,6 +224,7 @@ const SignUp: FC = () => {
           )
         }}
       />
+
       <Controller
         control={control}
         name="age"
@@ -231,7 +238,7 @@ const SignUp: FC = () => {
         render={({ field: { ref, ...field }, fieldState: { error } }) => {
           return (
             <>
-              <Input {...field} placeholder="Возраст" />
+              <Calendar value={value} onChange={onChange} />
               {error && error.message}
             </>
           )
