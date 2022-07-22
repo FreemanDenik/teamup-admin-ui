@@ -196,7 +196,7 @@ const PersonalArea: FC = () => {
           </div>
         </div>
       </div>
-    {/*   <Modal
+      {/*   <Modal
         modalActivate={modalActivate}
         setModalActivate={setModalActivate}
       /> */}
