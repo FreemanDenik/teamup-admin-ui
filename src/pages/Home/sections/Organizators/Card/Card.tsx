@@ -9,7 +9,12 @@ import s from './Card.module.scss'
 const Card: FC<Partial<CardProps>> = ({ name, surname, age, photo, desc }) => {
   return (
     <div className={s.wrapper}>
-      <div className={s.avatar} style={{ backgroundImage: `url(${photo})` }} />
+      <div
+        className={s.avatar}
+        style={{
+          backgroundImage: `url("https://gravatar.com/avatar/0d050ec81f32eddac5fba9025cc2de8e?s=400&d=mp&r=x")` //Убрать заглушку когда будет приходить дто
+        }}
+      />
       <div className={s.info}>
         <div className={s.name}>
           {name} {surname}

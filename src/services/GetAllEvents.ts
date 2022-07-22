@@ -1,12 +1,11 @@
-export const GetAllEvents = async () => {
+export const GetAllEvents = async (): Promise<any> => {
   try {
     const res = await fetch('http://localhost:8080/public/event')
     if (!res.ok) {
       throw new Error(`${res.status}`)
     }
 
-    const body = await res.json()
-    return body
+    return await res.json()
   } catch (err) {
     return err
   }
