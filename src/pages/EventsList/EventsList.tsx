@@ -120,12 +120,14 @@ const EventsList = () => {
             filterFields={timeFilterList}
             resetFilterValue={resetFilterValue}
             getFilterValue={getFilterValueTime}
+            value={filterValueTime}
           />
           <FilterButton
             filterPlaceholder={'По интересам'}
             filterFields={listInterest}
             resetFilterValue={resetFilterValue}
             getFilterValue={getFilterValueInterest}
+            value={filterValueInterest}
           />
           <button
             className={`${s.filter__btn} ${s.btnUnset}`}

@@ -1,19 +1,18 @@
 import React, { FC, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import { SignUpFields } from '../../types'
 import { userDTO } from '../../redux/reducers/user'
 import Form from '../../pages/SignPage/Form'
 import Interests from '../Interests'
 import Input from '../Input'
-
 import { ValidateEmail } from '../../services/ValidateEmail'
 import { ValidateUserName } from '../../services/ValidateUserName'
 import s from '../../pages/SignPage/Form.module.scss'
 import { registerUser } from '../../services/registerUser'
 import { RootState } from '../../redux/store'
-import { useNavigate } from 'react-router-dom'
 
 const SignUp: FC = () => {
   const interests = useSelector((state: RootState) => state.userInterestReducer)

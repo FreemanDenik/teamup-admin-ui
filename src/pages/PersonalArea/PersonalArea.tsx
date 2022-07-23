@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import CardEvent from '../../components/CardEvent/CardEvent'
 import { RootState } from '../../redux/store'
 
-import Modal from './components/Modal'
+// import Modal from './components/Modal'
 import s from './PersonalArea.module.scss'
 
 const eventList = [
@@ -196,7 +196,7 @@ const PersonalArea: FC = () => {
           </div>
         </div>
       </div>
-    {/*   <Modal
+      {/* <Modal
         modalActivate={modalActivate}
         setModalActivate={setModalActivate}
       /> */}
