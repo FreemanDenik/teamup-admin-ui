@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { servicesReducer } from '../../types'
 
 const initialState: servicesReducer = {
-  apiFlagLocal: true,
+  apiFlagLocal: false,
   userAuth: false
 }
 

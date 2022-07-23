@@ -1,15 +1,16 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import Loop from '../../../../components/Loop/Loop'
 import { getTopUsers } from '../../../../services/getTopUsers'
 import { CardProps, UserDto } from '../../../../types'
 
 import Card from './Card'
 import s from './Organizators.module.scss'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay, Navigation } from 'swiper'
+import { v4 } from 'uuid'
 
 const Organizators: FC = () => {
-  const [runLoop, setRunLoop] = useState<boolean>(false)
   const [data, setData] = useState<Partial<CardProps>[]>([
     {
       name: 'Danil',
@@ -94,25 +95,6 @@ const Organizators: FC = () => {
     })
   }, [])
 
-  useEffect(() => {
-    if (wrapperRef.current) {
-      const {
-        current: { clientHeight, offsetTop }
-      } = wrapperRef
-
-      const check = () => {
-        const isTreshold = window.scrollY >= offsetTop - clientHeight * 0.9
-
-        if (isTreshold) return setRunLoop((prev) => (prev ? prev : true))
-        return setRunLoop(false)
-      }
-
-      window.addEventListener('scroll', check)
-      window.addEventListener('load', check)
-      return () => window.removeEventListener('scroll', check)
-    }
-  }, [wrapperRef])
-
   return (
     <section ref={wrapperRef}>
       <header className={s.header}>
@@ -122,15 +104,22 @@ const Organizators: FC = () => {
           dolore eu fugiat nulla pariatur.
         </p>
       </header>
-
-      <Loop<Partial<CardProps>>
-        data={data}
-        renderItem={(el) => <Card {...el} />}
-        width={325}
-        height={435}
-        gap={6}
-        run={runLoop}
-      />
+      <Swiper
+        slidesPerView={5}
+        spaceBetween={30}
+        loop={true}
+        loopFillGroupWithBlank={true}
+        modules={[Autoplay]}
+        autoplay={{ delay: 0.01, disableOnInteraction: false }}
+        className="mySwiper1"
+        speed={6000}
+      >
+        {data.map((slide: any) => (
+          <SwiperSlide key={v4()}>
+            <Card {...slide} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
       <Link to="/people">
         <button className={s.more}>Больше организаторов</button>
       </Link>
