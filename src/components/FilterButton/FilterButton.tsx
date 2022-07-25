@@ -11,6 +11,10 @@ interface FilterButtonProps extends HTMLProps<HTMLInputElement> {
   value?: string
   getFilterValue?: (value: string) => void
 }
+interface Interest {
+  id: number
+  title: string
+}
 
 const FilterButton = (props: FilterButtonProps) => {
   const {
@@ -64,17 +68,36 @@ const FilterButton = (props: FilterButtonProps) => {
       />
       {showList && (
         <ul className={`${s.list}`}>
-          {filterFields.sort().map((item) => (
-            <li
-              key={item}
-              className={`${s.list__item}`}
-              onClick={(item: React.MouseEvent<HTMLLIElement>) =>
-                handleClickListItem(item)
+          {filterFields
+            .sort()
+
+            .map((item) => {
+              if (typeof item != 'string') {
+                const { id, title } = item as Interest
+                return (
+                  <li
+                    key={id}
+                    className={`${s.list__item}`}
+                    onClick={(title: React.MouseEvent<HTMLLIElement>) =>
+                      handleClickListItem(title)
+                    }
+                  >
+                    {title}
+                  </li>
+                )
               }
-            >
-              {item}
-            </li>
-          ))}
+              return (
+                <li
+                  key={item}
+                  className={`${s.list__item}`}
+                  onClick={(item: React.MouseEvent<HTMLLIElement>) =>
+                    handleClickListItem(item)
+                  }
+                >
+                  {item}
+                </li>
+              )
+            })}
         </ul>
       )}
     </div>

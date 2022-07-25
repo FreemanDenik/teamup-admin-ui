@@ -8,6 +8,7 @@ import { userDTO } from '../../redux/reducers/user'
 import Form from '../../pages/SignPage/Form'
 import Interests from '../Interests'
 import Input from '../Input'
+
 import { ValidateEmail } from '../../services/ValidateEmail'
 import { ValidateUserName } from '../../services/ValidateUserName'
 import s from '../../pages/SignPage/Form.module.scss'
@@ -57,9 +58,6 @@ const SignUp: FC = () => {
     registerUser(JSON.stringify(user)).then((user) => dispatch(userDTO(user)))
     navigate('/')
   }
-
-  console.log('value', value)
-
   return (
     <Form
       onSubmit={handleSubmit(onSubmit)}

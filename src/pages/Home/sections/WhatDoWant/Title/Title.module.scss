@@ -1,7 +1,9 @@
 @use "../../../../../scss" as *;
-$font-size-title: $size-text--title;
+
 .whatDoWant__title {
   text-align: center;
-  font-size: $font-size-title - 1;
+  font-size: 41px;
   font-family: ptsans-bold, sans-serif;
+  margin-top: -140px;
+  margin-bottom: -100px;
 }

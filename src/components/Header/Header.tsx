@@ -16,16 +16,16 @@ const Header: FC = () => {
 
   return (
     <header className={headerStyle.header}>
-      <LayoutContainer>
-        <div className={headerStyle.inner}>
-          <YourCity />
-          <Link to={'/'} className={headerStyle.logo}>
-            TeamUp Group
-          </Link>
+      <div className={headerStyle.inner}>
+        <YourCity />
+        <Link to={'/'} className={headerStyle.logo}>
+          TeamUp Group
+        </Link>
+        <div className={headerStyle.wrapper}>
           <Nav />
           {auth ? <AuthPanel /> : <ButtonPanel />}
         </div>
-      </LayoutContainer>
+      </div>
     </header>
   )
 }

@@ -6,46 +6,62 @@ import Slider from '../../../../components/Slider'
 import { EventDto } from '../../../../types'
 import { GetEventsInCity } from '../../../../services/GetEventsInCity'
 
-import s from './UpcomingEvents.module.scss'
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/bundle'
 
+// import required modules
+import s from './UpcomingEvents.module.scss'
+import { GetAllEvents } from '../../../../services/GetAllEvents'
+
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation, Autoplay } from 'swiper'
+import './swiper-user.scss'
 const UpcomingEvents = () => {
   const [events, setEvents] = useState<any>([])
 
   useEffect(() => {
-    GetEventsInCity('Москва').then((events) => setEvents(events.eventDtoList))
+    GetAllEvents().then((events) => setEvents(events.eventDtoList))
   }, [])
 
   return (
     <section className={s.upcomingEvents}>
       <h1 className={s.title}>Ближайшие мероприятия возле вас</h1>
-      <Slider<EventDto>
-        gap={9}
-        width={516}
-        height={268}
-        data={events}
-        startFrom="middle"
-        renderItem={(event) => {
-          return (
+      <Swiper
+        slidesPerView={3}
+        spaceBetween={30}
+        loop={true}
+        loopFillGroupWithBlank={true}
+        navigation={true}
+        modules={[Navigation, Autoplay]}
+        autoplay={{ delay: 2000, disableOnInteraction: true }}
+        className="mySwiper"
+        speed={2000}
+      >
+        {events.map((slide: any) => (
+          <SwiperSlide key={v4()}>
+            {' '}
             <div className={s.eventCard} key={v4()}>
               <div className={s.eventCard__tags}>
-                {event.eventInterests.map((item) => (
+                {slide.eventInterests.map((item: any) => (
                   <div key={item.id} className={s.eventCard__tag}>
                     {item.title}
                   </div>
                 ))}
               </div>
               <div className={s.eventCard__info}>
-                <div className={s.eventCard__name}>{event.eventName}</div>
+                <div className={s.eventCard__name}>{slide.eventName}</div>
                 <div className={s.eventCard__desc}>
-                  {event.descriptionEvent}
+                  {slide.descriptionEvent}
                 </div>
-                <div className={s.eventCard__dateTime}>{event.timeEvent}</div>
-                <div className={s.eventCard__address}>город {event.city}</div>
+                <div className={s.eventCard__dateTime}>{slide.timeEvent}</div>
+                <div className={s.eventCard__address}>город {slide.city}</div>
               </div>
             </div>
-          )
-        }}
-      />
+          </SwiperSlide>
+        ))}
+      </Swiper>
       <Link to={'/events/moscow'}>
         <button className={s.upcomingEvents__otherEvents}>
           Другие мероприятия
