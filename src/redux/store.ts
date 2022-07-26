@@ -12,14 +12,14 @@ const rootReducer = combineReducers({
 
 const logger =
   (store: { getState: () => any }) =>
-    (next: (arg0: any) => any) =>
-      (actions: any) => {
-        const res = next(actions)
-        console.log('User', store.getState().userReducer)
-        console.log('Interests', store.getState().userInterestReducer)
-        console.log('Service', store.getState().servicesReducer)
-        return res
-      }
+  (next: (arg0: any) => any) =>
+  (actions: any) => {
+    const res = next(actions)
+    console.log('User', store.getState().userReducer)
+    console.log('Interests', store.getState().userInterestReducer)
+    console.log('Service', store.getState().servicesReducer)
+    return res
+  }
 
 const store = () => {
   return configureStore({

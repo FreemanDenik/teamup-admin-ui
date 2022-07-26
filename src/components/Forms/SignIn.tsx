@@ -1,5 +1,6 @@
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import { userDTO } from '../../redux/reducers/user'
 import { userAuth } from '../../redux/reducers/servicesReducer'
@@ -8,11 +9,9 @@ import Form from '../../pages/SignPage/Form'
 import { LoginUserModel } from '../../types'
 import Input from '../../components/Input'
 import { loginUser } from '../../services/loginUser'
-import { useNavigate } from 'react-router-dom'
 
 const SignIn = () => {
   const { control, handleSubmit } = useForm<LoginUserModel>({
-    mode: 'onBlur',
     defaultValues: {
       email: '',
       password: '',
@@ -21,7 +20,7 @@ const SignIn = () => {
   })
 
   const dispatch = useDispatch()
-  const navigate = useNavigate()
+
   const login: SubmitHandler<LoginUserModel> = async (data) => {
     const user = {
       username: data.email,
@@ -29,7 +28,6 @@ const SignIn = () => {
     }
     loginUser(JSON.stringify(user)).then((user) => dispatch(userDTO(user)))
     dispatch(userAuth(true))
-    navigate('/')
   }
   return (
     <Form
@@ -45,11 +43,11 @@ const SignIn = () => {
         control={control}
         name="email"
         rules={{
-          required: true,
-          pattern: {
-            value: /\w+@\w+\.\w+/gi,
-            message: 'Your email should be valid'
-          }
+          required: true
+          // pattern: {
+          //   value: /\w+@\w+\.\w+/gi,
+          //   message: 'Your email should be valid'
+          // }
         }}
         render={({ field: { ref, ...field }, fieldState: { error } }) => {
           return (
