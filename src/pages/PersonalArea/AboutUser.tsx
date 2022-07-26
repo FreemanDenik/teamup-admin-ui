@@ -1,12 +1,16 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import CardEvent from '../../components/CardEvent/CardEvent'
 import { RootState } from '../../redux/store'
 
-import Modal from './components/Modal'
 import s from './PersonalArea.module.scss'
 import { useNavigate, useParams } from 'react-router-dom'
+import { loginUser } from '../../services/loginUser'
+import { userDTO } from '../../redux/reducers/user'
+import getUserProfile from '../../services/GetUserProfile'
+import { EventDto, UserDto } from '../../types'
+import getUserEvents from '../../services/getUserEvents'
 
 const eventList = [
   {
@@ -95,9 +99,65 @@ const eventList = [
   }
 ]
 
-const PersonalArea: FC = () => {
+const AboutUser: FC = () => {
   const { id: userID } = useParams()
   const navigate = useNavigate()
+
+  const initialState: UserDto = {
+    id: 0,
+    username: '',
+    firstName: 'Иван',
+    lastName: 'Иванов',
+    middleName: 'Иванович',
+    photo: 'https://images.unsplash.com/photo-1532318065232-2ba7c6676cd5?w=200',
+    email: '',
+    city: 'Москва',
+    aboutUser: '',
+    userInterests: [],
+    age: 18,
+    role: ''
+  }
+
+  const [getProfile, setProfile] = useState<UserDto>(initialState)
+  const [events, setEvents] = useState([
+    {
+      'id': 3,
+      'eventName': '',
+      'descriptionEvent': '',
+      'placeEvent': '',
+      'city': 'Москва',
+      'timeEvent': [2022, 3, 10, 11, 0],
+      'timeEndEvent': [2022, 4, 9, 20, 0],
+      'eventPrivacy': null,
+      'participantsCount': 110,
+      'countViewEvent': 14,
+      'eventType': {
+        'id': 2,
+        'type': 'Выставка'
+      },
+      'authorId': 2,
+      'eventInterests': [
+        {
+          'id': 2,
+          'title': 'Искусство',
+          'shortDescription': 'Картины, живопись, графика.'
+        }
+      ],
+      'status': {
+        'id': 2,
+        'status': 'На проверке',
+        'success': null,
+        'failure': null
+      },
+      'minYear': null
+    }
+  ])
+
+  useEffect(() => {
+    getUserProfile(+userID).then((user) => setProfile(user.userDto))
+    getUserEvents(+userID).then((events) => setEvents(events.eventDtoList))
+    return setProfile(initialState)
+  }, [])
 
   const {
     firstName,
@@ -109,14 +169,12 @@ const PersonalArea: FC = () => {
     username,
     userInterests,
     aboutUser
-  } = useSelector((state: RootState) => state.userReducer.userDto)
-
+  } = getProfile
+  console.log(getProfile)
   const renderEvents = (): number => (window.window.innerWidth >= 1920 ? 3 : 2)
 
   const [slice, setSlace] = useState<number>(renderEvents())
-  const [modalActivate, setModalActivate] = useState<boolean>(false)
-
-  const events: any = eventList.map((event: any) => (
+  const eventList: any = events.map((event: any) => (
     <div key={event.id} className={`${s.card}`}>
       <CardEvent key={event.id} event={event} />
     </div>
@@ -134,11 +192,6 @@ const PersonalArea: FC = () => {
   return (
     <>
       <div className={`${s.personalArea}`}>
-        <div className={s.edit_btn}>
-          <button onClick={() => setModalActivate(true)} className={s.btnFill}>
-            Редактировать
-          </button>
-        </div>
         <div className={`${s.basicData}`}>
           <div className={`${s.basicData_data}`}>
             <div className={`${s.basicData_avatar}`}>
@@ -172,65 +225,53 @@ const PersonalArea: FC = () => {
             </span>
           </div>
         </div>
-
         <div className={`${s.aboutUs}`}>
           <h3 className={`${s.blockTitle}`}>Обо мне</h3>
           <div className={`${s.aboutUs_block}`}>
             <p className={`${s.aboutUs_text}`}>{aboutUser}</p>
           </div>
         </div>
-
         <div className={`${s.interests}`}>
           <h3 className={`${s.blockTitle}`}>Интересы</h3>
           <div className={`${s.interests_conteiner}`}>{interests}</div>
         </div>
-
         <div className={s.myActivities}>
-          {events.length ? (
-            <div className={s.myActivities_btn}>
-              <button
-                onClick={() => setSlace(slice + renderEvents())} //CreateEventHandler
-                className={s.btnFill}
-              >
-                Создать мероприятие
-              </button>
-            </div>
-          ) : null}
+          <h3 className={s.myActivities_blockTitle}>Актуальные мероприятия</h3>
+          <div className={s.myActivities_conteiner}>
+            {eventList.slice(0, slice)}
+            {eventList.slice(0, slice)}
+            {eventList.slice(0, slice)}
+          </div>
+          <div className={s.myActivities_btn}>
+            <button
+              onClick={() => setSlace(slice + renderEvents())}
+              className={s.btnFill}
+            >
+              Больше мероприятий
+            </button>
+          </div>
+        </div>
+        <div className={s.myActivities}>
           <h3 className={s.myActivities_blockTitle}>
-            {events.length ? 'Мои мероприятия' : 'Нет еще мероприятий?'}
+            Другие мероприятия этого пользователя
           </h3>
-          {events.length ? (
-            <>
-              <div className={s.myActivities_conteiner}>
-                {events.slice(0, slice)}
-              </div>
-              <div className={s.myActivities_btn}>
-                <button
-                  onClick={() => setSlace(slice + renderEvents())}
-                  className={s.btnFill}
-                >
-                  Больше мероприятий
-                </button>
-              </div>
-            </>
-          ) : (
-            <div className={s.myActivities_btn}>
-              <button
-                onClick={() => navigate('/')} //navigate to create event page
-                className={s.btnFill}
-              >
-                Создать мероприятие
-              </button>
-            </div>
-          )}
+          <div className={s.myActivities_conteiner}>
+            {eventList.slice(0, slice)}
+            {eventList.slice(0, slice)}
+            {eventList.slice(0, slice)}
+          </div>
+          <div className={s.myActivities_btn}>
+            <button
+              onClick={() => setSlace(slice + renderEvents())}
+              className={s.btnFill}
+            >
+              Больше мероприятий
+            </button>
+          </div>
         </div>
       </div>
-      {/*   <Modal
-        modalActivate={modalActivate}
-        setModalActivate={setModalActivate}
-      /> */}
     </>
   )
 }
 
-export default PersonalArea
+export default AboutUser

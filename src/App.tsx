@@ -10,6 +10,7 @@ import PeoplePage from './pages/People/PeoplePage'
 import EventsList from './pages/EventsList'
 import PersonalArea from './pages/PersonalArea/PersonalArea'
 import { UploadTest } from './pages/UploadTest'
+import AboutUser from './pages/PersonalArea/AboutUser'
 
 const App = () => {
   return (
@@ -20,11 +21,13 @@ const App = () => {
           <Route path="people" element={<PeoplePage />} />
           <Route path="events/:city" element={<EventsList />} />
           <Route path="personal-area" element={<PersonalArea />} />
+          <Route path="/public/user/id/:id" element={<AboutUser />} />
         </Route>
         <Route path="moderator" element={<ModeratorPage />} />
         <Route path="/upload-test" element={<UploadTest />} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="*" element={<Home />} />
       </Routes>
     </AnimatePresence>
   )
