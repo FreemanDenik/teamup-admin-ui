@@ -1,10 +1,4 @@
-import store from '../redux/store'
-
-import user from './localServerAPI/user.json'
-
-import { Dto } from '../types'
-
-const getUserEvents = async (id: Dto) => {
+const getUserEvents = async (id: number | undefined) => {
   try {
     const res = await fetch(
       `http://localhost:8080/public/user/event/${id}/owner`

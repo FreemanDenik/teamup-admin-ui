@@ -1,9 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import { UserDto } from '../../types'
 
 import s from './UserCard.module.scss'
-import { Link } from 'react-router-dom'
 
 interface IUserCard extends UserDto {
   photo?: string

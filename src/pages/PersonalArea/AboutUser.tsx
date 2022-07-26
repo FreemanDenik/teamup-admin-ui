@@ -1,111 +1,21 @@
 import { FC, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { Spin } from 'antd'
 
-import CardEvent from '../../components/CardEvent/CardEvent'
-import { RootState } from '../../redux/store'
-
-import s from './PersonalArea.module.scss'
-import { useNavigate, useParams } from 'react-router-dom'
-import { loginUser } from '../../services/loginUser'
-import { userDTO } from '../../redux/reducers/user'
 import getUserProfile from '../../services/GetUserProfile'
-import { EventDto, UserDto } from '../../types'
+import { UserDto } from '../../types'
 import getUserEvents from '../../services/getUserEvents'
+import CardEvent from '../../components/CardEvent/CardEvent'
 
-const eventList = [
-  {
-    id: 0,
-    eventName: 'Выставка картин',
-    descriptionEvent: 'Выставка разнообразных картин',
-    placeEvent: 'Эрмитаж',
-    city: 'Санкт-Петербург',
-    timeEvent: [1, 2, 3],
-    eventPrivacy: false,
-    eventNumberOfParticipant: 100,
-    eventType: {
-      id: 0,
-      type: 'Выставка'
-    }
-  },
-  {
-    id: 1,
-    eventName: 'Выставка картин',
-    descriptionEvent: 'Выставка разнообразных картин',
-    placeEvent: 'Эрмитаж',
-    city: 'Санкт-Петербург',
-    timeEvent: [1, 2, 3],
-    eventPrivacy: false,
-    eventNumberOfParticipant: 100,
-    eventType: {
-      id: 0,
-      type: 'Выставка'
-    }
-  },
-  {
-    id: 2,
-    eventName: 'Выставка картин',
-    descriptionEvent: 'Выставка разнообразных картин',
-    placeEvent: 'Эрмитаж',
-    city: 'Санкт-Петербург',
-    timeEvent: [1, 2, 3],
-    eventPrivacy: false,
-    eventNumberOfParticipant: 100,
-    eventType: {
-      id: 0,
-      type: 'Выставка'
-    }
-  },
-  {
-    id: 3,
-    eventName: 'Выставка картин',
-    descriptionEvent: 'Выставка разнообразных картин',
-    placeEvent: 'Эрмитаж',
-    city: 'Санкт-Петербург',
-    timeEvent: [1, 2, 3],
-    eventPrivacy: false,
-    eventNumberOfParticipant: 100,
-    eventType: {
-      id: 0,
-      type: 'Выставка'
-    }
-  },
-  {
-    id: 4,
-    eventName: 'Выставка картин',
-    descriptionEvent: 'Выставка разнообразных картин',
-    placeEvent: 'Эрмитаж',
-    city: 'Санкт-Петербург',
-    timeEvent: [1, 2, 3],
-    eventPrivacy: false,
-    eventNumberOfParticipant: 100,
-    eventType: {
-      id: 0,
-      type: 'Выставка'
-    }
-  },
-  {
-    id: 5,
-    eventName: 'Выставка картин',
-    descriptionEvent: 'Выставка разнообразных картин',
-    placeEvent: 'Эрмитаж',
-    city: 'Санкт-Петербург',
-    timeEvent: [1, 2, 3],
-    eventPrivacy: false,
-    eventNumberOfParticipant: 100,
-    eventType: {
-      id: 0,
-      type: 'Выставка'
-    }
-  }
-]
+import 'antd/dist/antd.css'
+import s from './PersonalArea.module.scss'
 
 const AboutUser: FC = () => {
   const { id: userID } = useParams()
-  const navigate = useNavigate()
 
   const initialState: UserDto = {
     id: 0,
-    username: '',
+    username: 'test',
     firstName: 'Иван',
     lastName: 'Иванов',
     middleName: 'Иванович',
@@ -154,8 +64,9 @@ const AboutUser: FC = () => {
   ])
 
   useEffect(() => {
-    getUserProfile(+userID).then((user) => setProfile(user.userDto))
-    getUserEvents(+userID).then((events) => setEvents(events.eventDtoList))
+    if (userID) getUserProfile(+userID).then((user) => setProfile(user.userDto))
+    if (userID)
+      getUserEvents(+userID).then((events) => setEvents(events.eventDtoList))
     return setProfile(initialState)
   }, [])
 
@@ -170,7 +81,6 @@ const AboutUser: FC = () => {
     userInterests,
     aboutUser
   } = getProfile
-  console.log(getProfile)
   const renderEvents = (): number => (window.window.innerWidth >= 1920 ? 3 : 2)
 
   const [slice, setSlace] = useState<number>(renderEvents())
@@ -188,90 +98,93 @@ const AboutUser: FC = () => {
       </div>
     )
   })
-
-  return (
-    <>
-      <div className={`${s.personalArea}`}>
-        <div className={`${s.basicData}`}>
-          <div className={`${s.basicData_data}`}>
-            <div className={`${s.basicData_avatar}`}>
-              <img src={photo} alt="Avatar" />
-            </div>
-            <div className={`${s.basicData_information}`}>
-              <h2 className={`${s.basicData_information__name}`}>
-                {firstName + ' ' + lastName}
-              </h2>
-              <span className="basicData_information__username">
-                {username}
-              </span>
-              <span className="basicData_information__email">{email}</span>
-              <span className="basicData_information__age">{age}</span>
-              <span className="basicData_information__city">{city}</span>
-            </div>
-          </div>
-          <div className={`${s.basicData_subscribesAndEvents}`}>
-            <div className={`${s.basicData_subscribes}`}>
-              <div className={`${s.basicData_subscribes__images}`}>
-                <img src={photo} alt="" />
-                <img src={photo} alt="" />
-                <img src={photo} alt="" />
+  if (username === 'test') return <Spin size="large" />
+  else
+    return (
+      <>
+        <div className={`${s.personalArea}`}>
+          <div className={`${s.basicData}`}>
+            <div className={`${s.basicData_data}`}>
+              <div className={`${s.basicData_avatar}`}>
+                <img src={photo} alt="Avatar" />
               </div>
-              <span className="basicData_subscribes__title">
-                {`${eventList.length + 17} подписчиков`}
+              <div className={`${s.basicData_information}`}>
+                <h2 className={`${s.basicData_information__name}`}>
+                  {firstName + ' ' + lastName}
+                </h2>
+                <span className="basicData_information__username">
+                  {username}
+                </span>
+                <span className="basicData_information__email">{email}</span>
+                <span className="basicData_information__age">{age}</span>
+                <span className="basicData_information__city">{city}</span>
+              </div>
+            </div>
+            <div className={`${s.basicData_subscribesAndEvents}`}>
+              <div className={`${s.basicData_subscribes}`}>
+                <div className={`${s.basicData_subscribes__images}`}>
+                  <img src={photo} alt="" />
+                  <img src={photo} alt="" />
+                  <img src={photo} alt="" />
+                </div>
+                <span className="basicData_subscribes__title">
+                  {`${eventList.length + 17} подписчиков`}
+                </span>
+              </div>
+              <span className="basicData_events">
+                {`${eventList.length} мероприятий`}
               </span>
             </div>
-            <span className="basicData_events">
-              {`${eventList.length} мероприятий`}
-            </span>
+          </div>
+          <div className={`${s.aboutUs}`}>
+            <h3 className={`${s.blockTitle}`}>Обо мне</h3>
+            <div className={`${s.aboutUs_block}`}>
+              <p className={`${s.aboutUs_text}`}>{aboutUser}</p>
+            </div>
+          </div>
+          <div className={`${s.interests}`}>
+            <h3 className={`${s.blockTitle}`}>Интересы</h3>
+            <div className={`${s.interests_conteiner}`}>{interests}</div>
+          </div>
+          <div className={s.myActivities}>
+            <h3 className={s.myActivities_blockTitle}>
+              Актуальные мероприятия
+            </h3>
+            <div className={s.myActivities_conteiner}>
+              {eventList.slice(0, slice)}
+              {eventList.slice(0, slice)}
+              {eventList.slice(0, slice)}
+            </div>
+            <div className={s.myActivities_btn}>
+              <button
+                onClick={() => setSlace(slice + renderEvents())}
+                className={s.btnFill}
+              >
+                Больше мероприятий
+              </button>
+            </div>
+          </div>
+          <div className={s.myActivities}>
+            <h3 className={s.myActivities_blockTitle}>
+              Другие мероприятия этого пользователя
+            </h3>
+            <div className={s.myActivities_conteiner}>
+              {eventList.slice(0, slice)}
+              {eventList.slice(0, slice)}
+              {eventList.slice(0, slice)}
+            </div>
+            <div className={s.myActivities_btn}>
+              <button
+                onClick={() => setSlace(slice + renderEvents())}
+                className={s.btnFill}
+              >
+                Больше мероприятий
+              </button>
+            </div>
           </div>
         </div>
-        <div className={`${s.aboutUs}`}>
-          <h3 className={`${s.blockTitle}`}>Обо мне</h3>
-          <div className={`${s.aboutUs_block}`}>
-            <p className={`${s.aboutUs_text}`}>{aboutUser}</p>
-          </div>
-        </div>
-        <div className={`${s.interests}`}>
-          <h3 className={`${s.blockTitle}`}>Интересы</h3>
-          <div className={`${s.interests_conteiner}`}>{interests}</div>
-        </div>
-        <div className={s.myActivities}>
-          <h3 className={s.myActivities_blockTitle}>Актуальные мероприятия</h3>
-          <div className={s.myActivities_conteiner}>
-            {eventList.slice(0, slice)}
-            {eventList.slice(0, slice)}
-            {eventList.slice(0, slice)}
-          </div>
-          <div className={s.myActivities_btn}>
-            <button
-              onClick={() => setSlace(slice + renderEvents())}
-              className={s.btnFill}
-            >
-              Больше мероприятий
-            </button>
-          </div>
-        </div>
-        <div className={s.myActivities}>
-          <h3 className={s.myActivities_blockTitle}>
-            Другие мероприятия этого пользователя
-          </h3>
-          <div className={s.myActivities_conteiner}>
-            {eventList.slice(0, slice)}
-            {eventList.slice(0, slice)}
-            {eventList.slice(0, slice)}
-          </div>
-          <div className={s.myActivities_btn}>
-            <button
-              onClick={() => setSlace(slice + renderEvents())}
-              className={s.btnFill}
-            >
-              Больше мероприятий
-            </button>
-          </div>
-        </div>
-      </div>
-    </>
-  )
+      </>
+    )
 }
 
 export default AboutUser

@@ -52,22 +52,21 @@ const Modal = ({ modalActivate, setModalActivate }: PersonalAreaProps) => {
   const onSubmit = async (data: any) => {
     console.log(data)
   }
-    //отправка на данный момент сделана только для наглядности. Когда будет работать измененние юзера нужно переделать в соответствии с Request сервера
-    
-    const user = {
-      id: 0,
-      firstName: data.firstName,
-      lastName: data.lastName,
-      middleName: 'string',
-      username: data.username,
-      role: 'ROLE_USER',
-      email: data.email,
-      city: data.city,
-      aboutUser: data.AboutUs,
-      userInterests: interests //данное поле обязательно брать из редакс. Это массив интересов пользователя
-    }
-    editUser(JSON.stringify(user)).then((user) => dispatch(userDTO(user)))
-  
+  //отправка на данный момент сделана только для наглядности. Когда будет работать измененние юзера нужно переделать в соответствии с Request сервера
+
+  const user = {
+    id: 0,
+    firstName: 'data.firstName',
+    lastName: 'data.lastName',
+    middleName: 'string',
+    username: 'data.username',
+    role: 'ROLE_USER',
+    email: 'data.email',
+    city: 'data.city',
+    aboutUser: 'data.AboutUs',
+    userInterests: interests //данное поле обязательно брать из редакс. Это массив интересов пользователя
+  }
+  editUser(JSON.stringify(user)).then((user) => dispatch(userDTO(user)))
 
   return (
     <div
