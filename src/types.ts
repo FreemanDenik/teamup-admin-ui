@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 import { Path, RegisterOptions, UseFormRegister } from 'react-hook-form'
 
-interface Dto {
+export interface Dto {
   // Первичный ключ
   id: number
 }

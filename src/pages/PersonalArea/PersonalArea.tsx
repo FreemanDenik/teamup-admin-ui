@@ -1,10 +1,11 @@
 import { FC, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import CardEvent from '../../components/CardEvent/CardEvent'
 import { RootState } from '../../redux/store'
 
-// import Modal from './components/Modal'
+import Modal from './components/Modal'
 import s from './PersonalArea.module.scss'
 
 const eventList = [
@@ -95,6 +96,9 @@ const eventList = [
 ]
 
 const PersonalArea: FC = () => {
+  const { id: userID } = useParams()
+  const navigate = useNavigate()
+
   const {
     firstName,
     lastName,
@@ -182,18 +186,43 @@ const PersonalArea: FC = () => {
         </div>
 
         <div className={s.myActivities}>
-          <h3 className={s.blockTitle}>Мои мероприятия</h3>
-          <div className={s.myActivities_conteiner}>
-            {events.slice(0, slice)}
-          </div>
-          <div className={s.myActivities_btn}>
-            <button
-              onClick={() => setSlace(slice + renderEvents())}
-              className={s.btnFill}
-            >
-              Больше мероприятий
-            </button>
-          </div>
+          {events.length ? (
+            <div className={s.myActivities_btn}>
+              <button
+                onClick={() => setSlace(slice + renderEvents())} //CreateEventHandler
+                className={s.btnFill}
+              >
+                Создать мероприятие
+              </button>
+            </div>
+          ) : null}
+          <h3 className={s.myActivities_blockTitle}>
+            {events.length ? 'Мои мероприятия' : 'Нет еще мероприятий?'}
+          </h3>
+          {events.length ? (
+            <>
+              <div className={s.myActivities_conteiner}>
+                {events.slice(0, slice)}
+              </div>
+              <div className={s.myActivities_btn}>
+                <button
+                  onClick={() => setSlace(slice + renderEvents())}
+                  className={s.btnFill}
+                >
+                  Больше мероприятий
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className={s.myActivities_btn}>
+              <button
+                onClick={() => navigate('/')} //navigate to create event page
+                className={s.btnFill}
+              >
+                Создать мероприятие
+              </button>
+            </div>
+          )}
         </div>
       </div>
       {/* <Modal
